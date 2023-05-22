@@ -24,7 +24,9 @@
         <label for="senha">Digite sua senha:</label><br>
         <input type="password" name="senha" placeholder="senha" required><br>
 
-        <input type="submit" name="enviar" value="Cadastrar">
+        <input type="submit" name="enviar" value="Cadastrar"><br>
+
+        <span>já tem uma conta?<a href="/sra/index.php">logar</a></span>
        
 
     </form>
