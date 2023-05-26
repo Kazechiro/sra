@@ -14,14 +14,52 @@ include('protect.php');
     <title>Painel</title>
 </head>
 <body>
+<header>
+      <nav class="nav-bar">
+          <div class="logo">
+              <h1><ion-icon name="cafe-outline"></ion-icon>S.R.A</h1>
+          </div>
+          <div class="nav-list">
+              <ul>
+                  <li class="nav-item"><a href="menu.html" class="nav-link">Início</a></li>
+                  <li class="nav-item"><a href="#" class="nav-link">Projetos</a></li>
+                  <li class="nav-item"><a href="#" class="nav-link"> Sobre</a></li>
+              </ul>
+          </div>
+          <div class="login-button">
+              <button><a href="index.php">Entrar</a></button>
+          </div>
+
+          <div class="mobile-menu-icon">
+              <button onclick="menuShow()"><img class="icon" src="assets/img/menu_white_36dp.svg" alt=""></button>
+          </div>
+      </nav>
+      <div class="mobile-menu">
+          <ul>
+              <li class="nav-item"><a href="menu.html" class="nav-link">Início</a></li>
+              <li class="nav-item"><a href="principal.php" class="nav-link">Grupos</a></li>
+              <li class="nav-item"><a href="#" class="nav-link">Sobre</a></li>
+          </ul>
+
+          <div class="login-button">
+              <button><a href="#">Entrar</a></button>
+          </div>
+      </div>
+  </header>
+
+  <script src="js/script.js"></script>
     <center>
     Bem vindo ao Painel, <?php echo $_SESSION['nome']; ?>.
 
-    <p>
+        <div class="links-principal">
         <a href="criarGrupo.php">Criar um grupo</a> <br>
         <a href="entrarGrupo.php">Entrar em um grupo já criado</a>.<br>
         <a href="logout.php">Sair</a>
-    </p>
+        <a href="tarefas.php">Lista de Tarefas</a>
+        </div>
+    
     </center>
 </body>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </html>

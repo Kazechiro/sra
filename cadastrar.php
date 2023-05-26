@@ -13,7 +13,7 @@ $dados = mysqli_fetch_row($query_verificar);
 if ($dados[0] != $email) { 
 //a função mysqli_num_rows obtem o número de linhas afetadas por uma consulta($query_verificar) executada no banco de dados. A função retorna um inteiro que representa o número de linhas que foram retornadas pela consulta
 
-$incluir = "INSERT INTO usuarios(`nome`, `email`, `senha`) 
+$incluir = "INSERT INTO usuario(nome, email, senha) 
 VALUES ('$nome', '$email', '$senha')";
 $query_incluir = mysqli_query($conexao, $incluir);
 
