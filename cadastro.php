@@ -77,21 +77,21 @@
                 Cadastre sua conta
             </h1>
             <div class="input-container">
-                <input type="text" name="Digite seu nome" class="inputCadastro" required>
+                <input type="text" name="nome" class="inputCadastro" required>
                 <label class="labelCadastro">
-                    Nome
+                    Digite seu nome
                 </label>
             </div>
             <div class="input-container">
-                <input type="text" name="Digite seu email" class="inputCadastro" required>
+                <input type="text" name="email" class="inputCadastro" required>
                 <label class="labelCadastro">
-                    Email
+                    Digite seu email
                 </label>
             </div>
             <div class="input-container">
-                <input type="password" name="Digite sua senha" class="inputCadastro" required>
+                <input type="password" name="senha" class="inputCadastro" required>
                 <label class="labelCadastro">
-                    Senha
+                    Digite sua senha
                 </label>
             </div>
             <div>
