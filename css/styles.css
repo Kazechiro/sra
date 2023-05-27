@@ -229,7 +229,7 @@ header {
 } 
 
 
-/*** estilização tarefas***/
+/*** estilização tarefas ***/
 
 .body-tarefa {
     width: 100%;
@@ -349,3 +349,15 @@ button {
     font-style: italic;
   }
 
+/*** estilização Principal ***/
+
+.links-painel {
+    padding-top: 100px;
+}
+
+
+/*** estilização criarGrupo ***/
+
+#login #form_Grupo {
+    padding-top: 100px;
+}

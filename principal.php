@@ -11,6 +11,7 @@ include('protect.php');
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/styles.css">
     <title>Painel</title>
 </head>
 <body>
@@ -22,7 +23,7 @@ include('protect.php');
           <div class="nav-list">
               <ul>
                   <li class="nav-item"><a href="menu.html" class="nav-link">Início</a></li>
-                  <li class="nav-item"><a href="#" class="nav-link">Projetos</a></li>
+                  <li class="nav-item"><a href="principal.php" class="nav-link">Grupos</a></li>
                   <li class="nav-item"><a href="#" class="nav-link"> Sobre</a></li>
               </ul>
           </div>
@@ -46,18 +47,16 @@ include('protect.php');
           </div>
       </div>
   </header>
-
   <script src="js/script.js"></script>
     <center>
     Bem vindo ao Painel, <?php echo $_SESSION['nome']; ?>.
 
-        <div class="links-principal">
+    <div class="links-painel">
         <a href="criarGrupo.php">Criar um grupo</a> <br>
-        <a href="entrarGrupo.php">Entrar em um grupo já criado</a>.<br>
-        <a href="logout.php">Sair</a>
-        <a href="tarefas.php">Lista de Tarefas</a>
-        </div>
-    
+        <a href="entrarGrupo.php">Entrar em um grupo já criado</a> <br>
+        <a href="logout.php">Sair</a> <br>
+        <a href="tarefas.html">Menu de Tarefas</a>
+    </div>
     </center>
 </body>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

@@ -1,5 +1,6 @@
 <?php
 
+
 $usuario = 'root';
 $senha = '';
 $database = 'sra';
