@@ -7,6 +7,9 @@ $query_listar = "SELECT id_tarefa,nome_tarefa,desc_tarefa,concluida FROM tarefa"
 $listar = mysqli_query($conexao,$query_listar);
 $dado = mysqli_fetch_all($listar);
 
+
+
+
 ?>
 
 
@@ -35,6 +38,7 @@ $dado = mysqli_fetch_all($listar);
         margin-top: 10px;
         padding: 10px;
         margin: auto;
+        width: 400px;
       }
       div.lista_tarefa li {
         padding: 5px;
@@ -46,6 +50,10 @@ $dado = mysqli_fetch_all($listar);
       div.lista_tarefa ul {
        align-items: inherit;
        
+      }
+
+      div.lista_tarefa a {
+        font-size: 12px;
       }
     </style>
   </head>
@@ -107,7 +115,8 @@ $dado = mysqli_fetch_all($listar);
           <?php foreach($dado as $item):    ?>
               <li>
                 <?=$item[1]?>
-                <?=$item[2]?>
+                <?=$item[2]?> <a href="?concluir=<? $item[0] ?>">[Concluir]</a> 
+                <a href="apagar_tarefa.php">[Excluir]</a>
               </li>
             <?php  endforeach; ?>
        

@@ -30,19 +30,19 @@
         </nav>
         <div class="mobile-menu">
             <ul>
-                <li class="nav-item"><a href="#" class="nav-link">Início</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Projetos</a></li>
+                <li class="nav-item"><a href="menu.html" class="nav-link">Início</a></li>
+                <li class="nav-item"><a href="principal.php" class="nav-link">Grupos</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">Sobre</a></li>
             </ul>
 
             <div class="login-button">
-                <button><a href="#">Entrar</a></button>
+                <button><a href="index.php">Entrar</a></button>
             </div>
         </div>
     </header>
     <script src="js/script.js"></script>
     <div id="login">
-    <form action="novo_grupo.php" method="POST" id="form_Grupo" >
+    <form action="novo_grupo.php" method="POST" id="form_Grupo" style="padding-top: 100px;">
     <h1>criar grupo</h1>
         <div class="input-grupo">          
             <input type="text" name="nome_grupo" class="inputLogin">

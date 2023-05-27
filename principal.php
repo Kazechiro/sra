@@ -14,7 +14,7 @@ include('protect.php');
     <link rel="stylesheet" href="./css/styles.css">
     <title>Painel</title>
 </head>
-<body>
+<body id="body-principal">
 <header>
       <nav class="nav-bar">
           <div class="logo">
@@ -51,11 +51,11 @@ include('protect.php');
     <center>
     Bem vindo ao Painel, <?php echo $_SESSION['nome']; ?>.
 
-    <div class="links-painel">
+    <div class="lista-principal" style="padding-top:100px;">
         <a href="criarGrupo.php">Criar um grupo</a> <br>
         <a href="entrarGrupo.php">Entrar em um grupo já criado</a> <br>
         <a href="logout.php">Sair</a> <br>
-        <a href="tarefas.html">Menu de Tarefas</a>
+        <a href="tarefas.php">Menu de Tarefas</a>
     </div>
     </center>
 </body>
