@@ -485,7 +485,9 @@ button {
 /*** estilização Principal ***/
 
 
-
+.lista-principal a {
+    color:red;
+}
 
 
 
@@ -495,7 +497,7 @@ button {
 
 /*** estilização criarGrupo ***/
 
-
-#form_grupo { 
-    padding-top: 100px;
+#grupo .input-grupo {
+    padding: 50px;
 }
+

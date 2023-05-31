@@ -1,8 +1,7 @@
 <?php
-if(!isset($_SESSION)) {
-    session_start();
-}
-include('protect.php');
+
+session_start();
+
 
 ?>
 <!DOCTYPE html>
@@ -28,7 +27,7 @@ include('protect.php');
               </ul>
           </div>
           <div class="login-button">
-              <button><a href="index.php">Entrar</a></button>
+              <button><a href="logout.php">Sair</a></button>
           </div>
 
           <div class="mobile-menu-icon">
@@ -43,10 +42,11 @@ include('protect.php');
           </ul>
 
           <div class="login-button">
-              <button><a href="#">Entrar</a></button>
+              <button><a href="logout.php">Sair</a></button>
           </div>
       </div>
   </header>
+
   <script src="js/script.js"></script>
     <center>
     Bem vindo ao Painel, <?php echo $_SESSION['nome']; ?>.
@@ -54,10 +54,40 @@ include('protect.php');
     <div class="lista-principal" style="padding-top:100px;">
         <a href="criarGrupo.php">Criar um grupo</a> <br>
         <a href="entrarGrupo.php">Entrar em um grupo já criado</a> <br>
-        <a href="logout.php">Sair</a> <br>
         <a href="tarefas.php">Menu de Tarefas</a>
+        <a href="visualizar.php"></a>
     </div>
     </center>
+   <footer>
+   <?php
+
+if(isset($_SESSION['msg'])) {
+    echo $_SESSION['msg'];
+    unset($_SESSION['msg']);
+}
+
+
+if(!isset($_SESSION)) {
+    session_start();
+}
+include('protect.php');
+include('conexao.php');
+
+$query_grupo ="SELECT id_grupo, nome_grupo, desc_grupo FROM grupo ORDER BY id_grupo DESC";
+$result_grupo = $conn->prepare($query_grupo);
+$result_grupo->execute();
+
+while($row_grupo = $result_grupo->fetch(PDO::FETCH_ASSOC)) {
+    extract($row_grupo);
+  //  var_dump($row_grupo);
+    echo "Grupo:" . $row_grupo['nome_grupo'] . "<br>";
+    echo "Visualizar:" ."<a href='grupo.php?id_grupo=$id_grupo'>Visualizar</a> <br>";
+
+}
+
+
+?>
+   </footer>
 </body>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

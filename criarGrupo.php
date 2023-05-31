@@ -21,7 +21,7 @@
                 </ul>
             </div>
             <div class="login-button">
-                <button><a href="index.php">Entrar</a></button>
+                <button><a href="logout.php">Sair</a></button>
             </div>
 
             <div class="mobile-menu-icon">
@@ -36,7 +36,7 @@
             </ul>
 
             <div class="login-button">
-                <button><a href="index.php">Entrar</a></button>
+                <button><a href="logout.php">Sair</a></button>
             </div>
         </div>
     </header>
@@ -55,7 +55,7 @@
             </div>
 
         <div>
-            <button type="submit" class="submit-button">Entrar</button>
+            <button type="submit" class="submit-button">Criar</button>
 
         </div>
 
