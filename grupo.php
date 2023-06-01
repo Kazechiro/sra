@@ -1,5 +1,9 @@
 <?php
-session_start();
+
+if(!isset($_SESSION)) {
+  session_start();
+}
+
 
 ob_start();
 
@@ -7,7 +11,7 @@ include('conexao.php');
 
 
 $id_grupo = filter_input(INPUT_GET, 'id_grupo', FILTER_SANITIZE_NUMBER_INT);
-var_dump($id_grupo);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,10 +25,39 @@ var_dump($id_grupo);
 <body id="body-principal">
 <?php
 if (!empty($id_grupo)) {
-$query_grupo ="SELECT id_grupo, nome_grupo, desc_grupo FROM grupo WHERE id_grupo=:id_grupo LIMIT 1";
+$query_grupo ="SELECT id_grupo, nome_grupo, desc_grupo FROM grupo WHERE id_grupo=:id_grupo";
 $result_grupo = $conn->prepare($query_grupo);
+$result_grupo->bindParam(':id_grupo',$id_grupo);
 $result_grupo->execute();
+
 } else {
+  $_SESSION['msg'] ="<p>Erro: grupo não encontrado</p>";
+  header("Location: principal.php"); }
+
+if (($result_grupo) and ($result_grupo->rowCount()!= 0)) {
+  $row_grupo = $result_grupo->fetch(PDO::FETCH_ASSOC);
+  extract($row_grupo);
+
+$query_tarefa ="SELECT id_tarefa, nome_tarefa, desc_tarefa FROM tarefa
+WHERE grupo_id=:grupo_id ORDER BY id_tarefa DESC";
+$result_tarefa = $conn->prepare($query_tarefa);
+$result_tarefa->bindParam('grupo_id', $id_grupo);
+$result_tarefa->execute();
+
+if (($result_tarefa) and ($result_tarefa->rowCount() != 0)) {
+  while($row_tarefa = $result_tarefa->fetch(PDO::FETCH_ASSOC)) {
+    extract($row_tarefa);
+  //  var_dump($row_tarefa);
+    echo "Menu de tarefas" ."<a href='tarefas.php?id_grupo=$id_grupo'>Visualizar</a>";
+   
+
+} 
+
+} else {
+  echo "Menu de tarefas" ."<a href='tarefas.php?id_grupo=$id_grupo'>Visualizar</a>";
+} 
+
+} else { 
   $_SESSION['msg'] ="<p>Erro: grupo não encontrado</p>";
   header("Location: principal.php");
 }
@@ -32,6 +65,9 @@ $result_grupo->execute();
 
 ?>
   <script src="js/script.js"></script>
+  <footer>
+
+  </footer>
 </body>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
