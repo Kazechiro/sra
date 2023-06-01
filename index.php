@@ -27,7 +27,6 @@ if(isset($_POST['email']) || isset($_POST['senha'])) {
 
             $_SESSION['id_usuario'] = $usuario['id_usuario'];
             $_SESSION['nome'] = $usuario['nome'];
-            $_SESSION['adm']  = $usuario['adm'];
 
             header("Location: principal.php");
 
@@ -105,7 +104,7 @@ if(isset($_POST['email']) || isset($_POST['senha'])) {
 
         </div>
      <div class="cadastro">
-            não possui uma conta? <a href="cadastro.php">inscreva-se</a>
+            Não possui uma conta? <a href="cadastro.php">inscreva-se</a>
      </div>
     </form>
     </div>

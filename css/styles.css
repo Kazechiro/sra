@@ -480,24 +480,41 @@ button {
     font-style: italic;
   }
 
+  .input-CGrupo{
+    position: relative;
 
+  }
+  .boxtags{
+    blackground-color: black;
+    position: relative;
+    background: none;
+    border: none;
+    border-bottom: 1px solid white;
+    outine: none;
+    color: black;
+    font-size: 15px;
+    width: 30%;
+    letter-spacing: 2px;
+    text-decoration: none;
 
-/*** estilização Principal ***/
+  }
+.butao{
 
-
-.lista-principal a {
-    color:red;
+    width: 100%;
+border: none;
+padding: 15px;
+color: black;
+background-color: #fff;
+font-size: 15px;
+cursor: pointer;
+border-radius: 10px;
+  }
+  .butao:hover{
+    background-color: #528B8B;
 }
+  a{
+    text-decoration: none;
+  }
 
 
-
-
-
-
-
-/*** estilização criarGrupo ***/
-
-#grupo .input-grupo {
-    padding: 50px;
-}
 

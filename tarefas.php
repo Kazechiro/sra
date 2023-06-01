@@ -1,7 +1,10 @@
 <?php
 
+session_start();
+ob_start();
 include('conexao.php');
 
+$id_grupo = filter_input(INPUT_GET, 'id_grupo', FILTER_SANITIZE_NUMBER_INT);
 
 $query_listar = "SELECT id_tarefa,nome_tarefa,desc_tarefa,concluida FROM tarefa";
 $listar = mysqli_query($conexao,$query_listar);
@@ -66,7 +69,7 @@ $dado = mysqli_fetch_all($listar);
           <div class="nav-list">
               <ul>
                   <li class="nav-item"><a href="menu.html" class="nav-link">Início</a></li>
-                  <li class="nav-item"><a href="#" class="nav-link">Projetos</a></li>
+                  <li class="nav-item"><a href="principal.php" class="nav-link">Projetos</a></li>
                   <li class="nav-item"><a href="#" class="nav-link"> Sobre</a></li>
               </ul>
           </div>
@@ -80,8 +83,8 @@ $dado = mysqli_fetch_all($listar);
       </nav>
       <div class="mobile-menu">
           <ul>
-              <li class="nav-item"><a href="#" class="nav-link">Início</a></li>
-              <li class="nav-item"><a href="#" class="nav-link">Projetos</a></li>
+              <li class="nav-item"><a href="menu.html" class="nav-link">Início</a></li>
+              <li class="nav-item"><a href="principal.php" class="nav-link">Projetos</a></li>
               <li class="nav-item"><a href="#" class="nav-link">Sobre</a></li>
           </ul>
 
@@ -112,13 +115,33 @@ $dado = mysqli_fetch_all($listar);
       </form>
       <div class="lista_tarefa">
       <ul style="list-style: none;">
-          <?php foreach($dado as $item):    ?>
-              <li>
-                <?=$item[1]?>
-                <?=$item[2]?> <a href="?concluir=<? $item[0] ?>">[Concluir]</a> 
-                <a href="apagar_tarefa.php">[Excluir]</a>
-              </li>
-            <?php  endforeach; ?>
+      <?php
+
+
+
+$query_tarefa ="SELECT id_tarefa, nome_tarefa, desc_tarefa FROM tarefa
+WHERE grupo_id=:grupo_id ORDER BY id_tarefa DESC";
+$result_tarefa = $conn->prepare($query_tarefa);
+$result_tarefa->bindParam('grupo_id', $id_grupo);
+$result_tarefa->execute();
+
+if (($result_tarefa) and ($result_tarefa->rowCount() != 0)) {
+  while($row_tarefa = $result_tarefa->fetch(PDO::FETCH_ASSOC)) {
+    extract($row_tarefa);
+  //  var_dump($row_tarefa);
+    echo "Tarefa:" . $row_tarefa['nome_tarefa'] . "<br>";
+    echo "Descrição:" . $row_tarefa['desc_tarefa'] . "<br>";
+   
+
+} 
+
+} else {
+  
+} 
+
+
+
+            ?>
        
       </ul>
       </div>
