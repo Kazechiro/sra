@@ -9,8 +9,8 @@ $desc_grupo = isset($_POST['desc_grupo'])? $_POST['desc_grupo'] : '';
 
 
 
-  $incluir = "INSERT INTO grupo(nome_grupo, desc_grupo, usuario_id) 
-  VALUES ('$nome_grupo', '$desc_grupo','$_SESSION[id_usuario]')";
+  $incluir = "INSERT INTO grupo(nome_grupo, desc_grupo, usuario_id,grupo_id) 
+  VALUES ('$nome_grupo', '$desc_grupo','$_SESSION[id_usuario]','$_SESSION[id_grupo]')";
   $query_incluir = mysqli_query($conexao, $incluir);
   
   header("location: principal.php");
