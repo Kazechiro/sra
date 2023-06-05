@@ -82,7 +82,7 @@ if(!isset($_SESSION)) {
 include('protect.php');
 include('conexao.php');
 
-$query_grupo ="SELECT id_grupo, nome_grupo, desc_grupo FROM grupo ORDER BY id_grupo DESC";
+$query_grupo ="SELECT id_grupo, nome_grupo, desc_grupo FROM grupo WHERE usuario_id = $_SESSION[id_usuario] ORDER BY id_grupo DESC";
 $result_grupo = $conn->prepare($query_grupo);
 $result_grupo->execute();
 
@@ -102,6 +102,3 @@ while($row_grupo = $result_grupo->fetch(PDO::FETCH_ASSOC)) {
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </html>
-
-
-

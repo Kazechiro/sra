@@ -3,19 +3,15 @@
 session_start();
 ob_start();
 include('conexao.php');
+include('protect.php');
 
-$id_grupo = filter_input(INPUT_GET, 'id_grupo', FILTER_SANITIZE_NUMBER_INT);
-
+$id_grupo = $_GET['id_grupo'];
 $query_listar = "SELECT id_tarefa,nome_tarefa,desc_tarefa,concluida FROM tarefa";
 $listar = mysqli_query($conexao,$query_listar);
 $dado = mysqli_fetch_all($listar);
 
 
-
-
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -98,7 +94,7 @@ $dado = mysqli_fetch_all($listar);
 
     <div class="todo-container">
  
-      <form action="novaTarefa.php" id="todo-form" method="post" >
+      <form action="novaTarefa.php?id_grupo=<?php echo $id_grupo?>" id="todo-form" method="post" >
         <h1>Adicione sua tarefa</h1>
         <div class="form-control">
 
@@ -129,9 +125,11 @@ if (($result_tarefa) and ($result_tarefa->rowCount() != 0)) {
   while($row_tarefa = $result_tarefa->fetch(PDO::FETCH_ASSOC)) {
     extract($row_tarefa);
   //  var_dump($row_tarefa);
+          "id_tarefa". $row_tarefa['id_tarefa'];
     echo "Tarefa:" . $row_tarefa['nome_tarefa'] . "<br>";
     echo "Descrição:" . $row_tarefa['desc_tarefa'] . "<br>";
-   
+    // eu estava aqui fazendo o botão de excluir tarefas, não sei se vai dar certo
+    echo "Apagar:" . "<a href='apagar_tarefa.php'>Apagar</a>";
 
 } 
 

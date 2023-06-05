@@ -4,7 +4,7 @@ if(!isset($_SESSION)) {
 }
 
 include('conexao.php');
-$id_grupo = filter_input(INPUT_GET, 'id_grupo', FILTER_SANITIZE_NUMBER_INT);
+$id_grupo = $_GET['id_grupo'];
 $tarefa_nome = isset($_POST['nome'])? $_POST['nome'] : '';
 $desc_tarefa = isset($_POST['desc'])? $_POST['desc'] : '';
 
@@ -13,7 +13,7 @@ $result_grupo = $conn->prepare($query_grupo);
 $result_grupo->execute();
 
 
-$incluir = "INSERT INTO tarefa(nome_tarefa, desc_tarefa, concluida, usuario_id,id_grupo) 
+$incluir = "INSERT INTO tarefa(nome_tarefa, desc_tarefa, concluida, usuario_id,grupo_id) 
 VALUES ('$tarefa_nome', '$desc_tarefa', 0,'$_SESSION[id_usuario]','$id_grupo')";
 $query_incluir = mysqli_query($conexao, $incluir);
 
@@ -35,4 +35,3 @@ header("location: tarefas.php?id_grupo=$id_grupo");
 
 
 ?>
-
