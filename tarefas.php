@@ -112,9 +112,6 @@ $dado = mysqli_fetch_all($listar);
       <div class="lista_tarefa">
       <ul style="list-style: none;">
       <?php
-
-
-
 $query_tarefa ="SELECT id_tarefa, nome_tarefa, desc_tarefa FROM tarefa
 WHERE grupo_id=:grupo_id ORDER BY id_tarefa DESC";
 $result_tarefa = $conn->prepare($query_tarefa);
@@ -129,7 +126,7 @@ if (($result_tarefa) and ($result_tarefa->rowCount() != 0)) {
     echo "Tarefa:" . $row_tarefa['nome_tarefa'] . "<br>";
     echo "Descrição:" . $row_tarefa['desc_tarefa'] . "<br>";
     // eu estava aqui fazendo o botão de excluir tarefas, não sei se vai dar certo
-    echo "Apagar:" . "<a href='apagar_tarefa.php'>Apagar</a>";
+    echo "<a href='apagar_tarefa.php?id_tarefa=$id_tarefa'>Apagar</a>";
 
 } 
 
@@ -137,14 +134,10 @@ if (($result_tarefa) and ($result_tarefa->rowCount() != 0)) {
   
 } 
 
-
-
             ?>
        
       </ul>
       </div>
-    
-      
     
   </body>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

@@ -14,6 +14,16 @@ include('protect.php');
     <link rel="stylesheet" href="./css/styles.css">
     <title>Painel</title>
 </head>
+<style>
+    .grupos{
+    border: 1px solid #000;
+    padding: 10px;
+    width: 12%;
+    background: white;
+    border-radius: 10px 20px 30px;
+    }
+   
+</style>
 <body>
 <header>
       <nav class="nav-bar">
@@ -61,8 +71,8 @@ include('protect.php');
         
         <a href="criarGrupo.php"> <button class="butao">Criar Projeto</button> </a> <br>
         <a href="entrarGrupo.php"> <button class="butao">Entrar em um Projeto</button></a> <br>
-        <a href="tarefas.php"><button class="butao">Menu de Tarefas</button></a> <br>
-        <a href="logout.php"> <button class="butao">Sair</button></a> <br>
+        
+        
     
     
 </div>
@@ -89,8 +99,10 @@ $result_grupo->execute();
 while($row_grupo = $result_grupo->fetch(PDO::FETCH_ASSOC)) {
     extract($row_grupo);
   //  var_dump($row_grupo);
-    echo "Grupo:" . $row_grupo['nome_grupo'] . "<br>";
-    echo "Visualizar:" ."<a href='grupo.php?id_grupo=$id_grupo'>Visualizar</a> <br>";
+    echo '<div class="grupos">' ."Grupo:" . $row_grupo['nome_grupo'] .  
+    " <a href='grupo.php?id_grupo=$id_grupo'>Visualizar</a>" .'</div>' . 
+    "<a href='apagar_grupo.php?id_grupo=$id_grupo'>[Apagar]</a>";
+   
 
 }
 

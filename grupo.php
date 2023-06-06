@@ -10,7 +10,7 @@ ob_start();
 include('conexao.php');
 
 
-$id_grupo = filter_input(INPUT_GET, 'id_grupo', FILTER_SANITIZE_NUMBER_INT);
+$id_grupo = $_GET['id_grupo'];
 
 ?>
 <!DOCTYPE html>

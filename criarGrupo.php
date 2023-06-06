@@ -10,6 +10,7 @@
 <style>
     .inputtype{
         position: relative;
+        border: none;
     }
     .inputNome{
         position: relative;
@@ -54,7 +55,8 @@ border-radius: 10px;
     blackground-color: rgba(0, 0, 0, 0.8);
     padding: 15px;
     border-radius: 15px;
-    width: 20%;
+    width: 30%;
+    border:none;
 }
 legend{
     border: 1px solid #D9D9D9;
@@ -63,6 +65,26 @@ legend{
     background-color: #D9D9D9;
     color: black;
 }
+
+textarea {
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+
+textarea {
+    padding: 10px;
+    width: 90%;
+    line-height: 1.5;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 1px #999;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
     </style>
 <body>
 <header>
@@ -78,7 +100,7 @@ legend{
                 </ul>
             </div>
             <div class="login-button">
-                <button><a href="index.php">Entrar</a></button>
+                <button><a href="logout.php">Sair</a></button>
             </div>
 
             <div class="mobile-menu-icon">
@@ -110,9 +132,10 @@ legend{
             <label class="labelinput">Nome do grupo</label>
         </div>
 <br><br><br>
-            <div class="inputtype">
-            <input type="text" name="desc_grupo" class="inputNome" required>  
-            <label class="labelinput">Descrição do grupo</label>
+            <div class="inputtype"> 
+                Descrição
+            <textarea placeholder="Descreva brevemente seu Projeto"rows=10 cols=35 minlength="10" maxlength="250"></textarea> <required>  
+            <label class="labelinput"> </label>
             </div>
 <br>
         <div>
