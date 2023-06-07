@@ -2,42 +2,49 @@ create schema sra;
 use sra;
 
 
-CREATE TABLE usuario(
+CREATE TABLE usuario (
   id_usuario INT AUTO_INCREMENT PRIMARY KEY,
   nome VARCHAR(100),
   email VARCHAR(100),
   senha VARCHAR(20),
-  adm int(1)
+  adm INT(1) 
 );
 
-CREATE TABLE grupo(
-id_grupo int primary key auto_increment,
-nome_grupo varchar(50),
-desc_grupo varchar(250),
-usuario_id integer,
- CONSTRAINT fk_usugru FOREIGN KEY (usuario_id) REFERENCES usuario(id_usuario)
+CREATE TABLE grupo (
+  id_grupo INT PRIMARY KEY AUTO_INCREMENT,
+  nome_grupo VARCHAR(50),
+  desc_grupo VARCHAR(250),
+  usuario_id INT,
+  CONSTRAINT fk_usugru FOREIGN KEY (usuario_id) REFERENCES usuario(id_usuario)
 );
 
-
-create table tarefa(
-id_tarefa int auto_increment primary key,
-nome_tarefa varchar(100) not null,
-desc_tarefa varchar(255),
-concluida tinyint(1),
-usuario_id integer,
-grupo_id integer,
-CONSTRAINT fk_usutar FOREIGN KEY (usuario_id) REFERENCES usuario (id_usuario),
- CONSTRAINT fk_grutar FOREIGN KEY (grupo_id) REFERENCES grupo (id_grupo)
+CREATE TABLE colaborador_grupo (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  usuario_id INT,
+  grupo_id INT,
+  CONSTRAINT fk_usucola FOREIGN KEY (usuario_id) REFERENCES usuario(id_usuario),
+  CONSTRAINT fk_grucola FOREIGN KEY (grupo_id) REFERENCES grupo(id_grupo)
 );
 
-create table relatorio(
-id_relatorio int primary key auto_increment,
-titulo varchar(75),
-descricao varchar(1000),
-data_relatorio date,
-hora time
+CREATE TABLE tarefa (
+  id_tarefa INT AUTO_INCREMENT PRIMARY KEY,
+  nome_tarefa VARCHAR(100) NOT NULL,
+  desc_tarefa VARCHAR(255),
+  concluida TINYINT(1),
+  usuario_id INT,
+  grupo_id INT,
+  CONSTRAINT fk_usutar FOREIGN KEY (usuario_id) REFERENCES usuario(id_usuario),
+  CONSTRAINT fk_grutar FOREIGN KEY (grupo_id) REFERENCES grupo(id_grupo)
+);
+
+CREATE TABLE relatorio (
+  id_relatorio INT PRIMARY KEY AUTO_INCREMENT,
+  titulo VARCHAR(75),
+  descricao VARCHAR(1000),
+  data_relatorio DATE,
+  hora TIME
 );
 
 insert into usuario(id_usuario,nome,email,senha,adm)
 values ('','Arnaldo Samuel','arnaldo221@gmail.com','arnaldose','0'),
-        ('','kaio','kaio221@gmail.com','kaiose','1'); 
+        ('','kaio','kaio221@gmail.com','kaiose','1');  
