@@ -67,6 +67,20 @@ header {
     font-size: 1.1rem;
 }
 
+.login-buttonLanding button {
+    border: none;
+    border-radius: 5px;
+    background-color: #957E6C;
+    margin: 20px auto;
+}
+
+.login-buttonLanding button a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    font-size: 3rem;
+}
+
 .cadastro-button button {
     border: none;
     padding: 10px 15px;
@@ -139,9 +153,22 @@ header {
     }
 }
 
+/*** estilização landing page ***/
+
+.LogoLanding {
+    background-color: #025159;
+    border-radius: 20px 20px;
+    font-size: 20px;
+    margin: 20px auto;
+    width: 250px;
+    height: 50px;
+}
+
+.LogoLanding h1 {
+    color: #fff;
+}
 
 /*** estilização login ***/
-
 
 .body-login {
     width: 100%;
@@ -515,6 +542,3 @@ border-radius: 10px;
   a{
     text-decoration: none;
   }
-
-
-
