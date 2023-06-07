@@ -43,11 +43,13 @@ WHERE grupo_id=:grupo_id ORDER BY id_tarefa DESC";
 $result_tarefa = $conn->prepare($query_tarefa);
 $result_tarefa->bindParam('grupo_id', $id_grupo);
 $result_tarefa->execute();
+echo 'Código do grupo: ' . $row_grupo['id_grupo']."<br>";
 
 if (($result_tarefa) and ($result_tarefa->rowCount() != 0)) {
   while($row_tarefa = $result_tarefa->fetch(PDO::FETCH_ASSOC)) {
     extract($row_tarefa);
   //  var_dump($row_tarefa);
+  echo 'Grupo: ' . $row_grupo['id_grupo'];
     echo "Menu de tarefas" ."<a href='tarefas.php?id_grupo=$id_grupo'>Visualizar</a>";
    
 
