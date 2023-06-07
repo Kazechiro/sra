@@ -3,7 +3,7 @@ if(!isset($_SESSION)) {
     session_start();
 }
 include('protect.php');
-
+include('conexao.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -78,37 +78,29 @@ include('protect.php');
 </div>
 </center>
 <footer>
-   <?php
+    <?php
+    if (isset($_SESSION['msg'])) {
+        echo $_SESSION['msg'];
+        unset($_SESSION['msg']);
+    }
 
-if(isset($_SESSION['msg'])) {
-    echo $_SESSION['msg'];
-    unset($_SESSION['msg']);
-}
+    // Consultar os grupos do usuário e dos quais é colaborador
+    $query_grupo = "SELECT g.id_grupo, g.nome_grupo, g.desc_grupo
+                    FROM grupo g
+                    LEFT JOIN colaborador_grupo cg ON g.id_grupo = cg.grupo_id
+                    WHERE cg.usuario_id = $_SESSION[id_usuario] OR g.usuario_id = $_SESSION[id_usuario]
+                    ORDER BY g.id_grupo DESC";
+    $result_grupo = $conn->prepare($query_grupo);
+    $result_grupo->execute();
 
-
-if(!isset($_SESSION)) {
-    session_start();
-}
-include('protect.php');
-include('conexao.php');
-
-$query_grupo ="SELECT id_grupo, nome_grupo, desc_grupo FROM grupo WHERE usuario_id = $_SESSION[id_usuario] ORDER BY id_grupo DESC";
-$result_grupo = $conn->prepare($query_grupo);
-$result_grupo->execute();
-
-while($row_grupo = $result_grupo->fetch(PDO::FETCH_ASSOC)) {
-    extract($row_grupo);
-  //  var_dump($row_grupo);
-    echo '<div class="grupos">' ."Grupo:" . $row_grupo['nome_grupo'] .  
-    " <a href='grupo.php?id_grupo=$id_grupo'>Visualizar</a>" .'</div>' . 
-    "<a href='apagar_grupo.php?id_grupo=$id_grupo'>[Apagar]</a>";
-   
-
-}
-
-
-?>
-   </footer>
+    while ($row_grupo = $result_grupo->fetch(PDO::FETCH_ASSOC)) {
+        extract($row_grupo);
+        echo '<div class="grupos">Grupo: ' . $row_grupo['nome_grupo'] .  
+            ' <a href="grupo.php?id_grupo=' . $id_grupo . '">Visualizar</a></div>' . 
+            '<a href="apagar_grupo.php?id_grupo=' . $id_grupo . '">[Apagar]</a>';
+    }
+    ?>
+</footer>
 
 </body>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
