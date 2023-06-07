@@ -126,7 +126,7 @@ if (($result_tarefa) and ($result_tarefa->rowCount() != 0)) {
     echo "Tarefa:" . $row_tarefa['nome_tarefa'] . "<br>";
     echo "Descrição:" . $row_tarefa['desc_tarefa'] . "<br>";
     // eu estava aqui fazendo o botão de excluir tarefas, não sei se vai dar certo
-    echo "<a href='apagar_tarefa.php?id_tarefa=$id_tarefa'>Apagar</a>";
+    echo "<a href='apagar_tarefa.php?id_tarefa=$id_tarefa'>Apagar</a><br>";
 
 } 
 
