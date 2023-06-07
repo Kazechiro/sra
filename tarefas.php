@@ -102,7 +102,7 @@ $dado = mysqli_fetch_all($listar);
           <input name="nome" type="text" id="todo-input" placeholder="O que você vai fazer?"/>
           
           <label for="desc">descrição:</label>
-          <input name="desc" type="text" id="todo-input" placeholder="Descrição"/>
+          <input name="desc_tarefa" type="text" id="todo-input" placeholder="Descrição"/>
         
           <button type="submit" name="enviar" value="cadastrar">
             <i class="fa-thin fa-plus"></i>

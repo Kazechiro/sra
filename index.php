@@ -90,12 +90,12 @@ if(isset($_POST['email']) || isset($_POST['senha'])) {
     <form action="" method="POST" id="form_login">
     <h1>Acesse sua conta</h1>
         <div class="input-container">          
-            <input type="text" name="email" class="inputLogin">
+            <input type="text" name="email" class="inputLogin" required>
             <label class="labelLogin">E-mail</label>
         </div>
 
             <div class="input-container">
-            <input type="password" name="senha" class="inputLogin">
+            <input type="password" name="senha" class="inputLogin" required>
             <label class="labelLogin">Senha</label>
             </div>
 
