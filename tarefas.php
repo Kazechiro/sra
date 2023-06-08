@@ -95,6 +95,7 @@ $dado = mysqli_fetch_all($listar);
     <div class="todo-container">
  
       <form action="novaTarefa.php?id_grupo=<?php echo $id_grupo?>" id="todo-form" method="post" >
+      <legend> Grupo: <?php ?> </legend>
         <h1>Adicione sua tarefa</h1>
         <div class="form-control">
 
