@@ -17,7 +17,7 @@
         background: none;
     border: none;
     border-bottom: 1px solid white;
-    outine: none;
+    outline: none;
     color: black;
     font-size: 15px;
     width: 90%;
@@ -52,7 +52,6 @@ border-radius: 10px;
     top:50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    blackground-color: rgba(0, 0, 0, 0.8);
     padding: 15px;
     border-radius: 15px;
     width: 30%;
@@ -134,7 +133,7 @@ label {
 <br><br><br>
             <div class="inputtype"> 
                 Descrição
-            <textarea placeholder="Descreva brevemente seu Projeto"rows=10 cols=35 minlength="10" maxlength="250"></textarea> <required>  
+            <textarea name="desc_grupo" placeholder="Descreva brevemente seu Projeto"rows=10 cols=35 maxlength="250"></textarea> <required>  
             <label class="labelinput"> </label>
             </div>
 <br>
