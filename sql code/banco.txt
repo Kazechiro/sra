@@ -23,7 +23,7 @@ CREATE TABLE colaborador_grupo (
   usuario_id INT,
   grupo_id INT,
   CONSTRAINT fk_usucola FOREIGN KEY (usuario_id) REFERENCES usuario(id_usuario),
-  CONSTRAINT fk_grucola FOREIGN KEY (grupo_id) REFERENCES grupo(id_grupo)
+  CONSTRAINT fk_grucola FOREIGN KEY (grupo_id) REFERENCES grupo(id_grupo) ON DELETE CASCADE
 );
 
 CREATE TABLE tarefa (
@@ -45,6 +45,15 @@ CREATE TABLE relatorio (
   hora TIME
 );
 
+ALTER TABLE colaborador_grupo
+DROP FOREIGN KEY fk_grucola;
+
+ALTER TABLE colaborador_grupo
+ADD CONSTRAINT fk_grucola
+FOREIGN KEY (grupo_id)
+REFERENCES grupo(id_grupo)
+ON DELETE CASCADE;
+
 insert into usuario(id_usuario,nome,email,senha,adm)
 values ('','Arnaldo Samuel','arnaldo221@gmail.com','arnaldose','0'),
-        ('','kaio','kaio221@gmail.com','kaiose','1');  
+        ('','kaio','kaio221@gmail.com','kaiose','1'); 
