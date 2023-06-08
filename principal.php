@@ -96,9 +96,16 @@ include('conexao.php');
     while ($row_grupo = $result_grupo->fetch(PDO::FETCH_ASSOC)) {
         extract($row_grupo);
         echo '<div class="grupos">Grupo: ' . $row_grupo['nome_grupo'] .  
-            ' <a href="grupo.php?id_grupo=' . $id_grupo . '">Visualizar</a></div>' . 
-            '<a href="apagar_grupo.php?id_grupo=' . $id_grupo . '">[Apagar]</a>';
-    }
+            ' <a href="grupo.php?id_grupo=' . $id_grupo . '">Visualizar</a></div>'; 
+            if ($_SESSION['adm'] == 1) {
+                echo '<a href="apagar_grupo.php?id_grupo=' . $id_grupo . '">[Apagar]</a>';
+            } else {
+                
+            }
+       
+    }   
+
+    
     ?>
 </footer>
 
