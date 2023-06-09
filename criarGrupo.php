@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./css/styles.css">
-  <title>Criar Grupo</title>
+  <title>Criar Projeto</title>
 </head>
 <style>
     .inputtype{
@@ -99,9 +99,7 @@ label {
                     <li class="nav-item"><a href="#" class="nav-link"> Sobre</a></li>
                 </ul>
             </div>
-            <div class="login-button">
-                <button><a href="logout.php">Sair</a></button>
-            </div>
+            
 
             <div class="mobile-menu-icon">
                 <button onclick="menuShow()"><img class="icon" src="assets/img/menu_white_36dp.svg" alt=""></button>
@@ -125,11 +123,11 @@ label {
       <br><br>
       <br><br>
       
-    <legend><b>Criar Grupo</b></legend>
+    <legend><b>Criar Projeto</b></legend>
     <br><br>
         <div class="inputtype">          
             <input type="text" name="nome_grupo" class="inputNome" required> 
-            <label class="labelinput">Nome do grupo</label>
+            <label class="labelinput">Nome do Projeto</label>
         </div>
 <br><br><br>
             <div class="inputtype"> 
