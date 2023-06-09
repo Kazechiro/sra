@@ -544,3 +544,21 @@ border-radius: 10px;
   a{
     text-decoration: none;
   }
+
+
+  /*** Estilo taefas(status)   ***/
+
+  /* Estilo para tarefas "A fazer" */
+.status-todo {
+    background-color: gray;
+  }
+  
+  /* Estilo para tarefas "Em andamento" */
+  .status-in-progress {
+    background-color: orange;
+  }
+  
+  /* Estilo para tarefas "Concluídas" */
+  .status-done {
+    background-color: green;
+  }

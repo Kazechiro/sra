@@ -8,3 +8,13 @@ function menuShow() {
       document.querySelector('.icon').src = "assets/img/close_white_36dp.svg";
   }
 }
+
+
+
+function openPopup() {
+  // Seleciona o elemento do pop-up pelo ID
+  var popup = document.getElementById("popup-form");
+  
+  // Define o estilo display como "block" para torná-lo visível
+  popup.style.display = "block";
+}

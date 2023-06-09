@@ -91,56 +91,81 @@ $dado = mysqli_fetch_all($listar);
       </div>
   </header>
 
-  <script src="js/script.js"></script>
+  <div class="todo-container">
+  <form action="novaTarefa.php?id_grupo=<?php echo $id_grupo?>" id="todo-form" method="post">
+    <legend>Grupo: <?php echo $nome_grupo?></legend>
+    <h1>Adicione sua tarefa</h1>
+    <div id="popup-form" style="display: none;">
+      <!-- Campos do formulário -->
+      <label for="nome">nome:</label>
+      <input name="nome" type="text" id="todo-input" placeholder="O que você vai fazer?" required/><br>
 
-    <div class="todo-container">
+      <label for="desc">descrição:</label>
+      <input name="desc_tarefa" type="text" id="todo-input" placeholder="Descrição" required/><br>
+        <span>status da tarefa</span><br>
  
-      <form action="novaTarefa.php?id_grupo=<?php echo $id_grupo?>" id="todo-form" method="post" >
-      <legend> Grupo: <?php echo $nome_grupo?> </legend>
-        <h1>Adicione sua tarefa</h1>
-        <div class="form-control">
 
-          <label for="nome">nome:</label>
-          <input name="nome" type="text" id="todo-input" placeholder="O que você vai fazer?" required/>
-          
-          <label for="desc">descrição:</label>
-          <input name="desc_tarefa" type="text" id="todo-input" placeholder="Descrição" required/>
-        
-          <button type="submit" name="enviar" value="cadastrar">
-            <i class="fa-thin fa-plus"></i>
-          </button>
-        </div>
-      </form>
-      <div class="lista_tarefa">
-      <ul style="list-style: none;">
+    
+
+      <button id="close-button" type="button">Fechar</button>
+
+      <button id="add-button" type="submit" name="enviar" value="cadastrar">Adicionar</button>
+    </div>
+
+    <div class="form-control">
+      <button name="enviar" type="button" onclick="openPopup()">
+        <i class="fa-thin fa-plus"></i>
+      </button>
+    </div>
+  </form>
+
+  <div class="lista_tarefa">
+    <ul style="list-style: none;">
+      <!-- Loop das tarefas -->
       <?php
-$query_tarefa ="SELECT id_tarefa, nome_tarefa, desc_tarefa FROM tarefa
-WHERE grupo_id=:grupo_id ORDER BY id_tarefa DESC";
-$result_tarefa = $conn->prepare($query_tarefa);
-$result_tarefa->bindParam('grupo_id', $id_grupo);
-$result_tarefa->execute();
+        $query_tarefa = "SELECT id_tarefa, nome_tarefa, desc_tarefa, status_tarefa FROM tarefa WHERE grupo_id=:grupo_id ORDER BY id_tarefa DESC";
+        $result_tarefa = $conn->prepare($query_tarefa);
+        $result_tarefa->bindParam('grupo_id', $id_grupo);
+        $result_tarefa->execute();
 
-if (($result_tarefa) and ($result_tarefa->rowCount() != 0)) {
-  while($row_tarefa = $result_tarefa->fetch(PDO::FETCH_ASSOC)) {
-    extract($row_tarefa);
-  //  var_dump($row_tarefa);
-          "id_tarefa". $row_tarefa['id_tarefa'];
-    echo "Tarefa:" . $row_tarefa['nome_tarefa'] . "<br>";
-    echo "Descrição:" . $row_tarefa['desc_tarefa'] . "<br>";
-    // eu estava aqui fazendo o botão de excluir tarefas, não sei se vai dar certo
-    echo "<a href='apagar_tarefa.php?id_tarefa=$id_tarefa&id_grupo=$id_grupo&nome_grupo=$nome_grupo'>Apagar</a><br>";
-    
-    
-} 
+        if (($result_tarefa) and ($result_tarefa->rowCount() != 0)) {
+          while($row_tarefa = $result_tarefa->fetch(PDO::FETCH_ASSOC)) {
+            extract($row_tarefa);
 
-} else {
-  
-} 
+           $status_tarefa = $row_tarefa['status_tarefa'];
 
-            ?>
-       
-      </ul>
-      </div>
+            echo "<li>Tarefa: " . $row_tarefa['nome_tarefa'] . "</li>";
+            echo "<li>Descrição: " . $row_tarefa['desc_tarefa'] . "</li>";
+           
+            // Botão de excluir tarefas
+            echo "<li><a href='apagar_tarefa.php?id_tarefa=$id_tarefa&id_grupo=$id_grupo&nome_grupo=$nome_grupo'>Apagar</a></li>";
+          }
+        } else {
+          // Nenhuma tarefa encontrada
+        }
+      ?>
+    </ul>
+  </div>
+
+ <script>
+  function openPopup() {
+    var popup = document.getElementById("popup-form");
+    popup.style.display = "block";
+  }
+
+  function closePopup() {
+    var popup = document.getElementById("popup-form");
+    popup.style.display = "none";
+  }
+
+  document.getElementById("close-button").addEventListener("click", closePopup);
+
+</script>
+</div>
+
+
+
+
     
   </body>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
