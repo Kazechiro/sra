@@ -43,8 +43,8 @@ WHERE grupo_id=:grupo_id ORDER BY id_tarefa DESC LIMIT 1";
 $result_tarefa = $conn->prepare($query_tarefa);
 $result_tarefa->bindParam('grupo_id', $id_grupo);
 $result_tarefa->execute();
-echo 'Código do grupo: ' . $row_grupo['id_grupo']."<br>";
-echo "Nome do grupo: " . $nome_grupo . "<br>";
+echo 'Código do Prjeto: ' . $row_grupo['id_grupo']."<br>";
+echo "Nome do Projeto: " . $nome_grupo . "<br>";
 if (($result_tarefa) and ($result_tarefa->rowCount() != 0)) {
   while($row_tarefa = $result_tarefa->fetch(PDO::FETCH_ASSOC)) {
     extract($row_tarefa);
