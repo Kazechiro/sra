@@ -55,10 +55,6 @@ $dado = mysqli_fetch_all($listar);
       div.lista_tarefa a {
         font-size: 12px;
       }
-      span{
-        font-weight:bold;
-  font-family: "Segoe UI","Arial","Times New Roman";
-      }
     </style>
   </head>
   <body class="body-tarefa">
@@ -70,11 +66,13 @@ $dado = mysqli_fetch_all($listar);
           <div class="nav-list">
               <ul>
                   <li class="nav-item"><a href="menu.html" class="nav-link">Início</a></li>
-                  <li class="nav-item"><a href="principal.php" class="nav-link">Menu</a></li>
+                  <li class="nav-item"><a href="principal.php" class="nav-link">Projetos</a></li>
                   <li class="nav-item"><a href="#" class="nav-link"> Sobre</a></li>
               </ul>
           </div>
-          
+          <div class="login-button">
+              <button><a href="index.php">Entrar</a></button>
+          </div>
 
           <div class="mobile-menu-icon">
               <button onclick="menuShow()"><img class="icon" src="assets/img/menu_white_36dp.svg" alt=""></button>
@@ -83,7 +81,7 @@ $dado = mysqli_fetch_all($listar);
       <div class="mobile-menu">
           <ul>
               <li class="nav-item"><a href="menu.html" class="nav-link">Início</a></li>
-              <li class="nav-item"><a href="principal.php" class="nav-link">Menu</a></li>
+              <li class="nav-item"><a href="principal.php" class="nav-link">Projetos</a></li>
               <li class="nav-item"><a href="#" class="nav-link">Sobre</a></li>
           </ul>
 
@@ -93,28 +91,38 @@ $dado = mysqli_fetch_all($listar);
       </div>
   </header>
 
-  <script src="js/script.js"></script>
+  <div class="todo-container">
+  <form action="novaTarefa.php?id_grupo=<?php echo $id_grupo?>" id="todo-form" method="post" >
+      <center><h1> Projeto: <?php echo $nome_grupo?> </h1> </center>
+        <center><span>Adicione sua tarefa</span> </center>
+        <br><br>
+    <div id="popup-form" style="display: none;">
+      <!-- Campos do formulário -->
+      <label for="nome">nome:</label>
+      <input name="nome" type="text" id="todo-input" placeholder="O que você vai fazer?" required/><br>
 
-    <div class="todo-container">
+      <label for="desc">descrição:</label>
+      <input name="desc_tarefa" type="text" id="todo-input" placeholder="Descrição" required/><br>
+        <span>status da tarefa</span><br>
  
-      <form action="novaTarefa.php?id_grupo=<?php echo $id_grupo?>" id="todo-form" method="post" >
-      <legend> Grupo: <?php echo $nome_grupo?> </legend>
-        <h1>Adicione sua tarefa</h1>
-        <div class="form-control">
 
-          <label for="nome">nome:</label>
-          <input name="nome" type="text" id="todo-input" placeholder="O que você vai fazer?" required/>
-          
-          <label for="desc">descrição:</label>
-          <input name="desc_tarefa" type="text" id="todo-input" placeholder="Descrição" required/>
-        
-          <button type="submit" name="enviar" value="cadastrar">
-            <i class="fa-thin fa-plus"></i>
-          </button>
-        </div>
-      </form>
-      <div class="lista_tarefa">
-      <ul style="list-style: none;">
+    
+
+      <button id="close-button" type="button">Fechar</button>
+
+      <button id="add-button" type="submit" name="enviar" value="cadastrar">Adicionar</button>
+    </div>
+
+    <div class="form-control">
+      <button name="enviar" type="button" onclick="openPopup()">
+        <i class="fa-thin fa-plus"></i>
+      </button>
+    </div>
+  </form>
+
+  <div class="lista_tarefa">
+    <ul style="list-style: none;">
+      <!-- Loop das tarefas -->
       <?php
         $query_tarefa = "SELECT id_tarefa, nome_tarefa, desc_tarefa, status_tarefa FROM tarefa WHERE grupo_id=:grupo_id ORDER BY id_tarefa DESC";
         $result_tarefa = $conn->prepare($query_tarefa);
