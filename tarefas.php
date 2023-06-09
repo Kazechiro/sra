@@ -6,6 +6,7 @@ include('conexao.php');
 include('protect.php');
 
 $id_grupo = $_GET['id_grupo'];
+$nome_grupo = $_GET['nome_grupo'];
 $query_listar = "SELECT id_tarefa,nome_tarefa,desc_tarefa,concluida FROM tarefa";
 $listar = mysqli_query($conexao,$query_listar);
 $dado = mysqli_fetch_all($listar);
@@ -95,15 +96,15 @@ $dado = mysqli_fetch_all($listar);
     <div class="todo-container">
  
       <form action="novaTarefa.php?id_grupo=<?php echo $id_grupo?>" id="todo-form" method="post" >
-      <legend> Grupo: <?php ?> </legend>
+      <legend> Grupo: <?php echo $nome_grupo?> </legend>
         <h1>Adicione sua tarefa</h1>
         <div class="form-control">
 
           <label for="nome">nome:</label>
-          <input name="nome" type="text" id="todo-input" placeholder="O que você vai fazer?"/>
+          <input name="nome" type="text" id="todo-input" placeholder="O que você vai fazer?" required/>
           
           <label for="desc">descrição:</label>
-          <input name="desc_tarefa" type="text" id="todo-input" placeholder="Descrição"/>
+          <input name="desc_tarefa" type="text" id="todo-input" placeholder="Descrição" required/>
         
           <button type="submit" name="enviar" value="cadastrar">
             <i class="fa-thin fa-plus"></i>
@@ -127,8 +128,9 @@ if (($result_tarefa) and ($result_tarefa->rowCount() != 0)) {
     echo "Tarefa:" . $row_tarefa['nome_tarefa'] . "<br>";
     echo "Descrição:" . $row_tarefa['desc_tarefa'] . "<br>";
     // eu estava aqui fazendo o botão de excluir tarefas, não sei se vai dar certo
-    echo "<a href='apagar_tarefa.php?id_tarefa=$id_tarefa'>Apagar</a><br>";
-
+    echo "<a href='apagar_tarefa.php?id_tarefa=$id_tarefa&id_grupo=$id_grupo&nome_grupo=$nome_grupo'>Apagar</a><br>";
+    
+    
 } 
 
 } else {

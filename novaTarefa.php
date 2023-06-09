@@ -5,8 +5,9 @@ if(!isset($_SESSION)) {
 
 include('conexao.php');
 $id_grupo = $_GET['id_grupo'];
+$nome_grupo = $_GET['nome_grupo'];
 $tarefa_nome = isset($_POST['nome'])? $_POST['nome'] : '';
-$desc_tarefa = isset($_POST['desc'])? $_POST['desc'] : '';
+$desc_tarefa = isset($_POST['desc_tarefa'])? $_POST['desc_tarefa'] : '';
 
 $query_grupo ="SELECT id_grupo, nome_grupo, desc_grupo FROM grupo";
 $result_grupo = $conn->prepare($query_grupo);
@@ -22,7 +23,7 @@ if ($incluir) {
   while($row_grupo = $result_grupo->fetch(PDO::FETCH_ASSOC)) {
     extract($row_grupo);
 
-    header("location: tarefas.php?id_grupo=$id_grupo");
+    header("location: tarefas.php?id_grupo=$id_grupo&nome_grupo=$nome_grupo");
 }
 } else {
   echo "não foi possivel incluir";
@@ -30,7 +31,7 @@ if ($incluir) {
 
 
 
-header("location: tarefas.php?id_grupo=$id_grupo");
+header("location: tarefas.php?id_grupo=$id_grupo&nome_grupo=$nome_grupo");
 
 
 
