@@ -13,6 +13,7 @@ $grupo_id = $_GET['id_grupo'];
 
 $tarefa_nome = isset($_POST['nome_tarefa']) ? $_POST['nome_tarefa'] : '';
 $desc_tarefa = isset($_POST['desc_tarefa']) ? $_POST['desc_tarefa'] : '';
+
 $status_tarefa = $_POST['status_tarefa'];
 
 $query_grupo = "SELECT id_grupo, nome_grupo, desc_grupo FROM grupo";
@@ -20,7 +21,8 @@ $result_grupo = $conn->prepare($query_grupo);
 $result_grupo->execute();
 
 $incluir = "INSERT INTO tarefa (nome_tarefa, desc_tarefa, usuario_id, grupo_id, status_tarefa)
-            VALUES (:nome_tarefa, :desc_tarefa, :usuario_id, :grupo_id, :status_tarefa)";
+                  VALUES (:nome_tarefa, :desc_tarefa, :usuario_id, :grupo_id, :status_tarefa)";
+
 
 $result_inserir = $conn->prepare($incluir);
 $result_inserir->bindParam(':nome_tarefa', $tarefa_nome);

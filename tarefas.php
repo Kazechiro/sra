@@ -3,7 +3,7 @@
 session_start();
 ob_start();
 include('conexao.php');
-require('protect.php');
+include('protect.php');
 
 $id_grupo = $_GET['id_grupo'];
 $nome_grupo = $_GET['nome_grupo'];
@@ -71,7 +71,7 @@ $dado = mysqli_fetch_all($listar);
               </ul>
           </div>
           <div class="login-button">
-              <button><a href="index.php">Entrar</a></button>
+              <button><a href="logout.php">Logout</a></button>
           </div>
 
           <div class="mobile-menu-icon">
@@ -115,6 +115,22 @@ $dado = mysqli_fetch_all($listar);
     ?>
 </select>
 
+<label for="colaborador">Responsável:</label>
+<select name="colaborador" id="colaborador">
+  <?php
+    $query_colaboradores = "SELECT id_usuario, nome FROM usuario WHERE id_usuario IN (SELECT usuario_id FROM colaborador_grupo WHERE grupo_id = :grupo_id)";
+    $result_colaboradores = $conn->prepare($query_colaboradores);
+    $result_colaboradores->bindParam('grupo_id', $id_grupo);
+    $result_colaboradores->execute();
+
+    while($row_colaborador = $result_colaboradores->fetch(PDO::FETCH_ASSOC)) {
+      $colaboradorId = $row_colaborador['id_usuario'];
+      $colaboradorNome = $row_colaborador['nome'];
+
+      echo "<option value=\"$colaboradorId\">$colaboradorNome</option>";
+    }
+  ?>
+</select>
     
 
       <button id="close-button" type="button">Fechar</button>
