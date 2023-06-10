@@ -44,7 +44,13 @@ CREATE TABLE tarefa (
 
 );
 
-
+CREATE TABLE colaborador_tarefa (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  colaborador_id INT,
+  tarefa_id INT,
+  FOREIGN KEY (colaborador_id) REFERENCES usuario(id_usuario),
+  FOREIGN KEY (tarefa_id) REFERENCES tarefa(id_tarefa)
+);
 
 CREATE TABLE relatorio (
   id_relatorio INT PRIMARY KEY AUTO_INCREMENT,
@@ -53,20 +59,3 @@ CREATE TABLE relatorio (
   data_relatorio DATE,
   hora TIME
 );
-
-ALTER TABLE colaborador_grupo
-DROP FOREIGN KEY fk_grucola;
-
-ALTER TABLE colaborador_grupo
-ADD CONSTRAINT fk_grucola
-FOREIGN KEY (grupo_id)
-REFERENCES grupo(id_grupo)
-ON DELETE CASCADE;
-
-
-insert into usuario(id_usuario,nome,email,senha,adm)
-values ('','Arnaldo Samuel','arnaldo221@gmail.com','arnaldose','0'),
-        ('','kaio','kaio221@gmail.com','kaiose','1'); 
-        
-insert into tarefa_status(id_status,nome_status)
-VALUES ('','A fazer'), ('','Em andamento'), ('','Concluída');
