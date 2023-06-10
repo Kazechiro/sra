@@ -92,19 +92,28 @@ $dado = mysqli_fetch_all($listar);
   </header>
 
   <div class="todo-container">
-  <form action="novaTarefa.php?id_grupo=<?php echo $id_grupo?>" id="todo-form" method="post" >
+  <form action="novaTarefa.php?id_grupo=<?php echo $id_grupo?>&nome_grupo=<?php echo $nome_grupo  ?>" id="todo-form" method="post" >
       <center><h1> Projeto: <?php echo $nome_grupo?> </h1> </center>
         <center><span>Adicione sua tarefa</span> </center>
         <br><br>
     <div id="popup-form" style="display: none;">
       <!-- Campos do formulário -->
       <label for="nome">nome:</label>
-      <input name="nome" type="text" id="todo-input" placeholder="O que você vai fazer?" required/><br>
+      <input name="nome_tarefa" type="text" id="todo-input" placeholder="O que você vai fazer?" required/><br>
 
       <label for="desc">descrição:</label>
       <input name="desc_tarefa" type="text" id="todo-input" placeholder="Descrição" required/><br>
-        <span>status da tarefa</span><br>
- 
+        <span>status da tarefa:</span><br>
+        <select name="status_tarefa" required>
+    <option value="">Selecione o status</option>
+    <?php
+    $query_status = "SELECT id_status, nome_status FROM tarefa_status";
+    $result_status = mysqli_query($conexao, $query_status);
+    while ($row_status = mysqli_fetch_assoc($result_status)) {
+        echo "<option value='" . $row_status['id_status'] . "'>" . $row_status['nome_status'] . "</option>";
+    }
+    ?>
+</select>
 
     
 
@@ -137,7 +146,7 @@ $dado = mysqli_fetch_all($listar);
 
             echo "<li>Tarefa: " . $row_tarefa['nome_tarefa'] . "</li>";
             echo "<li>Descrição: " . $row_tarefa['desc_tarefa'] . "</li>";
-           
+             echo $status_tarefa = $row_tarefa['status_tarefa'];
             // Botão de excluir tarefas
             echo "<li><a href='apagar_tarefa.php?id_tarefa=$id_tarefa&id_grupo=$id_grupo&nome_grupo=$nome_grupo'>Apagar</a></li>";
           }
