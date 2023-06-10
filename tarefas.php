@@ -3,11 +3,11 @@
 session_start();
 ob_start();
 include('conexao.php');
-include('protect.php');
+require('protect.php');
 
 $id_grupo = $_GET['id_grupo'];
 $nome_grupo = $_GET['nome_grupo'];
-$query_listar = "SELECT id_tarefa,nome_tarefa,desc_tarefa,concluida FROM tarefa";
+$query_listar = "SELECT id_tarefa,nome_tarefa,desc_tarefa FROM tarefa";
 $listar = mysqli_query($conexao,$query_listar);
 $dado = mysqli_fetch_all($listar);
 

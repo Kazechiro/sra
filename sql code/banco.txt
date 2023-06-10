@@ -9,6 +9,11 @@ CREATE TABLE usuario (
   senha VARCHAR(20),
   adm INT(1) 
 );
+create table tarefa_status (
+id_status int primary key auto_increment,
+nome_status varchar(60)
+
+);
 
 CREATE TABLE grupo (
   id_grupo INT PRIMARY KEY AUTO_INCREMENT,
@@ -30,12 +35,16 @@ CREATE TABLE tarefa (
   id_tarefa INT AUTO_INCREMENT PRIMARY KEY,
   nome_tarefa VARCHAR(100) NOT NULL,
   desc_tarefa VARCHAR(255),
-  concluida TINYINT(1),
   usuario_id INT,
   grupo_id INT,
+  status_tarefa INT,
+  CONSTRAINT fk_starefa FOREIGN KEY (status_tarefa) REFERENCES tarefa_status(id_status),
   CONSTRAINT fk_usutar FOREIGN KEY (usuario_id) REFERENCES usuario(id_usuario),
   CONSTRAINT fk_grutar FOREIGN KEY (grupo_id) REFERENCES grupo(id_grupo)
+
 );
+
+
 
 CREATE TABLE relatorio (
   id_relatorio INT PRIMARY KEY AUTO_INCREMENT,
@@ -54,6 +63,10 @@ FOREIGN KEY (grupo_id)
 REFERENCES grupo(id_grupo)
 ON DELETE CASCADE;
 
+
 insert into usuario(id_usuario,nome,email,senha,adm)
 values ('','Arnaldo Samuel','arnaldo221@gmail.com','arnaldose','0'),
         ('','kaio','kaio221@gmail.com','kaiose','1'); 
+        
+insert into tarefa_status(id_status,nome_status)
+VALUES ('','A fazer'), ('','Em andamento'), ('','Concluída');

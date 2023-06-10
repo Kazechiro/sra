@@ -19,8 +19,8 @@ $query_grupo = "SELECT id_grupo, nome_grupo, desc_grupo FROM grupo";
 $result_grupo = $conn->prepare($query_grupo);
 $result_grupo->execute();
 
-$incluir = "INSERT INTO tarefa (nome_tarefa, desc_tarefa, concluida, usuario_id, grupo_id, status_tarefa)
-            VALUES (:nome_tarefa, :desc_tarefa, 0, :usuario_id, :grupo_id, :status_tarefa)";
+$incluir = "INSERT INTO tarefa (nome_tarefa, desc_tarefa, usuario_id, grupo_id, status_tarefa)
+            VALUES (:nome_tarefa, :desc_tarefa, :usuario_id, :grupo_id, :status_tarefa)";
 
 $result_inserir = $conn->prepare($incluir);
 $result_inserir->bindParam(':nome_tarefa', $tarefa_nome);
