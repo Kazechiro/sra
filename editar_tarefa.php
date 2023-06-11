@@ -17,7 +17,10 @@ $desc_tarefa = $row_tarefa['desc_tarefa'];
 $status_tarefa = $row_tarefa['status_tarefa'];
 
 
-
+$query_colaboradores = "SELECT c.id_usuario, c.nome FROM usuario AS c
+                       INNER JOIN colaborador_grupo AS cg ON c.id_usuario = cg.usuario_id
+                       WHERE cg.grupo_id = $id_grupo";
+$result_colaboradores = mysqli_query($conexao, $query_colaboradores);
 
 ?>
 <!DOCTYPE html>
@@ -48,7 +51,20 @@ $status_tarefa = $row_tarefa['status_tarefa'];
         echo "<option value='" . $row_status['id_status'] . "' $selected>" . $row_status['nome_status'] . "</option>";
     }
     ?>
+
+
 </select>
+<span>Responsável:</span>
+ <br>
+ <select name="colaborador_id" required>
+          <option value="">Selecione um colaborador</option>
+          <?php
+          while ($row_colaborador = mysqli_fetch_assoc($result_colaboradores)) {
+            echo "<option value='" . $row_colaborador['id_usuario'] . "'>" . $row_colaborador['nome'] . "</option>";
+          }
+          ?>
+        </select>
+
 <input type="submit" value="Salvar" class="botao" />
 </form>
 <?php 
@@ -58,15 +74,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $nome_tarefa_atualizado = $_POST['nome_tarefa'];
   $desc_tarefa_atualizado = $_POST['desc_tarefa'];
   $status_tarefa_atualizado = $_POST['status_tarefa'];
-
+  $colaborador_id_atualizado = $_POST['colaborador_id'];
   // Execute uma consulta SQL para atualizar os detalhes da tarefa
-  $query_atualizar = "UPDATE tarefa SET nome_tarefa = :nome_tarefa, desc_tarefa = :desc_tarefa, status_tarefa = :status_tarefa WHERE id_tarefa = :id_tarefa";
+  $query_atualizar = "UPDATE tarefa SET nome_tarefa = :nome_tarefa, desc_tarefa = :desc_tarefa, status_tarefa = :status_tarefa, colaborador_id = :colaborador_id
+   WHERE id_tarefa = :id_tarefa";
   $stmt_atualizar = $conn->prepare($query_atualizar);
   $stmt_atualizar->bindParam(':nome_tarefa', $nome_tarefa_atualizado);
   $stmt_atualizar->bindParam(':desc_tarefa', $desc_tarefa_atualizado);
   $stmt_atualizar->bindParam(':status_tarefa', $status_tarefa_atualizado);
   $stmt_atualizar->bindParam(':id_tarefa', $id_tarefa);
-
+  $stmt_atualizar->bindParam(':colaborador_id', $colaborador_id_atualizado);
   if ($stmt_atualizar->execute()) {
       // Redirecione o usuário para a página principal ou qualquer outra página desejada
       header("Location: tarefas.php?id_grupo=$id_grupo&nome_grupo=$nome_grupo&tarefa_status=$nome_status");
