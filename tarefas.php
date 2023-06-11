@@ -34,7 +34,7 @@ $dado = mysqli_fetch_all($listar);
         padding: 0;
         margin: 0;
       }
-      .lista_tarefa {
+      
       .lista_tarefa {
         margin-top: 10px;
         padding: 10px;
@@ -47,7 +47,7 @@ $dado = mysqli_fetch_all($listar);
         overflow-y: scroll;
         display: inline-block;
       }
-      .lista_tarefa li {
+      
       .lista_tarefa li {
         padding: 5px;
         font-size: 18px;
@@ -56,13 +56,13 @@ $dado = mysqli_fetch_all($listar);
         display: inline-block;
         display: inline-block;
       }
-    .lista_tarefa ul {
+   
     .lista_tarefa ul {
        align-items: inherit;
        
       }
 
-      .lista_tarefa a {
+      
       .lista_tarefa a {
         font-size: 12px;
       }
