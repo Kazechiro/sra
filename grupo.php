@@ -97,8 +97,8 @@ $nome_grupo = $_GET['nome_grupo'];
       </div>
       <div class="login-button">
         <button>
-          <a href="index.php">
-            Entrar
+          <a href="logout.php">
+            Logout
           </a>
         </button>
       </div>
@@ -159,7 +159,7 @@ $nome_grupo = $_GET['nome_grupo'];
         echo $id_grupo;
         ?>
       </span>
-      (use este codigo para gerenciar seu projeto)
+      (use este codigo para convidar alguém para o seu projeto)
     </p>
     <br><br><br><br>
     <div class="ButtonTarefa">
