@@ -101,13 +101,13 @@ $dado = mysqli_fetch_all($listar);
   </header>
 
   <div class="todo-container">
-  <form action="novaTarefa.php?id_grupo=<?php echo $id_grupo?>&nome_grupo=<?php echo $nome_grupo  ?>" id="todo-form" method="post" >
+  <form action="novaTarefa.php?id_grupo=<?php echo $id_grupo?>&nome_grupo=<?php echo $nome_grupo?>  " id="todo-form" method="post" >
       <center><h2> Projeto: <?php echo $nome_grupo?> </h2> 
        <span>Adicione sua tarefa</span> 
         <br><br>
     <div id="popup-form" style="display: none;">  
       <!-- Campos do formulário -->
-      <label for="nome">Nome:</label>
+      
       <label for="nome">Nome:</label>
       <input name="nome_tarefa" type="text" id="todo-input" placeholder="O que você vai fazer?" required/><br>
                   Descrição:
@@ -115,9 +115,8 @@ $dado = mysqli_fetch_all($listar);
       <textarea id="todo-input" name="desc_tarefa" placeholder="Descreva brevemente seu Projeto"rows=10 cols=35 maxlength="250" required> </textarea>
       <br>
         <span>Status da Tarefa:</span><br>
-                  Descrição:
                   <br>
-      <textarea id="todo-input" name="desc_tarefa" placeholder="Descreva brevemente seu Projeto"rows=10 cols=35 maxlength="250" required> </textarea>
+      
       <br>
         <span>Status da Tarefa:</span><br>
         <select name="status_tarefa" required>
@@ -152,8 +151,7 @@ $dado = mysqli_fetch_all($listar);
     
 
       <button class="botao" id="close-button" type="button">Fechar</button> 
-       <button class="botao" type="submit" name="enviar" value="cadastrar">Adicionar</button>
-      <button class="botao" id="close-button" type="button">Fechar</button> 
+      
        <button class="botao" type="submit" name="enviar" value="cadastrar">Adicionar</button>
     </div>
 
@@ -186,7 +184,8 @@ $dado = mysqli_fetch_all($listar);
             echo "<li>Descrição: " . $row_tarefa['desc_tarefa'] . "</li><br>";
              echo "status:" .$status_tarefa = $row_tarefa['status_tarefa'] . "<br>";
             // Botão de excluir tarefas
-            echo "<li><a href='apagar_tarefa.php?id_tarefa=$id_tarefa&id_grupo=$id_grupo&nome_grupo=$nome_grupo'>Apagar</a></li>";
+            echo "<li><a href='apagar_tarefa.php?id_tarefa=$id_tarefa&id_grupo=$id_grupo&nome_grupo=$nome_grupo'>Apagar</a></li><br>";
+            echo "<a href=editar_tarefa.php?id_tarefa=$id_tarefa&id_grupo=$id_grupo&nome_grupo=$nome_grupo><ion-icon name=create-outline></ion-icon></a>";
           }
         } else {
           // Nenhuma tarefa encontrada
