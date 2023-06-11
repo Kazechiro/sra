@@ -38,9 +38,9 @@ $result_inserir->execute();
 
 if ($result_inserir) {
   // Consulta o nome do status_tarefa com base no ID inserido
-  $query_status = "SELECT nome_status FROM tarefa_status WHERE id_status = :status_tarefa";
+  $query_status = "SELECT nome_status FROM tarefa_status WHERE id_status = :nome_status";
   $result_status = $conn->prepare($query_status);
-  $result_status->bindParam(':status_tarefa', $status_tarefa);
+  $result_status->bindParam(':nome_status', $status_tarefa);
   $result_status->execute();
   $nome_status = $result_status->fetchColumn();
 

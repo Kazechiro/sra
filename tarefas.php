@@ -171,30 +171,31 @@ $dado = mysqli_fetch_all($listar);
     <ul style="list-style: none;">
       <!-- Loop das tarefas -->
       <?php
-        $query_tarefa = "SELECT id_tarefa, nome_tarefa, desc_tarefa, status_tarefa FROM tarefa WHERE grupo_id=:grupo_id ORDER BY id_tarefa DESC";
-        $result_tarefa = $conn->prepare($query_tarefa);
-        $result_tarefa->bindParam('grupo_id', $id_grupo);
-        $result_tarefa->execute();
+$query_tarefa = "SELECT t.id_tarefa, t.nome_tarefa, t.desc_tarefa, s.nome_status 
+                 FROM tarefa AS t 
+                 INNER JOIN tarefa_status AS s ON t.status_tarefa = s.id_status 
+                 WHERE t.grupo_id = :grupo_id 
+                 ORDER BY t.id_tarefa DESC";
+$result_tarefa = $conn->prepare($query_tarefa);
+$result_tarefa->bindParam(':grupo_id', $id_grupo);
+$result_tarefa->execute();
 
-        if (($result_tarefa) and ($result_tarefa->rowCount() != 0)) {
-          while($row_tarefa = $result_tarefa->fetch(PDO::FETCH_ASSOC)) {
-            extract($row_tarefa);
+if (($result_tarefa) and ($result_tarefa->rowCount() != 0)) {
+  while ($row_tarefa = $result_tarefa->fetch(PDO::FETCH_ASSOC)) {
+    extract($row_tarefa);
 
-           $status_tarefa = $row_tarefa['status_tarefa'];
-                
-            echo "<li>";
-                echo "<span>Tarefa: " . $row_tarefa['nome_tarefa'] . "</span><br>";
-                echo "<span>Descrição: " . $row_tarefa['desc_tarefa'] . "</span><br>";
-                echo "<span>Status: " . $row_tarefa['status_tarefa'] . "</span><br>";
-                echo "<button type='button' class='botao'><a href='editar_tarefa.php?id_tarefa=$id_tarefa&id_grupo=$id_grupo&nome_grupo=$nome_grupo'>Editar</a></button>";
-                echo "<button type='button' class='botao'><a href='apagar_tarefa.php?id_tarefa=$id_tarefa&id_grupo=$id_grupo&nome_grupo=$nome_grupo'>Apagar</a></button><br>";
-                echo "</li>";
-           
-          }
-        } else {
-          // Nenhuma tarefa encontrada
-        }
-      ?>
+    echo "<li>";
+    echo "<span>Tarefa: " . $row_tarefa['nome_tarefa'] . "</span><br>";
+    echo "<span>Descrição: " . $row_tarefa['desc_tarefa'] . "</span><br>";
+    echo "<span>Status: " . $row_tarefa['nome_status'] . "</span><br>";
+    echo "<button type='button' class='botao'><a href='editar_tarefa.php?id_tarefa=$id_tarefa&id_grupo=$id_grupo&nome_grupo=$nome_grupo'>Editar</a></button>";
+    echo "<button type='button' class='botao'><a href='apagar_tarefa.php?id_tarefa=$id_tarefa&id_grupo=$id_grupo&nome_grupo=$nome_grupo'>Apagar</a></button><br>";
+    echo "</li>";
+  }
+} else {
+  // Nenhuma tarefa encontrada
+}
+?>
     </ul>
   </div>
 
