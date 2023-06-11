@@ -35,6 +35,7 @@ $dado = mysqli_fetch_all($listar);
         margin: 0;
       }
       .lista_tarefa {
+      .lista_tarefa {
         margin-top: 10px;
         padding: 10px;
         margin: auto;
@@ -42,34 +43,28 @@ $dado = mysqli_fetch_all($listar);
         height: 400px;
         overflow-y: scroll;
         display: inline-block;
+        height: 400px;
+        overflow-y: scroll;
+        display: inline-block;
       }
+      .lista_tarefa li {
       .lista_tarefa li {
         padding: 5px;
         font-size: 18px;
         margin: auto;
         justify-content: center;
         display: inline-block;
+        display: inline-block;
       }
+    .lista_tarefa ul {
     .lista_tarefa ul {
        align-items: inherit;
        
       }
 
       .lista_tarefa a {
+      .lista_tarefa a {
         font-size: 12px;
-      }
-      .botao{
-        width: 50%;
-border: none;
-padding: 10px;
-color: black;
-background-color: white;
-font-size: 15px;
-cursor: pointer;
-border-radius: 10px;
-      }
-      .butao:hover{
-    background-color: whitesmoke;
       }
     </style>
   </head>
@@ -110,10 +105,16 @@ border-radius: 10px;
       <center><h2> Projeto: <?php echo $nome_grupo?> </h2> 
        <span>Adicione sua tarefa</span> 
         <br><br>
-    <div id="popup-form" style="display: none;"> 
+    <div id="popup-form" style="display: none;">  
       <!-- Campos do formulário -->
       <label for="nome">Nome:</label>
+      <label for="nome">Nome:</label>
       <input name="nome_tarefa" type="text" id="todo-input" placeholder="O que você vai fazer?" required/><br>
+                  Descrição:
+                  <br>
+      <textarea id="todo-input" name="desc_tarefa" placeholder="Descreva brevemente seu Projeto"rows=10 cols=35 maxlength="250" required> </textarea>
+      <br>
+        <span>Status da Tarefa:</span><br>
                   Descrição:
                   <br>
       <textarea id="todo-input" name="desc_tarefa" placeholder="Descreva brevemente seu Projeto"rows=10 cols=35 maxlength="250" required> </textarea>
@@ -130,6 +131,7 @@ border-radius: 10px;
     }
     ?>
 </select>
+ <br>
  <br>
 <label for="colaborador">Responsável:</label>
 <select name="colaborador" id="colaborador">
@@ -151,6 +153,8 @@ border-radius: 10px;
 
       <button class="botao" id="close-button" type="button">Fechar</button> 
        <button class="botao" type="submit" name="enviar" value="cadastrar">Adicionar</button>
+      <button class="botao" id="close-button" type="button">Fechar</button> 
+       <button class="botao" type="submit" name="enviar" value="cadastrar">Adicionar</button>
     </div>
 
     <div class="form-control">
@@ -159,6 +163,8 @@ border-radius: 10px;
       </button>
     </div>
   </form>
+  </center>
+  <br>
   </center>
   <br>
   <div class="lista_tarefa">
@@ -204,6 +210,24 @@ border-radius: 10px;
 
 </script>
 </div>
+
+
+
+
+    
+  </body>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</html>
+
+
+
+
+    
+  </body>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</html>
 
 
 

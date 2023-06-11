@@ -22,20 +22,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = mysqli_query($conexao, $sql);
 
         if (mysqli_num_rows($result) > 0) {
-            echo "Você já é um colaborador deste grupo.";
+            echo '<div class="mensagem">' . "Você já é um colaborador deste grupo." . '</div>';;
         } else {
             // Adicionar o usuário como colaborador do grupo
             $sql = "INSERT INTO colaborador_grupo (usuario_id, grupo_id) VALUES ($usuarioId, $grupoId)";
             if (mysqli_query($conexao, $sql)) {
-                echo "Você foi adicionado como colaborador do grupo com sucesso!";
+                echo '<div class="mensagem">' . "Você foi adicionado como colaborador do grupo com sucesso!" . '</div>';
             } else {
-                echo "Erro ao adicionar como colaborador do grupo.";
+                echo '<div class="mensagem">' . "Erro ao adicionar como colaborador do grupo." . '</div>';
                 var_dump($sql);
             }
         }
     } else {
         // Grupo não encontrado, exibir mensagem de erro
-        echo "ID do grupo inválido. Por favor, tente novamente.";
+        echo '<div class="mensagem">'. "ID do grupo inválido. Por favor, tente novamente" . '</div>';
     }
 }
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <center>
+    <style>
+        .mensagem{
+            border: 1px solid #000;
+        padding: 20px;
+        width: 65%;
+        background: white;
+        border-radius: 10px 20px 30px;
+        position: relative;
+        z-index: -1;
+        padding-bottom: 100px;
+        margin-bottom: 40px;
+        bottom: -125px;
+        }
+        </style>
+    <br>
+    
+<a href="entrarGrupo.php" class="nav-link">
+                            VOLTAR
+                        </a>
+    </center>
+</body>
+
+
+</html>
