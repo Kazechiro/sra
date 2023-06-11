@@ -168,6 +168,13 @@ $nome_grupo = $_GET['nome_grupo'];
           Menu de tarefas
         </a>
       </button>
+      <br>
+      <br>
+      <button>
+        <a href=<?php echo "criarRelatorio.php?id_grupo=$id_grupo&nome_grupo=$nome_grupo"; ?>>
+          Menu de Relatórios
+        </a>
+      </button>
     </div>
   </div>
   </center>
