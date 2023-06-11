@@ -5,8 +5,8 @@ if (!isset($_SESSION)) {
 
 include('conexao.php');
 
-$id_grupo = $_GET['id_grupo'];
-$nome_grupo = $_GET['nome_grupo'];
+$id_grupo = $_POST['id_grupo'];
+$nome_grupo = $_POST['nome_grupo'];
 
 $usuario_id = $_SESSION['id_usuario'];
 $grupo_id = $_GET['id_grupo'];

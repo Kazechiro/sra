@@ -114,7 +114,7 @@ $dado = mysqli_fetch_all($listar);
                   <br>
       <textarea id="todo-input" name="desc_tarefa" placeholder="Descreva brevemente seu Projeto"rows=10 cols=35 maxlength="250" required> </textarea>
       <br>
-        <span>Status da Tarefa:</span><br>
+        
                   <br>
       
       <br>
@@ -155,6 +155,8 @@ $dado = mysqli_fetch_all($listar);
        <button class="botao" type="submit" name="enviar" value="cadastrar">Adicionar</button>
     </div>
 
+   
+
     <div class="form-control">
       <button name="enviar" type="button" onclick="openPopup()">
         <i class="fa-thin fa-plus"></i>
@@ -179,13 +181,15 @@ $dado = mysqli_fetch_all($listar);
             extract($row_tarefa);
 
            $status_tarefa = $row_tarefa['status_tarefa'];
-
-            echo "<li>Tarefa: " . $row_tarefa['nome_tarefa'] . "</li>";
-            echo "<li>Descrição: " . $row_tarefa['desc_tarefa'] . "</li><br>";
-             echo "status:" .$status_tarefa = $row_tarefa['status_tarefa'] . "<br>";
-            // Botão de excluir tarefas
-            echo "<li><a href='apagar_tarefa.php?id_tarefa=$id_tarefa&id_grupo=$id_grupo&nome_grupo=$nome_grupo'>Apagar</a></li><br>";
-            echo "<a href=editar_tarefa.php?id_tarefa=$id_tarefa&id_grupo=$id_grupo&nome_grupo=$nome_grupo><ion-icon name=create-outline></ion-icon></a>";
+                
+            echo "<li>";
+                echo "<span>Tarefa: " . $row_tarefa['nome_tarefa'] . "</span><br>";
+                echo "<span>Descrição: " . $row_tarefa['desc_tarefa'] . "</span><br>";
+                echo "<span>Status: " . $row_tarefa['status_tarefa'] . "</span><br>";
+                echo "<button type='button' class='botao'><a href='editar_tarefa.php?id_tarefa=$id_tarefa&id_grupo=$id_grupo&nome_grupo=$nome_grupo'>Editar</a></button>";
+                echo "<button type='button' class='botao'><a href='apagar_tarefa.php?id_tarefa=$id_tarefa&id_grupo=$id_grupo&nome_grupo=$nome_grupo'>Apagar</a></button><br>";
+                echo "</li>";
+           
           }
         } else {
           // Nenhuma tarefa encontrada
@@ -195,49 +199,24 @@ $dado = mysqli_fetch_all($listar);
   </div>
 
  <script>
-  function openPopup() {
-    var popup = document.getElementById("popup-form");
-    popup.style.display = "block";
-  }
+ function openPopup() {
+  var popup = document.getElementById("popup-form");
+  popup.style.display = "block";
+}
 
-  function closePopup() {
-    var popup = document.getElementById("popup-form");
-    popup.style.display = "none";
-  }
+function closePopup() {
+  var popup = document.getElementById("popup-form");
+  popup.style.display = "none";
+}
 
-  document.getElementById("close-button").addEventListener("click", closePopup);
+document.getElementById("close-button").addEventListener("click", closePopup);
+
+
+
 
 </script>
-</div>
-
-
-
-
-    
+</div>   
   </body>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </html>
-
-
-
-
-    
-  </body>
-  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-</html>
-
-
-
-
-    
-  </body>
-  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-</html>
-
-
-
-
-    
