@@ -175,6 +175,19 @@ $nome_grupo = $_GET['nome_grupo'];
           Menu de Relatórios
         </a>
       </button>
+      <br>
+      <br>
+      <?php if ($_SESSION['adm'] == 1) { ?>
+      <button>
+        <?php 
+      
+                echo '<a href="apagar_grupo.php?id_grupo=' . $id_grupo . '">Apagar</a>';
+           
+            ?>
+            </button>
+       <?php   } else {
+                
+              } ?>
     </div>
   </div>
   </center>
@@ -198,6 +211,9 @@ $nome_grupo = $_GET['nome_grupo'];
     $result_tarefa->execute();
     //echo 'Código do Prjeto: ' . $row_grupo['id_grupo'] . "<br>";
     //echo "Nome do Projeto: " . $nome_grupo . "<br>";
+    
+
+
     if (($result_tarefa) and ($result_tarefa->rowCount() != 0)) {
       while ($row_tarefa = $result_tarefa->fetch(PDO::FETCH_ASSOC)) {
         extract($row_tarefa);

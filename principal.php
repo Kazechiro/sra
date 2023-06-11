@@ -99,11 +99,7 @@ $nome_grupo = $_GET['nome_grupo'];
         extract($row_grupo);
         echo '<div class="grupos">Projeto: ' . $row_grupo['nome_grupo'] .  
             ' <a href="grupo.php?id_grupo=' . $id_grupo . '&nome_grupo=' . $nome_grupo . '">Visualizar</a></div>'; 
-            if ($_SESSION['adm'] == 1) {
-                echo '<a href="apagar_grupo.php?id_grupo=' . $id_grupo . '">[Apagar]</a>';
-            } else {
-                
-            }
+            
        
     }   
 

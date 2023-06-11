@@ -28,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sql = "INSERT INTO colaborador_grupo (usuario_id, grupo_id) VALUES ($usuarioId, $grupoId)";
             if (mysqli_query($conexao, $sql)) {
                 echo '<div class="mensagem">' . "Você foi adicionado como colaborador do grupo com sucesso!" . '</div>';
+                header('Location: principal.php');
             } else {
                 echo '<div class="mensagem">' . "Erro ao adicionar como colaborador do grupo." . '</div>';
                 var_dump($sql);

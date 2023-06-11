@@ -145,6 +145,7 @@ $dado = mysqli_fetch_all($listar);
       $colaboradorNome = $row_colaborador['nome'];
 
       echo "<option value=\"$colaboradorId\">$colaboradorNome</option>";
+      
     }
   ?>
 </select>
