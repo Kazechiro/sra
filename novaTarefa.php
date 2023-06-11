@@ -55,4 +55,3 @@ if ($result_inserir) {
 header("location: tarefas.php?id_grupo=$id_grupo&nome_grupo=$nome_grupo");
 
 ?>
-
