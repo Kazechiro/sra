@@ -181,7 +181,7 @@ $nome_grupo = $_GET['nome_grupo'];
       <button>
         <?php 
       
-                echo '<a href="apagar_grupo.php?id_grupo=' . $id_grupo . '">Apagar</a>';
+                echo '<a href="apagar_grupo.php?id_grupo=' . $id_grupo . '">Excluir</a>';
            
             ?>
             </button>
