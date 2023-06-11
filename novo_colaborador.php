@@ -9,22 +9,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $grupoId = intval($codigoEntrada); // Converter o código de entrada para inteiro
 
     // Consultar a tabela 'grupo' para verificar se o grupo com o ID fornecido existe
-    $sql = "SELECT id_grupo FROM grupo WHERE id_grupo = $grupoId";
+    $sql = "SELECT id_grupo FROM grupo WHERE id_grupo = $grupoId LIMIT 1";
     $result = mysqli_query($conexao, $sql);
 
     if (mysqli_num_rows($result) > 0) {
-        // O grupo existe, você pode permitir que o usuário entre no grupo ou execute outras ações necessárias
-        // Por exemplo, adicionar o usuário como um colaborador do grupo
-        $usuarioId = $_SESSION['id_usuario']; // ID do usuário (substitua pelo valor correto)
+        
+        $usuarioId = $_SESSION['id_usuario']; 
 
-        // Verificar se o usuário já é colaborador do grupo
+        
         $sql = "SELECT * FROM colaborador_grupo WHERE usuario_id = $usuarioId AND grupo_id = $grupoId";
         $result = mysqli_query($conexao, $sql);
 
         if (mysqli_num_rows($result) > 0) {
-            echo '<div class="mensagem">' . "Você já é um colaborador deste grupo." . '</div>';;
+            echo '<div class="mensagem">' . "Você já é um colaborador deste grupo." . '</div>';
         } else {
-            // Adicionar o usuário como colaborador do grupo
+            
             $sql = "INSERT INTO colaborador_grupo (usuario_id, grupo_id) VALUES ($usuarioId, $grupoId)";
             if (mysqli_query($conexao, $sql)) {
                 echo '<div class="mensagem">' . "Você foi adicionado como colaborador do grupo com sucesso!" . '</div>';
@@ -35,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
     } else {
-        // Grupo não encontrado, exibir mensagem de erro
+       
         echo '<div class="mensagem">'. "ID do grupo inválido. Por favor, tente novamente" . '</div>';
     }
 }

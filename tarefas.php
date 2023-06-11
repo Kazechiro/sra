@@ -7,10 +7,15 @@ include('protect.php');
 
 $id_grupo = $_GET['id_grupo'];
 $nome_grupo = $_GET['nome_grupo'];
-$query_listar = "SELECT id_tarefa,nome_tarefa,desc_tarefa FROM tarefa";
-$listar = mysqli_query($conexao,$query_listar);
+
+$query_listar = "SELECT id_tarefa, nome_tarefa, desc_tarefa FROM tarefa";
+$listar = mysqli_query($conexao, $query_listar);
 $dado = mysqli_fetch_all($listar);
 
+$query_colaboradores = "SELECT c.id_usuario, c.nome FROM usuario AS c
+                       INNER JOIN colaborador_grupo AS cg ON c.id_usuario = cg.usuario_id
+                       WHERE cg.grupo_id = $id_grupo";
+$result_colaboradores = mysqli_query($conexao, $query_colaboradores);
 
 ?>
 
@@ -132,28 +137,20 @@ $dado = mysqli_fetch_all($listar);
 </select>
  <br>
  <br>
-<label for="colaborador">Responsável:</label>
-<select name="colaborador" id="colaborador">
-  <?php
-    $query_colaboradores = "SELECT id_usuario, nome FROM usuario WHERE id_usuario IN (SELECT usuario_id FROM colaborador_grupo WHERE grupo_id = :grupo_id)";
-    $result_colaboradores = $conn->prepare($query_colaboradores);
-    $result_colaboradores->bindParam('grupo_id', $id_grupo);
-    $result_colaboradores->execute();
-
-    while($row_colaborador = $result_colaboradores->fetch(PDO::FETCH_ASSOC)) {
-      $colaboradorId = $row_colaborador['id_usuario'];
-      $colaboradorNome = $row_colaborador['nome'];
-
-      echo "<option value=\"$colaboradorId\">$colaboradorNome</option>";
-      
-    }
-  ?>
-</select>
-    
-
+ <!-- NÃO SEI PQ NÃO FUNCIONA  -->
+ <span>Responsável:</span>
+ <br>
+ <select name="colaborador_id" required>
+          <option value="">Selecione um colaborador</option>
+          <?php
+          while ($row_colaborador = mysqli_fetch_assoc($result_colaboradores)) {
+            echo "<option value='" . $row_colaborador['id_usuario'] . "'>" . $row_colaborador['nome'] . "</option>";
+          }
+          ?>
+        </select>
       <button class="botao" id="close-button" type="button">Fechar</button> 
       
-       <button class="botao" type="submit" name="enviar" value="cadastrar">Adicionar</button>
+      <button type="submit">Adicionar Tarefa</button>
     </div>
 
    
@@ -172,11 +169,14 @@ $dado = mysqli_fetch_all($listar);
     <ul style="list-style: none;">
       <!-- Loop das tarefas -->
       <?php
-$query_tarefa = "SELECT t.id_tarefa, t.nome_tarefa, t.desc_tarefa, s.nome_status 
-                 FROM tarefa AS t 
-                 INNER JOIN tarefa_status AS s ON t.status_tarefa = s.id_status 
-                 WHERE t.grupo_id = :grupo_id 
-                 ORDER BY t.id_tarefa DESC";
+$query_tarefa = "SELECT t.id_tarefa, t.nome_tarefa, t.desc_tarefa, s.nome_status, u.nome AS nome_colaborador
+FROM tarefa AS t 
+INNER JOIN tarefa_status AS s ON t.status_tarefa = s.id_status 
+INNER JOIN colaborador_grupo AS cg ON t.grupo_id = cg.grupo_id
+INNER JOIN usuario AS u ON cg.usuario_id = u.id_usuario
+WHERE t.grupo_id = :grupo_id 
+ORDER BY t.id_tarefa DESC";
+
 $result_tarefa = $conn->prepare($query_tarefa);
 $result_tarefa->bindParam(':grupo_id', $id_grupo);
 $result_tarefa->execute();
@@ -189,6 +189,7 @@ if (($result_tarefa) and ($result_tarefa->rowCount() != 0)) {
     echo "<span>Tarefa: " . $row_tarefa['nome_tarefa'] . "</span><br>";
     echo "<span>Descrição: " . $row_tarefa['desc_tarefa'] . "</span><br>";
     echo "<span>Status: " . $row_tarefa['nome_status'] . "</span><br>";
+    echo "<span>Responsável: " . $row_tarefa['nome_colaborador'] . "</span><br>";
     echo "<button type='button' class='botao'><a href='editar_tarefa.php?id_tarefa=$id_tarefa&id_grupo=$id_grupo&nome_grupo=$nome_grupo'>Editar</a></button>";
     echo "<button type='button' class='botao'><a href='apagar_tarefa.php?id_tarefa=$id_tarefa&id_grupo=$id_grupo&nome_grupo=$nome_grupo'>Apagar</a></button><br>";
     echo "</li>";
@@ -200,8 +201,8 @@ if (($result_tarefa) and ($result_tarefa->rowCount() != 0)) {
     </ul>
   </div>
 
- <script>
- function openPopup() {
+  <script>
+function openPopup() {
   var popup = document.getElementById("popup-form");
   popup.style.display = "block";
 }
@@ -212,9 +213,6 @@ function closePopup() {
 }
 
 document.getElementById("close-button").addEventListener("click", closePopup);
-
-
-
 
 </script>
 </div>   

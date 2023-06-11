@@ -87,21 +87,19 @@ $nome_grupo = $_GET['nome_grupo'];
     }
 
     // Consultar os grupos do usuário e dos quais é colaborador
-    $query_grupo = "SELECT g.id_grupo, g.nome_grupo, g.desc_grupo
-                    FROM grupo g
-                    LEFT JOIN colaborador_grupo cg ON g.id_grupo = cg.grupo_id
-                    WHERE cg.usuario_id = $_SESSION[id_usuario] OR g.usuario_id = $_SESSION[id_usuario]
-                    ORDER BY g.id_grupo DESC";
-    $result_grupo = $conn->prepare($query_grupo);
-    $result_grupo->execute();
+    $query_grupo = "SELECT DISTINCT g.id_grupo, g.nome_grupo, g.desc_grupo
+                FROM grupo g
+                LEFT JOIN colaborador_grupo cg ON g.id_grupo = cg.grupo_id 
+                WHERE cg.usuario_id = $_SESSION[id_usuario] OR g.usuario_id = $_SESSION[id_usuario]
+                ORDER BY g.id_grupo DESC";
+$result_grupo = $conn->prepare($query_grupo);
+$result_grupo->execute();
 
-    while ($row_grupo = $result_grupo->fetch(PDO::FETCH_ASSOC)) {
-        extract($row_grupo);
-        echo '<div class="grupos">Projeto: ' . $row_grupo['nome_grupo'] .  
-            ' <a href="grupo.php?id_grupo=' . $id_grupo . '&nome_grupo=' . $nome_grupo . '">Visualizar</a></div>'; 
-            
-       
-    }   
+while ($row_grupo = $result_grupo->fetch(PDO::FETCH_ASSOC)) {
+    extract($row_grupo);
+    echo '<div class="grupos">Projeto: ' . $row_grupo['nome_grupo'] .  
+        ' <a href="grupo.php?id_grupo=' . $id_grupo . '&nome_grupo=' . $nome_grupo . '">Visualizar</a></div>'; 
+}
 
     
     ?>

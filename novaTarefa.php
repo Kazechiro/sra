@@ -15,13 +15,14 @@ $tarefa_nome = isset($_POST['nome_tarefa']) ? $_POST['nome_tarefa'] : '';
 $desc_tarefa = isset($_POST['desc_tarefa']) ? $_POST['desc_tarefa'] : '';
 
 $status_tarefa = $_POST['status_tarefa'];
+$colaborador_id = $_POST['colaborador_id']; // Obtém o valor selecionado do campo colaborador_id
 
 $query_grupo = "SELECT id_grupo, nome_grupo, desc_grupo FROM grupo";
 $result_grupo = $conn->prepare($query_grupo);
 $result_grupo->execute();
 
-$incluir = "INSERT INTO tarefa (nome_tarefa, desc_tarefa, usuario_id, grupo_id, status_tarefa)
-                  VALUES (:nome_tarefa, :desc_tarefa, :usuario_id, :grupo_id, :status_tarefa)";
+$incluir = "INSERT INTO tarefa (nome_tarefa, desc_tarefa, usuario_id, grupo_id, status_tarefa, colaborador_id)
+                  VALUES (:nome_tarefa, :desc_tarefa, :usuario_id, :grupo_id, :status_tarefa, :colaborador_id)";
 
 
 $result_inserir = $conn->prepare($incluir);
@@ -30,11 +31,9 @@ $result_inserir->bindParam(':desc_tarefa', $desc_tarefa);
 $result_inserir->bindParam(':usuario_id', $usuario_id);
 $result_inserir->bindParam(':grupo_id', $grupo_id);
 $result_inserir->bindParam(':status_tarefa', $status_tarefa);
-
+$result_inserir->bindParam(':colaborador_id', $colaborador_id);
 // Executa a inserção da tarefa
 $result_inserir->execute();
-
-
 
 if ($result_inserir) {
   // Consulta o nome do status_tarefa com base no ID inserido
@@ -53,5 +52,4 @@ if ($result_inserir) {
 }
 
 header("location: tarefas.php?id_grupo=$id_grupo&nome_grupo=$nome_grupo");
-
 ?>
