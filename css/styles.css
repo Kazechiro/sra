@@ -170,6 +170,17 @@ header {
     color: #fff;
 }
 
+.login-buttonLanding{
+    
+border: none;
+padding: 9px;
+color: black;
+
+font-size: 5px;
+cursor: pointer;
+border-radius: 10px;
+}
+
 /*** estilização login ***/
 
 .body-login {
@@ -438,32 +449,36 @@ button {
   /* Todo Header */
   .todo-container {
     margin: auto;
-    width: 520px;
-    height: 400px;
+    width: 400px;
+    
     background-color: #fff;
     border-radius: 20px 100px;
-    padding: 70px 50px;
+    padding: 190px 100px;
     box-shadow: 10px 10px 21px -6 rgba(0,0,0,0.2);
-  
+    display: inline-block;
   }
   
 
   
   .todo-container h1 {
-    text-align: center;
+    position: relative ;
     padding-bottom: 40px;
+    
+    
   }
   /* Todo Form */
   #todo-form,
   #edit-form {
     padding: 1rem;
     border-bottom: 1px solid #ccc;
+    
   }
   
   #todo-form p,
   #edit-form p {
     margin-bottom: 0.5rem;
     font-weight: bold;
+    
   }
   
   .form-control {
@@ -539,7 +554,7 @@ cursor: pointer;
 border-radius: 10px;
   }
   .butao:hover{
-    background-color: #528B8B;
+    background-color: whitesmoke;
 }
   a{
     text-decoration: none;
@@ -562,3 +577,4 @@ border-radius: 10px;
   .status-done {
     background-color: green;
   }
+  

@@ -34,26 +34,42 @@ $dado = mysqli_fetch_all($listar);
         padding: 0;
         margin: 0;
       }
-      div.lista_tarefa {
+      .lista_tarefa {
         margin-top: 10px;
         padding: 10px;
         margin: auto;
         width: 400px;
+        height: 400px;
+        overflow-y: scroll;
+        display: inline-block;
       }
-      div.lista_tarefa li {
+      .lista_tarefa li {
         padding: 5px;
         font-size: 18px;
         margin: auto;
         justify-content: center;
-        
+        display: inline-block;
       }
-      div.lista_tarefa ul {
+    .lista_tarefa ul {
        align-items: inherit;
        
       }
 
-      div.lista_tarefa a {
+      .lista_tarefa a {
         font-size: 12px;
+      }
+      .botao{
+        width: 50%;
+border: none;
+padding: 10px;
+color: black;
+background-color: white;
+font-size: 15px;
+cursor: pointer;
+border-radius: 10px;
+      }
+      .butao:hover{
+    background-color: whitesmoke;
       }
     </style>
   </head>
@@ -70,9 +86,7 @@ $dado = mysqli_fetch_all($listar);
                   <li class="nav-item"><a href="#" class="nav-link"> Sobre</a></li>
               </ul>
           </div>
-          <div class="login-button">
-              <button><a href="logout.php">Logout</a></button>
-          </div>
+          
 
           <div class="mobile-menu-icon">
               <button onclick="menuShow()"><img class="icon" src="assets/img/menu_white_36dp.svg" alt=""></button>
@@ -93,18 +107,20 @@ $dado = mysqli_fetch_all($listar);
 
   <div class="todo-container">
   <form action="novaTarefa.php?id_grupo=<?php echo $id_grupo?>&nome_grupo=<?php echo $nome_grupo  ?>" id="todo-form" method="post" >
-      <center><h1> Projeto: <?php echo $nome_grupo?> </h1> </center>
-        <center><span>Adicione sua tarefa</span> </center>
+      <center><h2> Projeto: <?php echo $nome_grupo?> </h2> 
+       <span>Adicione sua tarefa</span> 
         <br><br>
-    <div id="popup-form" style="display: none;">
+    <div id="popup-form" style="display: none;"> 
       <!-- Campos do formulário -->
-      <label for="nome">nome:</label>
+      <label for="nome">Nome:</label>
       <input name="nome_tarefa" type="text" id="todo-input" placeholder="O que você vai fazer?" required/><br>
-
-      <label for="desc">descrição:</label>
-      <input name="desc_tarefa" type="text" id="todo-input" placeholder="Descrição" required/><br>
-        <span>status da tarefa:</span><br>
+                  Descrição:
+                  <br>
+      <textarea id="todo-input" name="desc_tarefa" placeholder="Descreva brevemente seu Projeto"rows=10 cols=35 maxlength="250" required> </textarea>
+      <br>
+        <span>Status da Tarefa:</span><br>
         <select name="status_tarefa" required>
+          <br>
     <option value="">Selecione o status</option>
     <?php
     $query_status = "SELECT id_status, nome_status FROM tarefa_status";
@@ -114,7 +130,7 @@ $dado = mysqli_fetch_all($listar);
     }
     ?>
 </select>
-
+ <br>
 <label for="colaborador">Responsável:</label>
 <select name="colaborador" id="colaborador">
   <?php
@@ -133,9 +149,8 @@ $dado = mysqli_fetch_all($listar);
 </select>
     
 
-      <button id="close-button" type="button">Fechar</button>
-
-      <button id="add-button" type="submit" name="enviar" value="cadastrar">Adicionar</button>
+      <button class="botao" id="close-button" type="button">Fechar</button> 
+       <button class="botao" type="submit" name="enviar" value="cadastrar">Adicionar</button>
     </div>
 
     <div class="form-control">
@@ -144,7 +159,8 @@ $dado = mysqli_fetch_all($listar);
       </button>
     </div>
   </form>
-
+  </center>
+  <br>
   <div class="lista_tarefa">
     <ul style="list-style: none;">
       <!-- Loop das tarefas -->
@@ -161,8 +177,8 @@ $dado = mysqli_fetch_all($listar);
            $status_tarefa = $row_tarefa['status_tarefa'];
 
             echo "<li>Tarefa: " . $row_tarefa['nome_tarefa'] . "</li>";
-            echo "<li>Descrição: " . $row_tarefa['desc_tarefa'] . "</li>";
-             echo $status_tarefa = $row_tarefa['status_tarefa'];
+            echo "<li>Descrição: " . $row_tarefa['desc_tarefa'] . "</li><br>";
+             echo "status:" .$status_tarefa = $row_tarefa['status_tarefa'] . "<br>";
             // Botão de excluir tarefas
             echo "<li><a href='apagar_tarefa.php?id_tarefa=$id_tarefa&id_grupo=$id_grupo&nome_grupo=$nome_grupo'>Apagar</a></li>";
           }
@@ -197,3 +213,8 @@ $dado = mysqli_fetch_all($listar);
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </html>
+
+
+
+
+    

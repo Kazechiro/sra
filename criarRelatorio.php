@@ -1,7 +1,7 @@
 <?php
 // Conectar ao banco de dados
 include('conexao.php');
-
+require('protect.php');
 
 ?>
 
