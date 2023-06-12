@@ -28,22 +28,95 @@ $result_colaboradores = mysqli_query($conexao, $query_colaboradores);
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <link rel="stylesheet" href="./css/styles.css">
+  <title>Editar Tarefa</title>
 </head>
+<style>
+  .boxedit{
+    position: relative;
+    margin-top: 10px;
+        padding: 10px;
+        margin: auto;
+        width: 400px;
+        height: 400px;
+        height: 400px;
+        
+  }
+  </style>
 <body>
+<header>
+        <nav class="nav-bar">
+            <div class="logo">
+                <h1>
+                    <ion-icon name="cafe-outline">
 
-
+                    </ion-icon>
+                    S.R.A
+                </h1>
+            </div>
+            <div class="nav-list">
+                <ul>
+                    <li class="nav-item">
+                        <a href="menu.html" class="nav-link">
+                            Início
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="principal.php" class="nav-link">
+                            Menu
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            Sobre
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="mobile-menu-icon">
+                <button onclick="menuShow()">
+                    <img class="icon" src="assets/img/menu_white_36dp.svg" alt="">
+                </button>
+            </div>
+        </nav>
+        <div class="mobile-menu">
+            <ul>
+                <li class="nav-item">
+                    <a href="menu.html" class="nav-link">
+                        Início
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="principal.php" class="nav-link">
+                        Grupos
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        Sobre
+                    </a>
+                </li>
+            </ul>
+            
+        </div>
+    </header>
+    <br><br><br><br><br><br><br>
+    <div class="boxedit">
+    <center>
+      <h1>EDITAR TAREFA</h1>
   <form action="" method="post" id="todo-form">
+    <br>
 <label for="nome">Nome:</label>
 <input name="nome_tarefa" type="text" id="todo-input" placeholder="O que você vai fazer?" value="<?php echo $nome_tarefa; ?>" required/><br>
-
-<label for="desc_tarefa">Descrição:</label>
-<textarea id="todo-input" name="desc_tarefa" placeholder="Descreva brevemente seu Projeto" rows=10 cols=35 maxlength="250" required><?php echo $desc_tarefa; ?></textarea>
-
-<label for="status_tarefa">Status da Tarefa:</label>
-<select name="status_tarefa" required>
+<br>
+<label for="desc_tarefa">Descrição:</label><br>
+<textarea id="todo-input" name="desc_tarefa" placeholder="Descreva brevemente seu Projeto" rows=10 cols=35 maxlength="250" required><?php echo $desc_tarefa; ?></textarea><br>
+<br>
+<label for="status_tarefa">Status da Tarefa:</label><br>
+<select name="status_tarefa" required><br>
     <!-- Opções do status da tarefa -->
-    <?php
+    <br><?php
     $query_status = "SELECT id_status, nome_status FROM tarefa_status";
     $result_status = mysqli_query($conexao, $query_status);
     while ($row_status = mysqli_fetch_assoc($result_status)) {
@@ -51,10 +124,10 @@ $result_colaboradores = mysqli_query($conexao, $query_colaboradores);
         echo "<option value='" . $row_status['id_status'] . "' $selected>" . $row_status['nome_status'] . "</option>";
     }
     ?>
+<br>
 
-
-</select>
-<span>Responsável:</span>
+</select><br>
+<br><span>Responsável:</span>
  <br>
  <select name="colaborador_id" required>
           <option value="">Selecione um colaborador</option>
@@ -65,7 +138,7 @@ $result_colaboradores = mysqli_query($conexao, $query_colaboradores);
           ?>
         </select>
 
-<input type="submit" value="Salvar" class="botao" />
+<br><input type="submit" value="Salvar" class="botao" />
 </form>
 <?php 
 
@@ -87,6 +160,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if ($stmt_atualizar->execute()) {
       // Redirecione o usuário para a página principal ou qualquer outra página desejada
       header("Location: tarefas.php?id_grupo=$id_grupo&nome_grupo=$nome_grupo&tarefa_status=$nome_status");
+      echo "edited";
       exit();
   } else {
       // Lidere com erros de atualização, se necessário
@@ -100,6 +174,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
 ?>
-
+</div>
+</center>
+ <script src="./js/script.js"></script>
 </body>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
 </html>
