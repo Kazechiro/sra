@@ -62,9 +62,9 @@ ALTER TABLE tarefa DROP FOREIGN KEY fk_tareco;
 ALTER TABLE tarefa MODIFY colaborador_id INT NULL;
 
 
-insert into usuario(id_usuario,nome,email,senha,adm)
-values ('','Arnaldo Samuel','arnaldo221@gmail.com','arnaldose','0'),
-		('','kaio','kaio221@gmail.com','kaiose','1');
+insert into usuario(nome,email,senha,adm)
+values ('Arnaldo Samuel','arnaldo221@gmail.com','arnaldose','0'),
+		('kaio','kaio221@gmail.com','kaiose','1');
         
-insert into tarefa_status(id_status, nome_status) 
-VALUES ('','A fazer'),('','Em andamento'),('','Concluída');
+insert into tarefa_status(nome_status) 
+VALUES ('A fazer'),('Em andamento'),('Concluída');
