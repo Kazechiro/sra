@@ -15,7 +15,7 @@ $tarefa_nome = isset($_POST['nome_tarefa']) ? $_POST['nome_tarefa'] : '';
 $desc_tarefa = isset($_POST['desc_tarefa']) ? $_POST['desc_tarefa'] : '';
 
 $status_tarefa = $_POST['status_tarefa'];
-$colaborador_id = $_POST['colaborador_id']; // Obtém o valor selecionado do campo colaborador_id
+$colaborador_id = $_POST['colaborador_id'];
 
 $query_grupo = "SELECT id_grupo, nome_grupo, desc_grupo FROM grupo";
 $result_grupo = $conn->prepare($query_grupo);

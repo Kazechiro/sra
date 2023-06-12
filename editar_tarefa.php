@@ -1,6 +1,6 @@
 <?php 
 include('conexao.php');
-
+require('protect.php');
 $id_tarefa = $_GET['id_tarefa'];
 $id_grupo = $_GET['id_grupo'];
 $nome_grupo = $_GET['nome_grupo'];

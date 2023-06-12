@@ -15,8 +15,11 @@ $dado = $listar->fetchAll(PDO::FETCH_ASSOC);
 
 $query_colaboradores = "SELECT c.id_usuario, c.nome FROM usuario AS c
                        INNER JOIN colaborador_grupo AS cg ON c.id_usuario = cg.usuario_id
-                       WHERE cg.grupo_id = $id_grupo";
-$result_colaboradores = mysqli_query($conexao, $query_colaboradores);
+                       WHERE cg.grupo_id = :grupo_id";
+$stmt_colaboradores = $conn->prepare($query_colaboradores);
+$stmt_colaboradores->bindParam(':grupo_id', $id_grupo);
+$stmt_colaboradores->execute();
+$result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -141,16 +144,15 @@ $result_colaboradores = mysqli_query($conexao, $query_colaboradores);
  <!-- NÃO SEI PQ NÃO FUNCIONA  -->
  <span>Responsável:</span>
  <br>
- <select name="colaborador_id" required>
-          <option value="">Selecione um colaborador</option>
-          <?php
-          while ($row_colaborador = mysqli_fetch_assoc($result_colaboradores)) {
-            echo "<option value='" . $row_colaborador['id_usuario'] . "'>" . $row_colaborador['nome'] . "</option>";
-          }
-          ?>
-        </select>
+<select name="colaborador_id">
+    <option value="">Selecione um colaborador</option>
+    <?php foreach ($result_colaboradores as $row_colaborador): ?>
+        <option value="<?php echo $row_colaborador['id_usuario']; ?>"><?php echo $row_colaborador['nome']; ?></option>
+    <?php endforeach; ?>
+</select>
+        
       <button class="botao" id="close-button" type="button">Fechar</button> 
-      
+      <br>
       <button type="submit">Adicionar Tarefa</button>
     </div>
 

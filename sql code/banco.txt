@@ -38,19 +38,15 @@ CREATE TABLE tarefa (
   usuario_id INT,
   grupo_id INT,
   status_tarefa INT,
+  colaborador_id INT,
+  CONSTRAINT fk_tareco FOREIGN KEY (colaborador_id) REFERENCES colaborador_grupo(usuario_id),
   CONSTRAINT fk_starefa FOREIGN KEY (status_tarefa) REFERENCES tarefa_status(id_status),
   CONSTRAINT fk_usutar FOREIGN KEY (usuario_id) REFERENCES usuario(id_usuario),
   CONSTRAINT fk_grutar FOREIGN KEY (grupo_id) REFERENCES grupo(id_grupo)
 
 );
 
-CREATE TABLE colaborador_tarefa (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  colaborador_id INT,
-  tarefa_id INT,
-  FOREIGN KEY (colaborador_id) REFERENCES usuario(id_usuario),
-  FOREIGN KEY (tarefa_id) REFERENCES tarefa(id_tarefa)
-);
+
 
 CREATE TABLE relatorio (
   id_relatorio INT PRIMARY KEY AUTO_INCREMENT,
