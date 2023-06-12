@@ -34,7 +34,7 @@ $nome_grupo = $_GET['nome_grupo'];
           </div>
           <div class="nav-list">
               <ul>
-                  <li class="nav-item"><a href="menu.html" class="nav-link">Início</a></li>
+                  <li class="nav-item"><a href="menu.php" class="nav-link">Início</a></li>
                   <li class="nav-item"><a href="principal.php" class="nav-link">Menu</a></li>
                   <li class="nav-item"><a href="#" class="nav-link"> Sobre</a></li>
               </ul>
@@ -50,8 +50,10 @@ $nome_grupo = $_GET['nome_grupo'];
       <div class="mobile-menu">
           <ul>
               <li class="nav-item"><a href="menu.html" class="nav-link">Início</a></li>
+
               <li class="nav-item"><a href="principal.php" class="nav-link">Grupos</a></li>
               <li class="nav-item"><a href="#" class="nav-link">Sobre</a></li>
+              
           </ul>
 
           <div class="login-button">

@@ -111,7 +111,7 @@ $nome_grupo = $_GET['nome_grupo'];
     <div class="mobile-menu">
       <ul>
         <li class="nav-item">
-          <a href="menu.html" class="nav-link">
+          <a href="menu.php" class="nav-link">
             Início
           </a>
         </li>
@@ -135,7 +135,7 @@ $nome_grupo = $_GET['nome_grupo'];
       </div>
     </div>
   </header>
-  <br><br><br><br><br><br><br><br><br><br>
+  <br><br><br><br>
   <div class="GrupoTela">
     <div class="ButtonVoltar">
       <button>

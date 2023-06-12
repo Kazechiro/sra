@@ -29,8 +29,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            Projetos
+                        <a href="principal.php" class="nav-link">
+                            Menu
                         </a>
                     </li>
                     <li class="nav-item">
