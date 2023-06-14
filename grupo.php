@@ -50,7 +50,7 @@ if (!empty($id_grupo)) {
     background: white;
     box-shadow: 10px 20px grey;
     border-radius: 10px 20px 30px;
-    margin: 60px auto;
+    margin: 35px auto;
     text-align: center;
   }
 
