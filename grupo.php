@@ -87,7 +87,7 @@ if (!empty($id_grupo)) {
 </style>
 
 <body>
- <!-- <header>
+  <header>
     <nav class="nav-bar">
       <div class="logo">
         <h1>
@@ -155,7 +155,7 @@ if (!empty($id_grupo)) {
         </button>
       </div>
     </div>
-  </header> -->
+  </header> 
   <br><br><br><br>
   <div class="GrupoTela">
     <div class="ButtonVoltar">
