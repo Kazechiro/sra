@@ -2,10 +2,11 @@
 // Conectar ao banco de dados
 include('conexao.php');
 require('protect.php');
+echo "ESTAMOS TRABALHANDO NISSO. <a href='principal.php'>Menu</a>";
 
 ?>
 
-
+<!--
 <!DOCTYPE html>
 <html>
 <head>
@@ -88,7 +89,7 @@ require('protect.php');
     <h2>Relatórios existentes:</h2>
     <?php
         
-      
+      /*
 
         // Verificar conexão
         if ($conexao->connect_error) {
@@ -112,6 +113,7 @@ require('protect.php');
 
         // Fechar conexão
         $conexao->close();
+        */
     ?>
 <script src="./js/script.js"></script>
 </body>
@@ -119,3 +121,5 @@ require('protect.php');
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
 </html>
+
+-->

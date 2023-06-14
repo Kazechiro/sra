@@ -16,7 +16,7 @@ $incluir = "INSERT INTO usuario(nome, email, senha)
 VALUES ('$nome', '$email', '$senha')";
 $query_incluir = mysqli_query($conexao, $incluir);
 
-header("location: cadastro.php");
+header("location: index.php");
    
 } else {
     echo "email já cadastrado";

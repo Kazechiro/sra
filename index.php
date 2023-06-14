@@ -60,8 +60,8 @@ if(isset($_POST['email']) || isset($_POST['senha'])) {
             </div>
             <div class="nav-list">
                 <ul>
-                    <li class="nav-item"><a href="menu.html" class="nav-link">Início</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Projetos</a></li>
+                    <li class="nav-item"><a href="menu.php" class="nav-link">Início</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Menu</a></li>
                     <li class="nav-item"><a href="#" class="nav-link"> Sobre</a></li>
                 </ul>
             </div>
@@ -76,7 +76,7 @@ if(isset($_POST['email']) || isset($_POST['senha'])) {
         <div class="mobile-menu">
             <ul>
                 <li class="nav-item"><a href="#" class="nav-link">Início</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Projetos</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Menu</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">Sobre</a></li>
             </ul>
 

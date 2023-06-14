@@ -1,3 +1,8 @@
+<?php
+require('protect.php');
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -18,7 +23,7 @@
         box-shadow: 10px 20px grey;
         border-radius: 10px 20px 30px;
         position: relative;
-        padding-bottom: 100px;
+        padding-bottom: 5px;
         margin-bottom: 40px;
         bottom: -125px;
     }

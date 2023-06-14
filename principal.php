@@ -5,7 +5,7 @@ if(!isset($_SESSION)) {
 include('protect.php');
 include('conexao.php');
 
-$nome_grupo = $_GET['nome_grupo'];
+$nome_grupo = isset($_GET['nome_grupo']) ? $_GET['nome_grupo'] : '';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +34,7 @@ $nome_grupo = $_GET['nome_grupo'];
           </div>
           <div class="nav-list">
               <ul>
-                  <li class="nav-item"><a href="menu.html" class="nav-link">Início</a></li>
+                  <li class="nav-item"><a href="menu.php" class="nav-link">Início</a></li>
                   <li class="nav-item"><a href="principal.php" class="nav-link">Menu</a></li>
                   <li class="nav-item"><a href="#" class="nav-link"> Sobre</a></li>
               </ul>
@@ -50,8 +50,10 @@ $nome_grupo = $_GET['nome_grupo'];
       <div class="mobile-menu">
           <ul>
               <li class="nav-item"><a href="menu.html" class="nav-link">Início</a></li>
+
               <li class="nav-item"><a href="principal.php" class="nav-link">Grupos</a></li>
               <li class="nav-item"><a href="#" class="nav-link">Sobre</a></li>
+              
           </ul>
 
           <div class="login-button">
@@ -97,11 +99,9 @@ $result_grupo->execute();
 
 while ($row_grupo = $result_grupo->fetch(PDO::FETCH_ASSOC)) {
     extract($row_grupo);
-    echo '<div class="grupos">Projeto: ' . $row_grupo['nome_grupo'] .  
-        ' <a href="grupo.php?id_grupo=' . $id_grupo . '&nome_grupo=' . $nome_grupo . '">Visualizar</a></div>'; 
-}
+    echo  '  <div class="grupos">GRUPO:<a href="grupo.php?id_grupo=' . $id_grupo . '&nome_grupo=' . $nome_grupo . '">' . $row_grupo['nome_grupo'] . '</a></div>'; 
 
-    
+}
     ?>
 </footer>
 

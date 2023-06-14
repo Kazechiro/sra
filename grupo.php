@@ -1,16 +1,37 @@
 <?php
-
 if (!isset($_SESSION)) {
   session_start();
 }
 ob_start();
-
+require('protect.php');
 include('conexao.php');
 
 $id_grupo = $_GET['id_grupo'];
 $nome_grupo = $_GET['nome_grupo'];
-?>
 
+if (!empty($id_grupo)) {
+    $query_grupo = "SELECT id_usuario_criador FROM grupo WHERE id_grupo = :grupo_id";
+    $stmt_grupo = $conn->prepare($query_grupo);
+    $stmt_grupo->bindParam(':grupo_id', $id_grupo);
+    $stmt_grupo->execute();
+    $row_grupo = $stmt_grupo->fetch(PDO::FETCH_ASSOC);
+
+    $adm_grupo = ($_SESSION['id_usuario'] == $row_grupo['id_usuario_criador']);
+
+    $query_colaboradores = "SELECT u.id_usuario, u.nome, g.id_usuario_criador, c.nome AS nome_criador FROM usuario AS u
+    INNER JOIN colaborador_grupo AS cg ON u.id_usuario = cg.usuario_id
+    INNER JOIN grupo AS g ON g.id_grupo = cg.grupo_id
+    INNER JOIN usuario AS c ON g.id_usuario_criador = c.id_usuario
+    WHERE cg.grupo_id = :grupo_id";
+    $stmt_colaboradores = $conn->prepare($query_colaboradores);
+    $stmt_colaboradores->bindParam(':grupo_id', $id_grupo);
+    $stmt_colaboradores->execute();
+    $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
+} else {
+    $_SESSION['msg'] = "<p>Erro: grupo não encontrado</p>";
+    header("Location: principal.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -66,7 +87,7 @@ $nome_grupo = $_GET['nome_grupo'];
 </style>
 
 <body>
-  <header>
+ <!-- <header>
     <nav class="nav-bar">
       <div class="logo">
         <h1>
@@ -111,7 +132,7 @@ $nome_grupo = $_GET['nome_grupo'];
     <div class="mobile-menu">
       <ul>
         <li class="nav-item">
-          <a href="menu.html" class="nav-link">
+          <a href="menu.php" class="nav-link">
             Início
           </a>
         </li>
@@ -134,8 +155,8 @@ $nome_grupo = $_GET['nome_grupo'];
         </button>
       </div>
     </div>
-  </header>
-  <br><br><br><br><br><br><br><br><br><br>
+  </header> -->
+  <br><br><br><br>
   <div class="GrupoTela">
     <div class="ButtonVoltar">
       <button>
@@ -150,6 +171,28 @@ $nome_grupo = $_GET['nome_grupo'];
         echo $nome_grupo;
         ?>
       </p>
+      <br>
+      <p>Colaboradores do Grupo:</p>
+      
+      <?php if (!empty($result_colaboradores)): ?>
+  <ul style="list-style: none;">
+    <?php foreach ($result_colaboradores as $colaborador): ?>
+      <?php
+        $nome_colaborador = $colaborador['nome'];
+        $id_usuario_criador = $colaborador['id_usuario_criador'];
+        $nome_criador = $colaborador['nome_criador'];
+      ?>
+      <li>
+        <?php echo $nome_colaborador. "<br>";
+        if ($id_usuario_criador == $row_grupo['id_usuario_criador']): ?>
+          (Criador do grupo: <?php echo $nome_criador; ?>)
+        <?php endif; ?>
+      </li>
+    <?php endforeach; ?>
+  </ul>
+<?php else: ?>
+  <p>Nenhum colaborador encontrado</p>
+<?php endif; ?>
     </h1>
     <br>
     <p>
@@ -177,66 +220,23 @@ $nome_grupo = $_GET['nome_grupo'];
       </button>
       <br>
       <br>
-      <?php if ($_SESSION['adm'] == 1) { ?>
-      <button>
-        <?php 
-      
-                echo '<a href="apagar_grupo.php?id_grupo=' . $id_grupo . '">Excluir</a>';
-           
-            ?>
-            </button>
-       <?php   } else {
-                
-              } ?>
+      <?php if ($_SESSION['adm'] == 1): ?>
+        <button>
+          <?php echo '<a href="apagar_grupo.php?id_grupo=' . $id_grupo . '">Excluir</a>'; ?>
+        </button>
+      <?php endif; ?>
     </div>
   </div>
   </center>
-  <?php
-  if (!empty($id_grupo)) {
-    $query_grupo = "SELECT id_grupo, nome_grupo, desc_grupo FROM grupo WHERE id_grupo=:id_grupo";
-    $result_grupo = $conn->prepare($query_grupo);
-    $result_grupo->bindParam(':id_grupo', $id_grupo);
-    $result_grupo->execute();
-  } else {
-    $_SESSION['msg'] = "<p>Erro: grupo não encontrado</p>";
-    header("Location: principal.php");
-  }
-  if (($result_grupo) and ($result_grupo->rowCount() != 0)) {
-    $row_grupo = $result_grupo->fetch(PDO::FETCH_ASSOC);
-    extract($row_grupo);
-    $query_tarefa = "SELECT id_tarefa, nome_tarefa, desc_tarefa FROM tarefa
-    WHERE grupo_id=:grupo_id ORDER BY id_tarefa DESC LIMIT 1";
-    $result_tarefa = $conn->prepare($query_tarefa);
-    $result_tarefa->bindParam('grupo_id', $id_grupo);
-    $result_tarefa->execute();
-    //echo 'Código do Prjeto: ' . $row_grupo['id_grupo'] . "<br>";
-    //echo "Nome do Projeto: " . $nome_grupo . "<br>";
-    
-
-
-    if (($result_tarefa) and ($result_tarefa->rowCount() != 0)) {
-      while ($row_tarefa = $result_tarefa->fetch(PDO::FETCH_ASSOC)) {
-        extract($row_tarefa);
-        //  var_dump($row_tarefa);
-        //echo "Menu de tarefas" . "<a href='tarefas.php?id_grupo=$id_grupo&nome_grupo=$nome_grupo'>Visualizar</a>";
-      }
-    } else {
-      //echo "Menu de tarefas" . "<a href='tarefas.php?id_grupo=$id_grupo&nome_grupo=$nome_grupo'>Visualizar</a>";
-    }
-  } else {
-    $_SESSION['msg'] = "<p>Erro: grupo não encontrado</p>";
-    header("Location: principal.php");
-  }
-  ?>
-
-  <script src="js/script.js"></script>
 
   <footer>
 
   </footer>
 
+  <script src="js/script.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
 </body>
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
 </html>

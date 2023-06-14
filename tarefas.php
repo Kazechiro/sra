@@ -15,8 +15,11 @@ $dado = $listar->fetchAll(PDO::FETCH_ASSOC);
 
 $query_colaboradores = "SELECT c.id_usuario, c.nome FROM usuario AS c
                        INNER JOIN colaborador_grupo AS cg ON c.id_usuario = cg.usuario_id
-                       WHERE cg.grupo_id = $id_grupo";
-$result_colaboradores = mysqli_query($conexao, $query_colaboradores);
+                       WHERE cg.grupo_id = :grupo_id";
+$stmt_colaboradores = $conn->prepare($query_colaboradores);
+$stmt_colaboradores->bindParam(':grupo_id', $id_grupo);
+$stmt_colaboradores->execute();
+$result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -141,16 +144,15 @@ $result_colaboradores = mysqli_query($conexao, $query_colaboradores);
  <!-- NÃO SEI PQ NÃO FUNCIONA  -->
  <span>Responsável:</span>
  <br>
- <select name="colaborador_id" required>
-          <option value="">Selecione um colaborador</option>
-          <?php
-          while ($row_colaborador = mysqli_fetch_assoc($result_colaboradores)) {
-            echo "<option value='" . $row_colaborador['id_usuario'] . "'>" . $row_colaborador['nome'] . "</option>";
-          }
-          ?>
-        </select>
+<select name="colaborador_id">
+    <option value="">Selecione um colaborador</option>
+    <?php foreach ($result_colaboradores as $row_colaborador): ?>
+        <option value="<?php echo $row_colaborador['id_usuario']; ?>"><?php echo $row_colaborador['nome']; ?></option>
+    <?php endforeach; ?>
+</select>
+        
       <button class="botao" id="close-button" type="button">Fechar</button> 
-      
+      <br>
       <button type="submit">Adicionar Tarefa</button>
     </div>
 
@@ -167,29 +169,29 @@ $result_colaboradores = mysqli_query($conexao, $query_colaboradores);
   </center>
   <br>
   <div class="lista_tarefa">
-    <ul style="list-style: none;">
-      <!-- Loop das tarefas -->
-      <?php
-$sql_tarefa = "SELECT t.id_tarefa, t.nome_tarefa, t.desc_tarefa, ts.nome_status, u.nome AS nome_colaborador
-FROM tarefa t
-INNER JOIN tarefa_status ts ON t.status_tarefa = ts.id_status
-INNER JOIN usuario u ON t.colaborador_id = u.id_usuario
-WHERE t.grupo_id = :grupo_id";
+  <ul style="list-style: none;">
+    <!-- Loop das tarefas -->
+    <?php
+      $sql_tarefa = "SELECT t.id_tarefa, t.nome_tarefa, t.desc_tarefa, ts.nome_status, u.nome AS nome_colaborador
+                    FROM tarefa t
+                    INNER JOIN tarefa_status ts ON t.status_tarefa = ts.id_status
+                    LEFT JOIN usuario u ON t.colaborador_id = u.id_usuario
+                    WHERE t.grupo_id = :grupo_id";
 
-$stmt_tarefa = $conn->prepare($sql_tarefa);
-$stmt_tarefa->bindParam(':grupo_id', $id_grupo);
-$stmt_tarefa->execute();
+      $stmt_tarefa = $conn->prepare($sql_tarefa);
+      $stmt_tarefa->bindParam(':grupo_id', $id_grupo);
+      $stmt_tarefa->execute();
 
-while ($row_tarefa = $stmt_tarefa->fetch(PDO::FETCH_ASSOC)) {
-echo "<li>";
-echo "<span>Tarefa: " . $row_tarefa['nome_tarefa'] . "</span><br>";
-echo "<span>Descrição: " . $row_tarefa['desc_tarefa'] . "</span><br>";
-echo "<span>Status: " . $row_tarefa['nome_status'] . "</span><br>";
-echo "<span>Responsável: " . $row_tarefa['nome_colaborador'] . "</span><br>";
-echo "<button type='button' class='botao'><a href='editar_tarefa.php?id_tarefa=" . $row_tarefa['id_tarefa'] . "&id_grupo=$id_grupo&nome_grupo=$nome_grupo'>Editar</a></button>";
-echo "<button type='button' class='botao'><a href='apagar_tarefa.php?id_tarefa=" . $row_tarefa['id_tarefa'] . "&id_grupo=$id_grupo&nome_grupo=$nome_grupo'>Apagar</a></button><br>";
-echo "</li>";
-}
+      while ($row_tarefa = $stmt_tarefa->fetch(PDO::FETCH_ASSOC)) {
+        echo "<li>";
+        echo "<span>Tarefa: " . $row_tarefa['nome_tarefa'] . "</span><br>";
+        echo "<span>Descrição: " . $row_tarefa['desc_tarefa'] . "</span><br>";
+        echo "<span>Status: " . $row_tarefa['nome_status'] . "</span><br>";
+        echo "<span>Responsável: " . ($row_tarefa['nome_colaborador'] ?? "Sem responsável") . "</span><br>";
+        echo "<button type='button' class='botao'><a href='editar_tarefa.php?id_tarefa=" . $row_tarefa['id_tarefa'] . "&id_grupo=$id_grupo&nome_grupo=$nome_grupo'>Editar</a></button>";
+        echo "<button type='button' class='botao'><a href='apagar_tarefa.php?id_tarefa=" . $row_tarefa['id_tarefa'] . "&id_grupo=$id_grupo&nome_grupo=$nome_grupo'>Apagar</a></button><br>";
+        echo "</li>";
+      }
 
 ?>
     </ul>

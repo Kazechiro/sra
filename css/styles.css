@@ -193,7 +193,7 @@ border-radius: 10px;
     width: 100%;
     height: 100%;
     display: flex;
-    align-itens: center;
+    align-items: center;
     justify-content: center;
     padding-top: 45px;
     
@@ -287,7 +287,7 @@ border-radius: 10px;
 }
 
 #login #form_login .inputLogin:not(:placeholder-shown).inputLogin:not(:focus){
-    margin- top: -10;
+    margin-top: -10;
     font-size: 16px;
     z-index: 2;
 } 
@@ -304,7 +304,7 @@ border-radius: 10px;
     width: 100%;
     height: 100%;
     display: flex;
-    align-itens: center;
+    align-items: center;
     justify-content: center;
     padding-top: 45px;
 }
@@ -395,7 +395,7 @@ border-radius: 10px;
 }
 
 #cadastro #form_cadastro .inputCadastro:not(:placeholder-shown).inputCadastro:not(:focus){
-    margin- top: -10;
+    margin-top: -10;
     font-size: 16px;
     z-index: 3;
 }
@@ -453,7 +453,7 @@ button {
     
     background-color: #fff;
     border-radius: 20px 100px;
-    padding: 190px 100px;
+    padding: 30px 30px;
     box-shadow: 10px 10px 21px -6 rgba(0,0,0,0.2);
     display: inline-block;
   }
@@ -529,12 +529,12 @@ button {
 
   }
   .boxtags{
-    blackground-color: black;
+    background-color: black;
     position: relative;
     background: none;
     border: none;
     border-bottom: 1px solid white;
-    outine: none;
+    outline: none;
     color: black;
     font-size: 15px;
     width: 30%;
@@ -577,4 +577,3 @@ border-radius: 10px;
   .status-done {
     background-color: green;
   }
-  
