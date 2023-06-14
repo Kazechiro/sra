@@ -155,7 +155,7 @@ if (!empty($id_grupo)) {
         </button>
       </div>
     </div>
-  </header> 
+  </header>
   <br><br><br><br>
   <div class="GrupoTela">
     <div class="ButtonVoltar">
