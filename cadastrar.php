@@ -1,5 +1,6 @@
 <?php
 include('conexao.php');
+session_start();
 //INCLUIR
 $nome = isset($_POST['nome'])? $_POST['nome'] : '';
 $email = isset($_POST['email'])? $_POST['email'] : ''; 
@@ -16,10 +17,15 @@ $incluir = "INSERT INTO usuario(nome, email, senha)
 VALUES ('$nome', '$email', '$senha')";
 $query_incluir = mysqli_query($conexao, $incluir);
 
-header("location: index.php");
-   
+
+$_SESSION['msg_cadastro'] = "<h3 class='success'>Email cadastrado com sucesso.</h3>";
+header('location: cadastro.php');
+exit();
 } else {
-    echo "email já cadastrado";
+
+$_SESSION['msg_cadastro'] = "<p class='error'>Email já existe</p>";
+header("location: cadastro.php");
+exit();
 }
 
 ?>

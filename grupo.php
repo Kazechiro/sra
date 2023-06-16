@@ -221,10 +221,10 @@ if (!empty($id_grupo)) {
       <br>
       <br>
       <?php if ($_SESSION['adm'] == 1): ?>
-        <button>
-          <?php echo '<a href="apagar_grupo.php?id_grupo=' . $id_grupo . '">Excluir</a>'; ?>
-        </button>
-      <?php endif; ?>
+  <button onclick="confirmarExclusao('<?php echo $id_grupo; ?>')">
+    Excluir
+  </button>
+<?php endif; ?>
     </div>
   </div>
   </center>
@@ -236,7 +236,13 @@ if (!empty($id_grupo)) {
   <script src="js/script.js"></script>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
+  <script>
+  function confirmarExclusao(idGrupo) {
+    if (confirm("Tem certeza que deseja excluir o grupo?")) {
+      window.location.href = "apagar_grupo.php?id_grupo=" + idGrupo;
+    }
+  }
+</script>
 </body>
 
 </html>

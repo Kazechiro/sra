@@ -41,6 +41,17 @@ background-color: whitesmoke;
     button:hover{
     background-color: #528B8B;
 }
+
+.success {
+    color: green;
+}
+
+.error {
+    color: red;
+}
+
+
+
 </style>
 <body>
     <header>
@@ -110,8 +121,18 @@ background-color: whitesmoke;
     <h1>Entrar em um Projeto</h1>
     <br>
     <form method="POST" action="novo_colaborador.php">
+    <?php
+       
+       
+        if (isset($_SESSION['msg_colaborador'])) {
+            echo $_SESSION['msg_colaborador'];
+            unset($_SESSION['msg_colaborador']); 
+        }
+        
+    ?>
+    <br>
         <label for="codigo_entrada">Digite o ID do Projeto:</label>
-        <input type="text" name="codigo_entrada" id="codigo_entrada" required>
+        <input type="number" name="codigo_entrada" id="codigo_entrada" required placeholder="digite o código" >
         <br>
        <div class="bts"><br> <br><button type="submit">Entrar</button> </div>
 

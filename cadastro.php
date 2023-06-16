@@ -9,19 +9,29 @@
     <link rel="stylesheet" href="./css/styles.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
+
+
+        .success {
+    color: green;
+}
+
+.error {
+    color: red;
+}
+
     </style>
     <!-- <title> Cadastro </title> -->
 </head>
 <body class="body-cadastro">
     <header>
-        <nav class="nav-bar"> <!-- faz aparecer a barra no topo -->
-            <div class="logo"> <!-- coloca o nome junto com a logo-->
+        <nav class="nav-bar"> 
+            <div class="logo"> 
                 <h1>
                     <ion-icon name="cafe-outline"></ion-icon>
                     S.R.A
                 </h1>
             </div>
-            <div class="nav-list"> <!-- cria itens de navegacao -->
+            <div class="nav-list"> 
                 <ul>
                     <li class="nav-item">
                         <a href="menu.html" class="nav-link">
@@ -40,7 +50,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="login-button"> <!-- botao verde entrar -->
+            <div class="login-button"> 
                 <button>
                     <a href="index.php">
                         Entrar
@@ -53,26 +63,21 @@
                 </button>
             </div>
         </nav>
-    </header>
+    </header> 
     <script src="js/script.js"></script>
     <!-- <center> -->
     <!-- <h1>Cadastro</h1> -->
     <div id="cadastro">
         <form action="cadastrar.php" id="form_cadastro" method="POST">
-            <!-- 
-            <--Cadastrar matricula->
-            <label for="nome">Digite seu nome:</label><br>
-            <input type="text" name="nome" placeholder="nome" required><br>
-            <--Cadastrar nome->
-            <label for="login">Digite seu email:</label><br>
-            <input type="text" name="email" placeholder="email" required><br> 
-            <--Cadastrar senha->
-            <label for="senha">Digite sua senha:</label><br>
-            <input type="password" name="senha" placeholder="senha" required><br>
-
-            <input type="submit" name="enviar" value="Cadastrar"><br>
-
-            <span>já tem uma conta? <a href="index.php">logar</a></span> -->
+        <?php
+        session_start();
+       
+        if (isset($_SESSION['msg_cadastro'])) {
+            echo $_SESSION['msg_cadastro'];
+            unset($_SESSION['msg_cadastro']); 
+        }
+        
+    ?>
             <h1>
                 Cadastre sua conta
             </h1>

@@ -30,9 +30,10 @@ if(isset($_POST['email']) || isset($_POST['senha'])) {
             $_SESSION['adm'] = $usuario['adm'];
 
             header("Location: principal.php");
-
+           
         } else {
-            echo "Falha ao logar! E-mail ou senha incorretos";
+            $_SESSION['msg_login'] = "<p class='error'>Falha ao logar! E-mail ou senha incorretos</p>";
+            
         }
 
     }
@@ -49,6 +50,11 @@ if(isset($_POST['email']) || isset($_POST['senha'])) {
     <link rel="stylesheet" href="./css/styles.css">
     <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
+
+
+  .error {
+    color: red;
+}
 </style>
     <title>Login</title>
 </head>
@@ -84,11 +90,20 @@ if(isset($_POST['email']) || isset($_POST['senha'])) {
                 <button><a href="#">Entrar</a></button>
             </div>
         </div>
-    </header>
+    </header> 
     <script src="js/script.js"></script>
    
     <div id="login">
     <form action="" method="POST" id="form_login">
+    <?php
+       
+        if (isset($_SESSION['msg_login'])) {
+            echo $_SESSION['msg_login'];
+            unset($_SESSION['msg_login']); 
+        }
+        
+    ?>
+
     <h1>Acesse sua conta</h1>
         <div class="input-container">          
             <input type="text" name="email" class="inputLogin" required>

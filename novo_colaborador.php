@@ -1,14 +1,14 @@
 <?php
 session_start();
-// Conexão com o banco de dados
+
 include('conexao.php');
 
-// Verificar se o formulário foi enviado
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $codigoEntrada = $_POST['codigo_entrada'];
-    $grupoId = intval($codigoEntrada); // Converter o código de entrada para inteiro
+    $grupoId = intval($codigoEntrada); 
 
-    // Consultar a tabela 'grupo' para verificar se o grupo com o ID fornecido existe
+   
     $sql = "SELECT id_grupo FROM grupo WHERE id_grupo = $grupoId LIMIT 1";
     $result = mysqli_query($conexao, $sql);
 
@@ -26,16 +26,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             $sql = "INSERT INTO colaborador_grupo (usuario_id, grupo_id) VALUES ($usuarioId, $grupoId)";
             if (mysqli_query($conexao, $sql)) {
-                echo '<div class="mensagem">' . "Você foi adicionado como colaborador do grupo com sucesso!" . '</div>';
+                $_SESSION['msg_colaborador'] = "<p class='success'>Você foi adicionado como colaborador do grupo com sucesso!</p>";
                 header('Location: principal.php');
             } else {
-                echo '<div class="mensagem">' . "Erro ao adicionar como colaborador do grupo." . '</div>';
-                var_dump($sql);
+                $_SESSION['msg_colaborador'] = "<p class='error'>Erro ao adicionar como colaborador!!</p>";
+                
             }
         }
     } else {
        
-        echo '<div class="mensagem">'. "ID do grupo inválido. Por favor, tente novamente" . '</div>';
+        $_SESSION['msg_colaborador'] = "<p class='error'>ID do grupo inválido, por favor tente novamente!</p>";
+        header('Location:entrarGrupo.php');
     }
 }
 ?>
