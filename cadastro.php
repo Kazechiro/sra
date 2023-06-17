@@ -1,3 +1,7 @@
+<?php 
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -34,7 +38,7 @@
             <div class="nav-list"> 
                 <ul>
                     <li class="nav-item">
-                        <a href="menu.html" class="nav-link">
+                        <a href="menu.php" class="nav-link">
                             Início
                         </a>
                     </li>
@@ -44,10 +48,11 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="menu.html" class="nav-link">
-                            Sobre
-                        </a>
-                    </li>
+                  <a href="<?php echo isset($_SESSION['id_usuario']) ? 'perfil.php' : 'cadastro.php'; ?>"
+                    class="nav-link">
+                    Perfil
+                  </a>
+                </li>
                 </ul>
             </div>
             <div class="login-button"> 

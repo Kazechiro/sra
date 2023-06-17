@@ -100,29 +100,35 @@ if (!empty($id_grupo)) {
       <div class="nav-list">
         <ul>
           <li class="nav-item">
-            <a href="menu.html" class="nav-link">
+            <a href="menu.php" class="nav-link">
               Início
             </a>
           </li>
           <li class="nav-item">
-            <a href="principal.php" class="nav-link">
-              Menu
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              Sobre
-            </a>
-          </li>
+                        <a href="<?php echo isset($_SESSION['id_usuario']) ? 'principal.php' : 'cadastro.php'; ?>" 
+                            class="nav-link">
+                            Menu
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                  <a href="<?php echo isset($_SESSION['id_usuario']) ? 'perfil.php' : 'cadastro.php'; ?>"
+                    class="nav-link">
+                    Perfil
+                  </a>
+                </li>
         </ul>
       </div>
       <div class="login-button">
-        <button>
-          <a href="logout.php">
-            Logout
-          </a>
-        </button>
-      </div>
+                <?php if(isset($_SESSION['id_usuario'])): ?>
+                    <button>
+                        <a href="logout.php">Sair</a>
+                    </button>
+                <?php else: ?>
+                    <button>
+                        <a href="index.php">Entrar</a>
+                    </button>
+                <?php endif; ?>
+            </div>
       <div class="mobile-menu-icon">
         <button onclick="menuShow()">
           <img class="icon" src="assets/img/menu_white_36dp.svg" alt="">

@@ -97,30 +97,52 @@ label {
 <header>
         <nav class="nav-bar">
             <div class="logo">
-                <h1><ion-icon name="cafe-outline"></ion-icon>S.R.A</h1>
+                <h1>
+                    <ion-icon name="cafe-outline"></ion-icon>
+                    S.R.A
+                </h1>
             </div>
             <div class="nav-list">
                 <ul>
-                    <li class="nav-item"><a href="menu.html" class="nav-link">Início</a></li>
-                    <li class="nav-item"><a href="principal.php" class="nav-link">Menu</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link"> Sobre</a></li>
+                    <li class="nav-item">
+                        <a href="menu.php" class="nav-link">
+                            Início
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?php echo isset($_SESSION['id_usuario']) ? 'principal.php' : 'cadastro.php'; ?>" 
+                            class="nav-link">
+                            Menu
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                  <a href="<?php echo isset($_SESSION['id_usuario']) ? 'perfil.php' : 'cadastro.php'; ?>"
+                    class="nav-link">
+                    Perfil
+                  </a>
+                </li>
                 </ul>
             </div>
-            
-
             <div class="mobile-menu-icon">
-                <button onclick="menuShow()"><img class="icon" src="assets/img/menu_white_36dp.svg" alt=""></button>
+                <button onclick="menuShow()">
+                    <img class="icon" src="assets/img/menu_white_36dp.svg" alt="">
+                </button>
             </div>
         </nav>
         <div class="mobile-menu">
             <ul>
-                <li class="nav-item"><a href="#" class="nav-link">Início</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Projetos</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Sobre</a></li>
+                <li class="nav-item">
+                    <a href="menu.html" class="nav-link">Início</a>
+                </li>
+                <li class="nav-item">
+                    <a href="principal.php" class="nav-link">Menu</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Sobre</a>
+                </li>
             </ul>
-
             <div class="login-button">
-                <button><a href="#">Entrar</a></button>
+               
             </div>
         </div>
     </header>

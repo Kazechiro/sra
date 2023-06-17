@@ -1,7 +1,7 @@
 <?php
 include('conexao.php');
 require('protect.php');
-
+session_start();
 $id_tarefa = $_GET['id_tarefa'];
 $id_grupo = $_GET['id_grupo'];
 $nome_grupo = $_GET['nome_grupo'];
@@ -47,46 +47,64 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
 </style>
 <body>
 <header>
-  <nav class="nav-bar">
-    <div class="logo">
-      <h1>
-        <ion-icon name="cafe-outline"></ion-icon>
-        S.R.A
-      </h1>
-    </div>
-    <div class="nav-list">
-      <ul>
-        <li class="nav-item">
-          <a href="menu.html" class="nav-link">Início</a>
-        </li>
-        <li class="nav-item">
-          <a href="principal.php" class="nav-link">Menu</a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">Sobre</a>
-        </li>
-      </ul>
-    </div>
-    <div class="mobile-menu-icon">
-      <button onclick="menuShow()">
-        <img class="icon" src="assets/img/menu_white_36dp.svg" alt="">
-      </button>
-    </div>
-  </nav>
-  <div class="mobile-menu">
-    <ul>
-      <li class="nav-item">
-        <a href="menu.html" class="nav-link">Início</a>
-      </li>
-      <li class="nav-item">
-        <a href="principal.php" class="nav-link">Grupos</a>
-      </li>
-      <li class="nav-item">
-        <a href="#" class="nav-link">Sobre</a>
-      </li>
-    </ul>
-  </div>
-</header>
+        <nav class="nav-bar">
+            <div class="logo">
+                <h1>
+                    <ion-icon name="cafe-outline"></ion-icon>
+                    S.R.A
+                </h1>
+            </div>
+            <div class="nav-list">
+                <ul>
+                    <li class="nav-item">
+                        <a href="menu.php" class="nav-link">
+                            Início
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?php echo isset($_SESSION['id_usuario']) ? 'principal.php' : 'cadastro.php'; ?>" 
+                            class="nav-link">
+                            Menu
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                  <a href="<?php echo isset($_SESSION['id_usuario']) ? 'perfil.php' : 'cadastro.php'; ?>"
+                    class="nav-link">
+                    Perfil
+                  </a>
+                </li>
+                </ul>
+            </div>
+            <div class="login-button">
+                <button>
+                    <a href="index.php">Entrar</a>
+                </button>
+            </div>
+            <div class="mobile-menu-icon">
+                <button onclick="menuShow()">
+                    <img class="icon" src="assets/img/menu_white_36dp.svg" alt="">
+                </button>
+            </div>
+        </nav>
+        <div class="mobile-menu">
+            <ul>
+                <li class="nav-item">
+                    <a href="menu.html" class="nav-link">Início</a>
+                </li>
+                <li class="nav-item">
+                    <a href="principal.php" class="nav-link">Menu</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Sobre</a>
+                </li>
+            </ul>
+            <div class="login-button">
+                <button>
+                    <a href="index.php">Entrar</a>
+                </button>
+            </div>
+        </div>
+    </header>
 <br><br><br><br><br><br><br>
 <div class="boxedit">
   <center>

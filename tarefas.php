@@ -85,9 +85,19 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
           </div>
           <div class="nav-list">
               <ul>
-                  <li class="nav-item"><a href="menu.html" class="nav-link">Início</a></li>
-                  <li class="nav-item"><a href="principal.php" class="nav-link">Projetos</a></li>
-                  <li class="nav-item"><a href="#" class="nav-link"> Sobre</a></li>
+                  <li class="nav-item"><a href="menu.php" class="nav-link">Início</a></li>
+                  <li class="nav-item">
+                        <a href="<?php echo isset($_SESSION['id_usuario']) ? 'principal.php' : 'cadastro.php'; ?>" 
+                            class="nav-link">
+                            Menu
+                        </a>
+                    </li>
+                  <li class="nav-item">
+                  <a href="<?php echo isset($_SESSION['id_usuario']) ? 'perfil.php' : 'cadastro.php'; ?>"
+                    class="nav-link">
+                    Perfil
+                  </a>
+                </li>
               </ul>
           </div>
           
@@ -98,7 +108,7 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
       </nav>
       <div class="mobile-menu">
           <ul>
-              <li class="nav-item"><a href="menu.html" class="nav-link">Início</a></li>
+              <li class="nav-item"><a href="menu.php" class="nav-link">Início</a></li>
               <li class="nav-item"><a href="principal.php" class="nav-link">Projetos</a></li>
               <li class="nav-item"><a href="#" class="nav-link">Sobre</a></li>
           </ul>
@@ -114,8 +124,8 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
       <center><h2> Projeto: <?php echo $nome_grupo?> </h2> 
        <span>Adicione sua tarefa</span> 
         <br><br>
-    <div id="popup-form" style="display: none;">  
-      <!-- Campos do formulário -->
+    <div id="popup-form" style="display: none;">
+      
       
       <label for="nome">Nome:</label>
       <input name="nome_tarefa" type="text" id="todo-input" placeholder="O que você vai fazer?" required/><br>

@@ -54,36 +54,34 @@ background-color: whitesmoke;
 
 </style>
 <body>
-    <header>
+<header>
         <nav class="nav-bar">
             <div class="logo">
                 <h1>
-                    <ion-icon name="cafe-outline">
-
-                    </ion-icon>
+                    <ion-icon name="cafe-outline"></ion-icon>
                     S.R.A
                 </h1>
             </div>
             <div class="nav-list">
                 <ul>
                     <li class="nav-item">
-                        <a href="menu.html" class="nav-link">
+                        <a href="menu.php" class="nav-link">
                             Início
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="principal.php" class="nav-link">
+                        <a href="<?php echo isset($_SESSION['id_usuario']) ? 'principal.php' : 'cadastro.php'; ?>" 
+                            class="nav-link">
                             Menu
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            Sobre
-                        </a>
-                    </li>
+                  <a href="<?php echo isset($_SESSION['id_usuario']) ? 'perfil.php' : 'cadastro.php'; ?>"
+                    class="nav-link">
+                    Perfil
+                  </a>
+                </li>
                 </ul>
-            </div>
-            
             </div>
             <div class="mobile-menu-icon">
                 <button onclick="menuShow()">
@@ -94,24 +92,16 @@ background-color: whitesmoke;
         <div class="mobile-menu">
             <ul>
                 <li class="nav-item">
-                    <a href="menu.html" class="nav-link">
-                        Início
-                    </a>
+                    <a href="menu.html" class="nav-link">Início</a>
                 </li>
                 <li class="nav-item">
-                    <a href="principal.php" class="nav-link">
-                        Projetos
-                    </a>
+                    <a href="principal.php" class="nav-link">Menu</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        Sobre
-                    </a>
+                    <a href="#" class="nav-link">Sobre</a>
                 </li>
             </ul>
-           
-               
-            </div>
+            
         </div>
     </header>
     <center>
