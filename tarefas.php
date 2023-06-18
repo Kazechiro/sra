@@ -78,14 +78,17 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
 
       .lista_tarefa .borda-cinza {
     border: 1px solid gray;
+    border-radius: 5px;
   }
 
   .lista_tarefa .borda-laranja {
     border: 1px solid orange;
+    border-radius: 5px;
   }
 
   .lista_tarefa .borda-verde {
     border: 1px solid green;
+    border-radius: 5px;
   }
 
 
