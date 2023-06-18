@@ -178,7 +178,7 @@ if (!empty($id_grupo)) {
         ?>
       </p>
       <br>
-      <p>Colaboradores do Grupo:</p>
+      <p>Colaboradores do Projeto:</p>
       
       <?php if (!empty($result_colaboradores)): ?>
   <ul style="list-style: none;">
@@ -244,7 +244,7 @@ if (!empty($id_grupo)) {
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
   <script>
   function confirmarExclusao(idGrupo) {
-    if (confirm("Tem certeza que deseja excluir o grupo?")) {
+    if (confirm("Tem certeza que deseja excluir o Projeto?")) {
       window.location.href = "apagar_grupo.php?id_grupo=" + idGrupo;
     }
   }

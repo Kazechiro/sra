@@ -51,6 +51,9 @@ if (isset($_POST['email']) && isset($_POST['senha'])) {
         .error {
             color: red;
         }
+        p{
+            position:absolute;
+        }
     </style>
     <title>Login</title>
 </head>
