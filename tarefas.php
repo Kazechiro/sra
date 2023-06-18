@@ -88,7 +88,7 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
 
   .lista_tarefa .borda-verde {
     border: 1px solid green;
-    border-radius: 5px;
+    border-radius: 5px; 
   }
 
 
