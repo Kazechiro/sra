@@ -130,7 +130,7 @@ $result_grupo->execute();
 
 while ($row_grupo = $result_grupo->fetch(PDO::FETCH_ASSOC)) {
     extract($row_grupo);
-    echo  '  <div class="grupos">GRUPO:<a href="grupo.php?id_grupo=' . $id_grupo . '&nome_grupo=' . $nome_grupo . '">' . $row_grupo['nome_grupo'] . '</a></div>'; 
+    echo  '  <div class="grupos">PROJETO:<a href="grupo.php?id_grupo=' . $id_grupo . '&nome_grupo=' . $nome_grupo . '">' . $row_grupo['nome_grupo'] . '</a></div>'; 
 
 }
     ?>

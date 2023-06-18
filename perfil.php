@@ -33,87 +33,104 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil</title>
-    <style>
-        /* Estilos do modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.5);
-        }
-        
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 600px;
-        }
-        
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        /* Estilos para os campos de input editáveis */
-        .editable {
-            border: 1px solid #ccc;
-            padding: 5px;
-        }
-    </style>
-    <script>
-        function toggleEdit() {
-            var nameField = document.getElementById("nameField");
-            var emailField = document.getElementById("emailField");
-            var editButton = document.getElementById("editButton");
-
-            if (nameField.contentEditable === "false") {
-                // Habilitar edição dos campos de texto e alterar texto do botão
-                nameField.contentEditable = "true";
-                emailField.contentEditable = "true";
-                nameField.focus();
-                nameField.classList.add("editable");
-                emailField.classList.add("editable");
-                editButton.innerHTML = "Cancelar";
-
-                // Exibir o botão "Salvar"
-                document.getElementById("saveButton").style.display = "block";
-            } else {
-                // Desabilitar edição dos campos de texto e alterar texto do botão
-                nameField.contentEditable = "false";
-                emailField.contentEditable = "false";
-                nameField.classList.remove("editable");
-                emailField.classList.remove("editable");
-                editButton.innerHTML = "Editar";
-
-                // Ocultar o botão "Salvar"
-                document.getElementById("saveButton").style.display = "none";
-            }
-        }
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/styles.css">
+  <title>Document</title>
 </head>
+<style>
+  .GrupoTela {
+    border: 1px solid #000;
+    padding: 20px;
+    width: 45%;
+    background: white;
+    box-shadow: 10px 20px grey;
+    border-radius: 10px 20px 30px;
+    margin: 35px auto;
+    text-align: center;
+  }
+</style>
+<header>
+<nav class="nav-bar">
+      <div class="logo">
+        <h1>
+          <ion-icon name="cafe-outline">
+
+          </ion-icon>
+          S.R.A
+        </h1>
+      </div>
+      <div class="nav-list">
+        <ul>
+          <li class="nav-item">
+            <a href="menu.php" class="nav-link">
+              Início
+            </a>
+          </li>
+          <li class="nav-item">
+                        <a href="<?php echo isset($_SESSION['id_usuario']) ? 'principal.php' : 'cadastro.php'; ?>" 
+                            class="nav-link">
+                            Menu
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                  <a href="<?php echo isset($_SESSION['id_usuario']) ? 'perfil.php' : 'cadastro.php'; ?>"
+                    class="nav-link">
+                    Perfil
+                  </a>
+                </li>
+        </ul>
+      </div>
+      <div class="login-button">
+                <?php if(isset($_SESSION['id_usuario'])): ?>
+                    <button>
+                        <a href="logout.php">Sair</a>
+                    </button>
+                <?php else: ?>
+                    <button>
+                        <a href="index.php">Entrar</a>
+                    </button>
+                <?php endif; ?>
+            </div>
+      <div class="mobile-menu-icon">
+        <button onclick="menuShow()">
+          <img class="icon" src="assets/img/menu_white_36dp.svg" alt="">
+        </button>
+      </div>
+    </nav>
+    <div class="mobile-menu">
+      <ul>
+        <li class="nav-item">
+          <a href="menu.php" class="nav-link">
+            Início
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="principal.php" class="nav-link">
+            Grupos
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            Sobre
+          </a>
+        </li>
+      </ul>
+      <div class="login-button">
+        <button>
+          <a href="logout.php">
+            Logout
+          </a>
+        </button>
+      </div>
+    </div>
+</header>
 <body>
-    <center>
-        <h1>Perfil de <?php echo $_SESSION['nome'] ?></h1>
+    <br><br><br><br>
+  <center>
+        
+    <div class="GrupoTela">
+      <h2>Perfil de <?php echo $_SESSION['nome'] ?></h2>
 
         <?php
         // Restante do código para exibir as informações do perfil
@@ -124,42 +141,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sql_query->bindParam(':id_usuario', $_SESSION['id_usuario'], PDO::PARAM_INT);
         $sql_query->execute();
 
-        while ($row_usuario = $sql_query->fetch(PDO::FETCH_ASSOC)) {
-            echo "<li style='list-style: none'>";
-            echo "Nome: <span id='nameField'>" . $row_usuario['nome'] . "</span><br>";
-            echo "Email: <span id='emailField'>" . $row_usuario['email'] . "</span><br>";
-            echo "<button id='editButton' type='button' class='botao' onclick='toggleEdit()'>Editar</button><br>";
-            echo "<button id='saveButton' type='submit' class='botao' style='display: none;'>Salvar</button><br>";
-            echo "</li>";
-        }
-        ?>
-
-        <!-- Modal de edição do perfil -->
-        <div id="modal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closeModal()">&times;</span>
-                <h2>Editar Perfil</h2>
-
-                <!-- Campos de input para editar o perfil -->
-                <form action="perfil.php" method="post">
-                    Nome: <input type="text" name="nome" id="editName"><br><br>
-                    Email: <input type="email" name="email" id="editEmail"><br><br>
-                    <input type="submit" value="Salvar">
-                </form>
-            </div>
-        </div>
-
-        <script>
-            // Função para abrir o modal
-            function openModal() {
-                document.getElementById("modal").style.display = "block";
-            }
-
-            // Função para fechar o modal
-            function closeModal() {
-                document.getElementById("modal").style.display = "none";
-            }
-        </script>
-    </center>
+  while ($row_usuario = $sql_query->fetch(PDO::FETCH_ASSOC)) {
+    echo "<li style='list-style: none'>";
+    echo "Nome: " . $row_usuario['nome'] . "<br>";
+    echo "Email: " . $row_usuario['email'] . "<br>";
+    echo "</li>";
+  }
+  
+  
+  ?>
+  </center>
 </body>
+
 </html>
+
