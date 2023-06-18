@@ -87,6 +87,7 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
 
     .lista_tarefa a {
       font-size: 12px;
+      padding-bottom: -8px ;
     }
 
     .lista_tarefa .borda-cinza {
@@ -250,10 +251,11 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
           echo "<span>Tarefa: " . $row_tarefa['nome_tarefa'] . "</span><br>";
           echo "<span>Descrição: " . $row_tarefa['desc_tarefa'] . "</span><br>";
           echo "<span>Status: " . $row_tarefa['nome_status'] . "</span><br>";
-          echo "<span>Responsável: " . ($row_tarefa['nome_colaborador'] ?? "Sem responsável") . "</span><br>";
+          echo "<span>Responsável: " . ($row_tarefa['nome_colaborador'] ?? "Sem responsável") . "</span><br><br>";
           echo "<button type='button' class='ButtonTarefaEditar'><a href='editar_tarefa.php?id_tarefa=" . $row_tarefa['id_tarefa'] . "&id_grupo=$id_grupo&nome_grupo=$nome_grupo'><ion-icon name='create-outline'></ion-icon></a></button>";
           echo "<button type='button' class='ButtonTarefaExcluir'><a href='apagar_tarefa.php?id_tarefa=" . $row_tarefa['id_tarefa'] . "&id_grupo=$id_grupo&nome_grupo=$nome_grupo'><ion-icon name='trash-outline'></ion-icon></a></button>";
-          echo "</li>";
+
+          echo "</li><br><br>";
         }
 
         ?>
