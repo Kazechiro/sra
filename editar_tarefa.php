@@ -1,12 +1,12 @@
 <?php
 include('conexao.php');
 require('protect.php');
-session_start();
+
 $id_tarefa = $_GET['id_tarefa'];
 $id_grupo = $_GET['id_grupo'];
 $nome_grupo = $_GET['nome_grupo'];
 
-$query_tarefa = "SELECT nome_tarefa, desc_tarefa, status_tarefa FROM tarefa WHERE id_tarefa = :id_tarefa";
+$query_tarefa = "SELECT nome_tarefa, desc_tarefa, status_tarefa, colaborador_id FROM tarefa WHERE id_tarefa = :id_tarefa";
 $stmt_tarefa = $conn->prepare($query_tarefa);
 $stmt_tarefa->bindParam(':id_tarefa', $id_tarefa);
 $stmt_tarefa->execute();
@@ -16,6 +16,7 @@ $row_tarefa = $stmt_tarefa->fetch(PDO::FETCH_ASSOC);
 $nome_tarefa = $row_tarefa['nome_tarefa'];
 $desc_tarefa = $row_tarefa['desc_tarefa'];
 $status_tarefa = $row_tarefa['status_tarefa'];
+$colaborador_id = $row_tarefa['colaborador_id'];
 
 $query_colaboradores = "SELECT c.id_usuario, c.nome FROM usuario AS c
                        INNER JOIN colaborador_grupo AS cg ON c.id_usuario = cg.usuario_id
@@ -47,63 +48,7 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
 </style>
 <body>
 <header>
-        <nav class="nav-bar">
-            <div class="logo">
-                <h1>
-                    <ion-icon name="cafe-outline"></ion-icon>
-                    S.R.A
-                </h1>
-            </div>
-            <div class="nav-list">
-                <ul>
-                    <li class="nav-item">
-                        <a href="menu.php" class="nav-link">
-                            Início
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="<?php echo isset($_SESSION['id_usuario']) ? 'principal.php' : 'cadastro.php'; ?>" 
-                            class="nav-link">
-                            Menu
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                  <a href="<?php echo isset($_SESSION['id_usuario']) ? 'perfil.php' : 'cadastro.php'; ?>"
-                    class="nav-link">
-                    Perfil
-                  </a>
-                </li>
-                </ul>
-            </div>
-            <div class="login-button">
-                <button>
-                    <a href="index.php">Entrar</a>
-                </button>
-            </div>
-            <div class="mobile-menu-icon">
-                <button onclick="menuShow()">
-                    <img class="icon" src="assets/img/menu_white_36dp.svg" alt="">
-                </button>
-            </div>
-        </nav>
-        <div class="mobile-menu">
-            <ul>
-                <li class="nav-item">
-                    <a href="menu.html" class="nav-link">Início</a>
-                </li>
-                <li class="nav-item">
-                    <a href="principal.php" class="nav-link">Menu</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Sobre</a>
-                </li>
-            </ul>
-            <div class="login-button">
-                <button>
-                    <a href="index.php">Entrar</a>
-                </button>
-            </div>
-        </div>
+        <!-- Código do cabeçalho -->
     </header>
 <br><br><br><br><br><br><br>
 <div class="boxedit">
@@ -141,7 +86,8 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
         <option value="">Selecione um colaborador</option>
         <?php
         foreach ($result_colaboradores as $row_colaborador) {
-          echo "<option value='" . $row_colaborador['id_usuario'] . "'>" . $row_colaborador['nome'] . "</option>";
+          $selected = ($row_colaborador['id_usuario'] == $colaborador_id) ? 'selected' : '';
+          echo "<option value='" . $row_colaborador['id_usuario'] . "' $selected>" . $row_colaborador['nome'] . "</option>";
         }
         ?>
       </select>
@@ -155,6 +101,20 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
       $desc_tarefa_atualizado = $_POST['desc_tarefa'];
       $status_tarefa_atualizado = $_POST['status_tarefa'];
       $colaborador_id_atualizado = isset($_POST['colaborador_id']) ? $_POST['colaborador_id'] : null;
+
+      // Verifica se o colaborador selecionado é válido
+      if ($colaborador_id_atualizado != "") {
+        $sql_validacao = "SELECT usuario_id FROM colaborador_grupo WHERE usuario_id = :colaborador_id";
+        $stmt_validacao = $conn->prepare($sql_validacao);
+        $stmt_validacao->bindParam(':colaborador_id', $colaborador_id_atualizado);
+        $stmt_validacao->execute();
+
+        // Verifica se o valor fornecido para o colaborador é válido
+        if ($stmt_validacao->rowCount() == 0) {
+          echo "O valor fornecido para o colaborador não é válido.";
+          exit();
+        }
+      }
 
       $query_atualizar = "UPDATE tarefa SET nome_tarefa = :nome_tarefa, desc_tarefa = :desc_tarefa, status_tarefa = :status_tarefa, colaborador_id = :colaborador_id WHERE id_tarefa = :id_tarefa";
       $stmt_atualizar = $conn->prepare($query_atualizar);

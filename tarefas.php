@@ -75,6 +75,20 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
       .lista_tarefa a {
         font-size: 12px;
       }
+
+      .lista_tarefa .borda-cinza {
+    border: 1px solid gray;
+  }
+
+  .lista_tarefa .borda-laranja {
+    border: 1px solid orange;
+  }
+
+  .lista_tarefa .borda-verde {
+    border: 1px solid green;
+  }
+
+
     </style>
   </head>
   <body class="body-tarefa">
@@ -193,7 +207,8 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
       $stmt_tarefa->execute();
 
       while ($row_tarefa = $stmt_tarefa->fetch(PDO::FETCH_ASSOC)) {
-        echo "<li>";
+        
+        echo "<li class='" . getStatusClass($row_tarefa['nome_status']) . "'>";
         echo "<span>Tarefa: " . $row_tarefa['nome_tarefa'] . "</span><br>";
         echo "<span>Descrição: " . $row_tarefa['desc_tarefa'] . "</span><br>";
         echo "<span>Status: " . $row_tarefa['nome_status'] . "</span><br>";
@@ -222,6 +237,23 @@ document.getElementById("close-button").addEventListener("click", closePopup);
 
 </script>
 </div>   
+<?php
+function getStatusClass($status) {
+  switch ($status) {
+    case 'A fazer':
+      return 'borda-cinza';
+    case 'Em andamento':
+      return 'borda-laranja';
+    case 'Concluída':
+      return 'borda-verde';
+    default:
+      return '';
+  }
+}
+?>
+
+
+
   </body>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
