@@ -8,7 +8,6 @@ if (!isset($_SESSION['id_usuario'])) {
     header("Location: index.php");
     exit();
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -31,80 +30,95 @@ if (!isset($_SESSION['id_usuario'])) {
         text-align: center;
     }
 </style>
+<script>
+    function togglePasswordVisibility() {
+        var passwordInput = document.getElementById('password-input');
+        var passwordButton = document.getElementById('password-button');
+
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            passwordButton.textContent = 'Ocultar senha';
+        } else {
+            passwordInput.type = 'password';
+            passwordButton.textContent = 'Revelar senha';
+        }
+    }
+</script>
 <header>
     <nav class="nav-bar">
-        <div class="logo">
-            <h1>
-                <ion-icon name="cafe-outline">
-                </ion-icon>
-                S.R.A
-            </h1>
-        </div>
-        <div class="nav-list">
-            <ul>
-                <li class="nav-item">
-                    <a href="menu.php" class="nav-link">
-                        Início
-                    </a>
+      <div class="logo">
+        <h1>
+          <ion-icon name="cafe-outline">
+
+          </ion-icon>
+          S.R.A
+        </h1>
+      </div>
+      <div class="nav-list">
+        <ul>
+          <li class="nav-item">
+            <a href="menu.php" class="nav-link">
+              Início
+            </a>
+          </li>
+          <li class="nav-item">
+                        <a href="<?php echo isset($_SESSION['id_usuario']) ? 'principal.php' : 'cadastro.php'; ?>" 
+                            class="nav-link">
+                            Menu
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                  <a href="<?php echo isset($_SESSION['id_usuario']) ? 'perfil.php' : 'cadastro.php'; ?>"
+                    class="nav-link">
+                    Perfil
+                  </a>
                 </li>
-                <li class="nav-item">
-                    <a href="<?php echo isset($_SESSION['id_usuario']) ? 'principal.php' : 'cadastro.php'; ?>"
-                        class="nav-link">
-                        Menu
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="<?php echo isset($_SESSION['id_usuario']) ? 'perfil.php' : 'cadastro.php'; ?>"
-                        class="nav-link">
-                        Perfil
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="login-button">
-            <?php if(isset($_SESSION['id_usuario'])): ?>
-                <button>
-                    <a href="logout.php">Sair</a>
-                </button>
-            <?php else: ?>
-                <button>
-                    <a href="index.php">Entrar</a>
-                </button>
-            <?php endif; ?>
-        </div>
-        <div class="mobile-menu-icon">
-            <button onclick="menuShow()">
-                <img class="icon" src="assets/img/menu_white_36dp.svg" alt="">
-            </button>
-        </div>
+        </ul>
+      </div>
+      <div class="login-button">
+                <?php if(isset($_SESSION['id_usuario'])): ?>
+                    <button>
+                        <a href="logout.php">Sair</a>
+                    </button>
+                <?php else: ?>
+                    <button>
+                        <a href="index.php">Entrar</a>
+                    </button>
+                <?php endif; ?>
+            </div>
+      <div class="mobile-menu-icon">
+        <button onclick="menuShow()">
+          <img class="icon" src="assets/img/menu_white_36dp.svg" alt="">
+        </button>
+      </div>
     </nav>
     <div class="mobile-menu">
-        <ul>
-            <li class="nav-item">
-                <a href="menu.php" class="nav-link">
-                    Início
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="principal.php" class="nav-link">
-                    Grupos
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                    Sobre
-                </a>
-            </li>
-        </ul>
-        <div class="login-button">
-            <button>
-                <a href="logout.php">
-                    Logout
-                </a>
-            </button>
-        </div>
+      <ul>
+        <li class="nav-item">
+          <a href="menu.php" class="nav-link">
+            Início
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="principal.php" class="nav-link">
+            Grupos
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            Sobre
+          </a>
+        </li>
+      </ul>
+      <div class="login-button">
+        <button>
+          <a href="logout.php">
+            Logout
+          </a>
+        </button>
+      </div>
     </div>
-</header>
+  </header>
 <body>
     <br><br><br><br>
     <center>
@@ -124,6 +138,8 @@ if (!isset($_SESSION['id_usuario'])) {
                 echo "<li style='list-style: none'>";
                 echo "Nome: " . $row_usuario['nome'] . "<br>";
                 echo "Email: " . $row_usuario['email'] . "<br>";
+                echo "Senha: <input type='password' id='password-input' value='" . $row_usuario['senha'] . "' disabled/>";
+                echo "<button id='password-button' onclick='togglePasswordVisibility()'>Revelar senha</button>";
                 echo "<a href='editar_perfil.php?id_usuario=" . $_SESSION['id_usuario'] . "'>Editar</a>";
                 echo "<a href='apagar_perfil.php?id_usuario=" . $_SESSION['id_usuario'] . "' onclick='return confirm(\"Tem certeza que deseja excluir seu perfil?\")'>Excluir</a>";
                 echo "</li>";

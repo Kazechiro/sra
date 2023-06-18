@@ -27,6 +27,7 @@ if (isset($_POST['email']) && isset($_POST['senha'])) {
             $_SESSION['nome'] = $usuario['nome'];
             $_SESSION['adm'] = $usuario['adm'];
             $_SESSION['email'] = $usuario['email'];
+            $_SESSION['senha'] = $usuario['senha'];
 
             header("Location: principal.php");
             exit();
