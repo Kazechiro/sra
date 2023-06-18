@@ -47,6 +47,30 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
       height: 400px;
       overflow-y: scroll;
       display: inline-block;
+      text-align: center;
+    }
+
+    .ButtonTarefaEditar {
+      position: relative;
+      width: 40px;
+      height: 30px;
+      left: 80px;
+    }
+
+    .ButtonTarefaEditar a ion-icon {
+      font-size: 25px;
+    }
+
+    .ButtonTarefaExcluir {
+      position: relative;
+      width: 40px;
+      height: 30px;
+      bottom: 30px;
+      left: 130px;
+    }
+
+    .ButtonTarefaExcluir a ion-icon {
+      font-size: 25px;
     }
 
     .lista_tarefa li {
@@ -66,18 +90,18 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
     }
 
     .lista_tarefa .borda-cinza {
-      border: 1px solid gray;
-      border-radius: 5px;
+      border: 2px solid gray;
+      border-radius: 50px;
     }
 
     .lista_tarefa .borda-laranja {
-      border: 1px solid orange;
-      border-radius: 5px;
+      border: 2px solid orange;
+      border-radius: 50px;
     }
 
     .lista_tarefa .borda-verde {
-      border: 1px solid green;
-      border-radius: 5px;
+      border: 2px solid green;
+      border-radius: 50px;
     }
   </style>
 </head>
@@ -227,8 +251,8 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
           echo "<span>Descrição: " . $row_tarefa['desc_tarefa'] . "</span><br>";
           echo "<span>Status: " . $row_tarefa['nome_status'] . "</span><br>";
           echo "<span>Responsável: " . ($row_tarefa['nome_colaborador'] ?? "Sem responsável") . "</span><br>";
-          echo "<button type='button' class='botao'><a href='editar_tarefa.php?id_tarefa=" . $row_tarefa['id_tarefa'] . "&id_grupo=$id_grupo&nome_grupo=$nome_grupo'><ion-icon name='create-outline'></ion-icon></a></button>";
-          echo "<button type='button' class='botao'><a href='apagar_tarefa.php?id_tarefa=" . $row_tarefa['id_tarefa'] . "&id_grupo=$id_grupo&nome_grupo=$nome_grupo'><ion-icon name='trash-outline'></ion-icon></a></button><br>";
+          echo "<button type='button' class='ButtonTarefaEditar'><a href='editar_tarefa.php?id_tarefa=" . $row_tarefa['id_tarefa'] . "&id_grupo=$id_grupo&nome_grupo=$nome_grupo'><ion-icon name='create-outline'></ion-icon></a></button>";
+          echo "<button type='button' class='ButtonTarefaExcluir'><a href='apagar_tarefa.php?id_tarefa=" . $row_tarefa['id_tarefa'] . "&id_grupo=$id_grupo&nome_grupo=$nome_grupo'><ion-icon name='trash-outline'></ion-icon></a></button>";
           echo "</li>";
         }
 
