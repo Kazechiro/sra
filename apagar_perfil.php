@@ -15,11 +15,11 @@ if ($result_grupo->rowCount() != 0) {
   $result_delete_usuario = $conn->prepare($query_delete_usuario);
   $result_delete_usuario->execute();
 
-  echo "<script type='javascript'>alert('A conta foi excluída com Sucesso!');";
+  $_SESSION['msg_perfil_excluido'] = "<p>Erro: Conta excluída com sucesso.</p>";
   header('Location: logout.php');
   exit();
 } else {
-  $_SESSION['msg'] = "<p>Erro: Conta não encontrada.</p>";
+  $_SESSION['msg_perfil_excluido'] = "<p>Erro: Conta não encontrada.</p>";
   header("Location: perfil.php?id_usuario=$_SESSION[id_usuario]");
   exit();
 }

@@ -125,7 +125,7 @@ if (!isset($_SESSION['id_usuario'])) {
                 echo "Nome: " . $row_usuario['nome'] . "<br>";
                 echo "Email: " . $row_usuario['email'] . "<br>";
                 echo "<a href='editar_perfil.php?id_usuario=" . $_SESSION['id_usuario'] . "'>Editar</a>";
-                echo "<a href='apagar_perfil.php?id_usuario=" . $_SESSION['id_usuario'] . "'>Excluir</a>";
+                echo "<a href='apagar_perfil.php?id_usuario=" . $_SESSION['id_usuario'] . "' onclick='return confirm(\"Tem certeza que deseja excluir seu perfil?\")'>Excluir</a>";
                 echo "</li>";
             }
             ?>
