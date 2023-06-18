@@ -88,7 +88,7 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
       <div class="logo">
         <h1>
           <ion-icon name="cafe-outline"></ion-icon>
-          S.R.A
+          S.R.A 
         </h1>
       </div>
       <div class="nav-list">
