@@ -58,6 +58,10 @@ header {
     padding: 10px 15px;
     border-radius: 5px;
     background-color: #957E6C;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    font-size: 1.1rem;
 }
 
 .login-button button a {
@@ -582,5 +586,3 @@ border-radius: 10px;
   .status-done {
     background-color: green;
   }
-
-
