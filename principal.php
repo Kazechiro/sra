@@ -26,6 +26,7 @@ $nome_grupo = isset($_GET['nome_grupo']) ? $_GET['nome_grupo'] : '';
     }
 </style>
 
+
 <body>
     <header>
         <nav class="nav-bar">
