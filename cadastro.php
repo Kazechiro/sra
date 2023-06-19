@@ -1,7 +1,6 @@
-<?php 
+<?php
 
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -14,28 +13,26 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
 
-
         .success {
-    color: green;
-}
-
-.error {
-    color: red;
-}
-
+            color: green;
+        }
+        .error {
+            color: red;
+        }
     </style>
     <!-- <title> Cadastro </title> -->
 </head>
+
 <body class="body-cadastro">
     <header>
-        <nav class="nav-bar"> 
-            <div class="logo"> 
+        <nav class="nav-bar">
+            <div class="logo">
                 <h1>
                     <ion-icon name="cafe-outline"></ion-icon>
                     S.R.A
                 </h1>
             </div>
-            <div class="nav-list"> 
+            <div class="nav-list">
                 <ul>
                     <li class="nav-item">
                         <a href="menu.php" class="nav-link">
@@ -43,24 +40,27 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="principal.php" class="nav-link">
+                        <a href="<?php echo isset($_SESSION['id_usuario']) ? 'principal.php' : 'cadastro.php'; ?>" class="nav-link">
                             Menu
                         </a>
                     </li>
                     <li class="nav-item">
-                  <a href="<?php echo isset($_SESSION['id_usuario']) ? 'perfil.php' : 'cadastro.php'; ?>"
-                    class="nav-link">
-                    Perfil
-                  </a>
-                </li>
+                        <a href="<?php echo isset($_SESSION['id_usuario']) ? 'perfil.php' : 'cadastro.php'; ?>" class="nav-link">
+                            Perfil
+                        </a>
+                    </li>
                 </ul>
             </div>
-            <div class="login-button"> 
-                <button>
-                    <a href="index.php">
+            <div class="login-button">
+                <?php if (isset($_SESSION['id_usuario'])) : ?>
+                    <button onclick="window.location.href='logout.php';">
+                        Sair
+                    </button>
+                <?php else : ?>
+                    <button onclick="window.location.href='index.php';">
                         Entrar
-                    </a>
-                </button>
+                    </button>
+                <?php endif; ?>
             </div>
             <div class="mobile-menu-icon">
                 <button onclick="menuShow()">
@@ -68,21 +68,51 @@
                 </button>
             </div>
         </nav>
-    </header> 
+        <div class="mobile-menu">
+            <ul>
+                <li class="nav-item">
+                    <a href="menu.php" class="nav-link">
+                        Início
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?php echo isset($_SESSION['id_usuario']) ? 'principal.php' : 'cadastro.php'; ?>" class="nav-link">
+                        Menu
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?php echo isset($_SESSION['id_usuario']) ? 'perfil.php' : 'cadastro.php'; ?>" class="nav-link">
+                        Perfil
+                    </a>
+                </li>
+            </ul>
+            <div class="login-button">
+                <?php if (isset($_SESSION['id_usuario'])) : ?>
+                    <button onclick="window.location.href='logout.php';">
+                        Sair
+                    </button>
+                <?php else : ?>
+                    <button onclick="window.location.href='index.php';">
+                        Entrar
+                    </button>
+                <?php endif; ?>
+            </div>
+        </div>
+    </header>
     <script src="js/script.js"></script>
     <!-- <center> -->
     <!-- <h1>Cadastro</h1> -->
     <div id="cadastro">
         <form action="cadastrar.php" id="form_cadastro" method="POST">
-        <?php
-        session_start();
-       
-        if (isset($_SESSION['msg_cadastro'])) {
-            echo $_SESSION['msg_cadastro'];
-            unset($_SESSION['msg_cadastro']); 
-        }
-        
-    ?>
+            <?php
+            session_start();
+
+            if (isset($_SESSION['msg_cadastro'])) {
+                echo $_SESSION['msg_cadastro'];
+                unset($_SESSION['msg_cadastro']);
+            }
+
+            ?>
             <h1>
                 Cadastre sua conta
             </h1>
@@ -110,7 +140,7 @@
                 </button>
             </div>
             <div class="cadastro">
-                Já tem uma conta? 
+                Já tem uma conta?
                 <a href=index.php>
                     Logar
                 </a>
@@ -122,4 +152,5 @@
 <!-- codigo para mostrar logo do projeto na barra (placeholder) -->
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
 </html>
