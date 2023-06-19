@@ -66,9 +66,9 @@ ADD CONSTRAINT fk_grucola
 FOREIGN KEY (grupo_id)
 REFERENCES grupo(id_grupo)
 ON DELETE CASCADE;
-
-
-
+ALTER TABLE tarefa DROP FOREIGN KEY fk_tareco;
+ALTER TABLE tarefa MODIFY colaborador_id INT NULL;
+ALTER TABLE relatorio ADD aprovado BOOLEAN NOT NULL DEFAULT false;
 
 insert into usuario(nome,email,senha,adm)
 values ('Arnaldo Samuel','arnaldo221@gmail.com','arnaldose', 0),
