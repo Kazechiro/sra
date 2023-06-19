@@ -41,7 +41,6 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
 
     .lista_tarefa {
       margin-top: 10px;
-      padding: 10px;
       margin: auto;
       width: 400px;
       height: 400px;
@@ -50,32 +49,31 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
       text-align: center;
     }
 
+    .lista_tarefa a {
+      font-size: 25px;
+    }
+
     .ButtonTarefaEditar {
       position: relative;
       width: 40px;
       height: 30px;
+      top: 10px;
       left: 80px;
-    }
-
-    .ButtonTarefaEditar a ion-icon {
-      font-size: 25px;
     }
 
     .ButtonTarefaExcluir {
       position: relative;
       width: 40px;
       height: 30px;
-      bottom: 30px;
+      bottom: 20px;
       left: 130px;
     }
 
-    .ButtonTarefaExcluir a ion-icon {
-      font-size: 25px;
-    }
-
     .lista_tarefa li {
-      padding: 5px;
       font-size: 18px;
+      padding-top: 10px;
+      padding-left: 5px;
+      padding-right: 5px;
       margin: auto;
       justify-content: center;
       display: inline-block;
@@ -83,11 +81,6 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
 
     .lista_tarefa ul {
       align-items: inherit;
-    }
-
-    .lista_tarefa a {
-      font-size: 12px;
-      padding-bottom: -8px ;
     }
 
     .lista_tarefa .borda-cinza {
@@ -155,18 +148,26 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
     <div class="mobile-menu">
       <ul>
         <li class="nav-item">
-          <a href="menu.php" class="nav-link">Início</a>
+          <a href="menu.php" class="nav-link">
+            Início
+          </a>
         </li>
         <li class="nav-item">
-          <a href="principal.php" class="nav-link">Menu</a>
+          <a href="principal.php" class="nav-link">
+            Menu
+          </a>
         </li>
         <li class="nav-item">
-          <a href="perfil.php" class="nav-link">Sobre</a>
+          <a href="perfil.php" class="nav-link">
+            Perfil
+          </a>
         </li>
       </ul>
       <div class="login-button">
         <button>
-          <a href="index.php">Entrar</a>
+          <a href="index.php">
+            Entrar
+          </a>
         </button>
       </div>
     </div>
@@ -187,11 +188,9 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
           <br>
           <textarea id="todo-input" name="desc_tarefa" placeholder="Descreva brevemente seu Projeto" rows=10 cols=35 maxlength="250" required> </textarea>
           <br>
-
+          <br><br>
+          <span>Status da Tarefa:</span>
           <br>
-
-          <br>
-          <span>Status da Tarefa:</span><br>
           <select name="status_tarefa" required>
             <br>
             <option value="">Selecione o status</option>
@@ -219,8 +218,6 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
           <br>
           <button type="submit">Adicionar Tarefa</button>
         </div>
-
-
 
         <div class="form-control">
           <button name="enviar" type="button" onclick="openPopup()">
@@ -251,13 +248,11 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
           echo "<span>Tarefa: " . $row_tarefa['nome_tarefa'] . "</span><br>";
           echo "<span>Descrição: " . $row_tarefa['desc_tarefa'] . "</span><br>";
           echo "<span>Status: " . $row_tarefa['nome_status'] . "</span><br>";
-          echo "<span>Responsável: " . ($row_tarefa['nome_colaborador'] ?? "Sem responsável") . "</span><br><br>";
+          echo "<span>Responsável: " . ($row_tarefa['nome_colaborador'] ?? "Sem responsável") . "</span>";
           echo "<button type='button' class='ButtonTarefaEditar'><a href='editar_tarefa.php?id_tarefa=" . $row_tarefa['id_tarefa'] . "&id_grupo=$id_grupo&nome_grupo=$nome_grupo'><ion-icon name='create-outline'></ion-icon></a></button>";
           echo "<button type='button' class='ButtonTarefaExcluir'><a href='apagar_tarefa.php?id_tarefa=" . $row_tarefa['id_tarefa'] . "&id_grupo=$id_grupo&nome_grupo=$nome_grupo'><ion-icon name='trash-outline'></ion-icon></a></button>";
-
           echo "</li><br><br>";
         }
-
         ?>
       </ul>
     </div>

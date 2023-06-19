@@ -1,10 +1,11 @@
-<?php 
+<?php
 
 session_start();
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,6 +28,7 @@ session_start();
         bottom: -125px;
     }
 </style>
+
 <body>
     <header>
         <nav class="nav-bar">
@@ -44,27 +46,25 @@ session_start();
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="<?php echo isset($_SESSION['id_usuario']) ? 'principal.php' : 'cadastro.php'; ?>" 
-                            class="nav-link">
+                        <a href="<?php echo isset($_SESSION['id_usuario']) ? 'principal.php' : 'cadastro.php'; ?>" class="nav-link">
                             Menu
                         </a>
                     </li>
                     <li class="nav-item">
-                  <a href="<?php echo isset($_SESSION['id_usuario']) ? 'perfil.php' : 'cadastro.php'; ?>"
-                    class="nav-link">
-                    Perfil
-                  </a>
-                </li>
+                        <a href="<?php echo isset($_SESSION['id_usuario']) ? 'perfil.php' : 'cadastro.php'; ?>" class="nav-link">
+                            Perfil
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div class="login-button">
-                <?php if(isset($_SESSION['id_usuario'])): ?>
-                    <button>
-                        <a href="logout.php">Sair</a>
+                <?php if (isset($_SESSION['id_usuario'])) : ?>
+                    <button onclick="window.location.href='logout.php';">
+                        Sair
                     </button>
-                <?php else: ?>
-                    <button>
-                        <a href="index.php">Entrar</a>
+                <?php else : ?>
+                    <button onclick="window.location.href='index.php';">
+                        Entrar
                     </button>
                 <?php endif; ?>
             </div>
@@ -77,19 +77,31 @@ session_start();
         <div class="mobile-menu">
             <ul>
                 <li class="nav-item">
-                    <a href="menu.html" class="nav-link">Início</a>
+                    <a href="menu.php" class="nav-link">
+                        Início
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a href="principal.php" class="nav-link">Menu</a>
+                    <a href="<?php echo isset($_SESSION['id_usuario']) ? 'principal.php' : 'cadastro.php'; ?>" class="nav-link">
+                        Menu
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Sobre</a>
+                    <a href="<?php echo isset($_SESSION['id_usuario']) ? 'perfil.php' : 'cadastro.php'; ?>" class="nav-link">
+                        Perfil
+                    </a>
                 </li>
             </ul>
             <div class="login-button">
-                <button>
-                    <a href="index.php">Entrar</a>
-                </button>
+                <?php if (isset($_SESSION['id_usuario'])) : ?>
+                    <button onclick="window.location.href='logout.php';">
+                        Sair
+                    </button>
+                <?php else : ?>
+                    <button onclick="window.location.href='index.php';">
+                        Entrar
+                    </button>
+                <?php endif; ?>
             </div>
         </div>
     </header>
@@ -115,4 +127,5 @@ session_start();
 </body>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
 </html>
