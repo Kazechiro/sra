@@ -8,6 +8,7 @@ include('conexao.php');
 
 $id_grupo = $_GET['id_grupo'];
 $nome_grupo = $_GET['nome_grupo'];
+$id_relatorio = $_GET['id_relatorio'];
 
 if (!empty($id_grupo)) {
     $query_grupo = "SELECT id_usuario_criador FROM grupo WHERE id_grupo = :grupo_id";

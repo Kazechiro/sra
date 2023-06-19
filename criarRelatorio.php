@@ -1,12 +1,16 @@
 <?php
-// Conectar ao banco de dados
+
 include('conexao.php');
 require('protect.php');
-echo "ESTAMOS TRABALHANDO NISSO. <a href='principal.php'>Menu</a>";
+
+$id_grupo = $_GET['id_grupo'];
+$id_grupo = $_GET['id_grupo'];
+$nome_grupo = $_GET['nome_grupo'];
+//echo "ESTAMOS TRABALHANDO NISSO. <a href='principal.php'>Menu</a>";
 
 ?>
 
-<!--
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +18,7 @@ echo "ESTAMOS TRABALHANDO NISSO. <a href='principal.php'>Menu</a>";
     <title>Sistema de Relatórios</title>
 </head>
 <body>
-<header>
+<!--<header>
         <nav class="nav-bar">
             <div class="logo">
                 <h1>
@@ -70,13 +74,19 @@ echo "ESTAMOS TRABALHANDO NISSO. <a href='principal.php'>Menu</a>";
             </ul>
             
         </div>
-    </header>
+    </header> -->
     <center>
         <br><br>
         
     <br><br><br><br>
     <h1>Relatório</h1>
-    <form action="novoRelatorio.php" method="POST">
+    <form action="novoRelatorio.php?id_grupo=<?php echo $id_grupo ?>&nome_grupo=<?php echo $nome_grupo ?>" method="POST">
+    <?php
+        if (isset($_SESSION['msg_relatorio_excluido'])) {
+            echo $_SESSION['msg_relatorio_excluido'];
+            unset($_SESSION['msg_relatorio_excluido']);
+        }
+        ?>
         <label for="titulo">Título:</label>
         <input type="text" name="titulo" id="titulo" required><br><br>
 
@@ -89,7 +99,7 @@ echo "ESTAMOS TRABALHANDO NISSO. <a href='principal.php'>Menu</a>";
     <h2>Relatórios existentes:</h2>
     <?php
         
-      /*
+      
 
         // Verificar conexão
         if ($conexao->connect_error) {
@@ -105,6 +115,7 @@ echo "ESTAMOS TRABALHANDO NISSO. <a href='principal.php'>Menu</a>";
             while($row = $resultado->fetch_assoc()) {
                 echo "<h3>" . $row["titulo"] . "</h3>";
                 echo "<p>" . $row["descricao"] . "</p>";
+                echo '<div class="linkd">' . "<a href='apagar_relatorio.php?id_relatorio=" . $row['id_relatorio'] . "&id_grupo=" . $id_grupo . "&nome_grupo=" . $nome_grupo . "' onclick='return confirm(\"Tem certeza que deseja excluir seu perfil?\")'>Excluir</a>" . '</div>';
                 echo "<hr>";
             }
         } else {
@@ -113,7 +124,7 @@ echo "ESTAMOS TRABALHANDO NISSO. <a href='principal.php'>Menu</a>";
 
         // Fechar conexão
         $conexao->close();
-        */
+        
     ?>
 <script src="./js/script.js"></script>
 </body>
@@ -122,4 +133,3 @@ echo "ESTAMOS TRABALHANDO NISSO. <a href='principal.php'>Menu</a>";
 
 </html>
 
--->

@@ -2,7 +2,7 @@
 
   include('conexao.php');
     $id_grupo = $_GET['id_grupo'];
-    $id_grupo = $_GET['nome_grupo'];
+    $nome_grupo = $_GET['nome_grupo'];
 
 
     // Verificar se o formulário foi enviado
