@@ -61,12 +61,20 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
       left: 80px;
     }
 
+    .ButtonTarefaEditar:hover {
+      background-color: #d4cfcf;
+    }
+
     .ButtonTarefaExcluir {
       position: relative;
       width: 40px;
       height: 30px;
       bottom: 20px;
       left: 130px;
+    }
+
+    .ButtonTarefaExcluir:hover {
+      background-color: #d4cfcf;
     }
 
     .lista_tarefa li {
