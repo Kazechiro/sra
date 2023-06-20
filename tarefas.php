@@ -106,7 +106,7 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
       <div class="logo">
         <h1>
           <ion-icon name="cafe-outline"></ion-icon>
-          S.R.A 
+          S.R.A
         </h1>
       </div>
       <div class="nav-list">
@@ -130,12 +130,12 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
       </div>
       <div class="login-button">
         <?php if (isset($_SESSION['id_usuario'])) : ?>
-          <button>
-            <a href="logout.php">Sair</a>
+          <button onclick="window.location.href='logout.php';">
+            Sair
           </button>
         <?php else : ?>
-          <button>
-            <a href="index.php">Entrar</a>
+          <button onclick="window.location.href='index.php';">
+            Entrar
           </button>
         <?php endif; ?>
       </div>
@@ -153,22 +153,26 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
           </a>
         </li>
         <li class="nav-item">
-          <a href="principal.php" class="nav-link">
+          <a href="<?php echo isset($_SESSION['id_usuario']) ? 'principal.php' : 'cadastro.php'; ?>" class="nav-link">
             Menu
           </a>
         </li>
         <li class="nav-item">
-          <a href="perfil.php" class="nav-link">
+          <a href="<?php echo isset($_SESSION['id_usuario']) ? 'perfil.php' : 'cadastro.php'; ?>" class="nav-link">
             Perfil
           </a>
         </li>
       </ul>
       <div class="login-button">
-        <button>
-          <a href="index.php">
+        <?php if (isset($_SESSION['id_usuario'])) : ?>
+          <button onclick="window.location.href='logout.php';">
+            Sair
+          </button>
+        <?php else : ?>
+          <button onclick="window.location.href='index.php';">
             Entrar
-          </a>
-        </button>
+          </button>
+        <?php endif; ?>
       </div>
     </div>
   </header>
@@ -268,7 +272,7 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
         popup.style.display = "none";
       }
 
-     
+
       function clickButton(Local) {
         alert("teste concluido");
         document.getElementById("demo").style.color = "red";
