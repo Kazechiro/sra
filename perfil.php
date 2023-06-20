@@ -19,7 +19,7 @@ if (!isset($_SESSION['id_usuario'])) {
   <title>Perfil</title>
 </head>
 <style>
-  .GrupoTela{
+  .GrupoTela {
     border: 1px solid #000;
     padding: 20px;
     width: 45%;
@@ -29,7 +29,8 @@ if (!isset($_SESSION['id_usuario'])) {
     margin: 35px auto;
     text-align: center;
   }
-  .linkd button{
+
+  .linkd button {
     border: none;
     padding: 10px 15px;
     border-radius: 5px;
@@ -38,16 +39,16 @@ if (!isset($_SESSION['id_usuario'])) {
     color: #fff;
     font-weight: 500;
     font-size: 1.1rem;
-}
-.linkd a{
-  
-	text-decoration: none}
-	
-a:hover{
-	text-decoration: underline;
-	color: #f00
-}	
+  }
 
+  .linkd a {
+    text-decoration: none
+  }
+
+  .linkd a:hover {
+    text-decoration: underline;
+    color: #f00
+  }
 </style>
 <script>
   function togglePasswordVisibility() {
@@ -143,11 +144,11 @@ a:hover{
   <br><br><br><br>
   <center>
     <div class="GrupoTela">
-      <h2>Perfil de <?php echo $_SESSION['nome'] ?></h2>
-
+      <h2>
+        Perfil de <?php echo $_SESSION['nome'] ?>
+      </h2>
       <?php
       // Restante do código para exibir as informações do perfil
-
       // Obter os dados do usuário atual do banco de dados
       $sql_usuario = "SELECT * FROM USUARIO WHERE id_usuario = :id_usuario";
       $sql_query = $conn->prepare($sql_usuario);
@@ -159,19 +160,17 @@ a:hover{
         echo "Nome: " . $row_usuario['nome'] . "<br>";
         echo "Email: " . $row_usuario['email'] . "<br>";
         echo "Senha: <input type='password' id='password-input' value='" . $row_usuario['senha'] . "' disabled/>";
-        echo '<div class="linkd">'."<button  id='password-button' onclick='togglePasswordVisibility()'>Revelar senha</button>".'</div>';
-        echo '<div class="linkd">'."<a href='editar_perfil.php?id_usuario=" . $_SESSION['id_usuario'] . "'>Editar</a>".'</div>';
-        
-        echo '<div class="linkd">'."<a href='apagar_perfil.php?id_usuario=" . $_SESSION['id_usuario'] . "' onclick='return confirm(\"Tem certeza que deseja excluir seu perfil?\")'>Excluir</a>".'</div>';
+        echo '<div class="linkd">' . "<button  id='password-button' onclick='togglePasswordVisibility()'>Revelar senha</button>" . '</div>';
+        echo '<div class="linkd">' . "<a href='editar_perfil.php?id_usuario=" . $_SESSION['id_usuario'] . "'>Editar</a>" . '</div>';
+        echo '<div class="linkd">' . "<a href='apagar_perfil.php?id_usuario=" . $_SESSION['id_usuario'] . "' onclick='return confirm(\"Tem certeza que deseja excluir seu perfil?\")'>Excluir</a>" . '</div>';
         echo "</li>";
       }
       ?>
     </div>
   </center>
   <script src="js/script.js"></script>
-<script type="module"
-        src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule
-        src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
+
 </html>
