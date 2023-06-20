@@ -48,8 +48,77 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
 </style>
 <body>
 <header>
-        <!-- Código do cabeçalho -->
-    </header>
+    <nav class="nav-bar">
+      <div class="logo">
+        <h1>
+          <ion-icon name="cafe-outline"></ion-icon>
+          S.R.A 
+        </h1>
+      </div>
+      <div class="nav-list">
+        <ul>
+          <li class="nav-item">
+            <a href="menu.php" class="nav-link">
+              Início
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?php echo isset($_SESSION['id_usuario']) ? 'principal.php' : 'cadastro.php'; ?>" class="nav-link">
+              Menu
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?php echo isset($_SESSION['id_usuario']) ? 'perfil.php' : 'cadastro.php'; ?>" class="nav-link">
+              Perfil
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="login-button">
+        <?php if (isset($_SESSION['id_usuario'])) : ?>
+          <button>
+            <a href="logout.php">Sair</a>
+          </button>
+        <?php else : ?>
+          <button>
+            <a href="index.php">Entrar</a>
+          </button>
+        <?php endif; ?>
+      </div>
+      <div class="mobile-menu-icon">
+        <button onclick="menuShow()">
+          <img class="icon" src="assets/img/menu_white_36dp.svg" alt="">
+        </button>
+      </div>
+    </nav>
+    <div class="mobile-menu">
+      <ul>
+        <li class="nav-item">
+          <a href="menu.php" class="nav-link">
+            Início
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="principal.php" class="nav-link">
+            Menu
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="perfil.php" class="nav-link">
+            Perfil
+          </a>
+        </li>
+      </ul>
+      <div class="login-button">
+        <button>
+          <a href="index.php">
+            Entrar
+          </a>
+        </button>
+      </div>
+    </div>
+  </header>
+
 <br><br><br><br><br><br><br>
 <div class="boxedit">
   <center>

@@ -268,9 +268,7 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
         popup.style.display = "none";
       }
 
-      //testes do botao//
-      //echo "<button type='button' class='botao' onclick='alert('Hello world!')'><ion-icon name='create-outline'></ion-icon></button>";//
-      //echo "<button type='button' class='botao' onclick='clickButton('editar_tarefa.php?id_tarefa=" . $row_tarefa['id_tarefa'] . "&id_grupo=$id_grupo&nome_grupo=$nome_grupo')><ion-icon name='create-outline'></ion-icon></button>";//
+     
       function clickButton(Local) {
         alert("teste concluido");
         document.getElementById("demo").style.color = "red";

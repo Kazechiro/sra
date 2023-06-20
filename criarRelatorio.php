@@ -13,7 +13,52 @@ $nome_grupo = $_GET['nome_grupo'];
     <style>
         .aprovado {
             border: 2px solid green;
+            border-radius: 8px;
+            width: fit-content;
         }
+
+        .aprovado {
+    border: 2px solid green;
+    border-radius: 8px;
+}
+
+.botoes {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    padding: 5px 30px;
+    outline: none;
+    border: none;
+    color: #f8f9fa;
+    font-size: 16px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 20px;
+}
+
+.botoes a, .botoes button {
+    padding: 8px 12px;
+    border-radius: 4px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.botoes a.editar-button {
+    background-color: #1E90FF;
+}
+
+.botoes a.excluir-button {
+    background-color: #FF4500;
+}
+
+.botoes button.aprovar-button {
+    background-color: #4CAF50;
+}
+
+
     </style>
     <title>Sistema de Relatórios</title>
 </head>
@@ -134,14 +179,16 @@ $nome_grupo = $_GET['nome_grupo'];
         while ($row = $resultado->fetch_assoc()) {
             $relatorioId = $row['id_relatorio'];
             $classeAprovado = $row['aprovado'] ? 'aprovado' : '';
-
+            $classeBotoes = $row['aprovado'] ? 'botoes aprovado' : 'botoes';
+    
             echo "<div class='relatorio $classeAprovado' data-id='$relatorioId'>";
             echo "<h3>" . $row["titulo"] . "</h3>";
             echo "<p>" . $row["descricao"] . "</p>";
-            echo "<div class='botoes'>";
-            echo "<a href='editar_relatorio.php?id_relatorio=$relatorioId&id_grupo=$id_grupo&nome_grupo=$nome_grupo'>Editar</a>";
-            echo "<a href='apagar_relatorio.php?id_relatorio=$relatorioId&id_grupo=$id_grupo&nome_grupo=$nome_grupo' onclick='return confirm(\"Tem certeza que deseja excluir o relatório?\")'>Excluir</a>";
-            echo "<button class='aprovar-button'>Aprovar</button>";
+            echo "<p>" . $row["data_relatorio"] . "</p>";
+            echo "<div class='$classeBotoes'>";
+            echo "<a class='editar-button' href='editar_relatorio.php?id_relatorio=$relatorioId&id_grupo=$id_grupo&nome_grupo=$nome_grupo'><ion-icon name='create-outline'></ion-icon></a>";
+            echo "<a class='excluir-button' href='apagar_relatorio.php?id_relatorio=$relatorioId&id_grupo=$id_grupo&nome_grupo=$nome_grupo' onclick='return confirm(\"Tem certeza que deseja excluir o relatório?\")'><ion-icon name='trash-outline'></ion-icon></a>";
+            echo "<button class='aprovar-button'><ion-icon name='checkmark-outline'></ion-icon></button>";
             echo "</div>";
             echo "</div>";
         }
@@ -155,11 +202,29 @@ $nome_grupo = $_GET['nome_grupo'];
     <script>
         const relatorios = document.querySelectorAll('.relatorio');
 
-        relatorios.forEach(relatorio => {
-            relatorio.addEventListener('click', () => {
-                relatorio.classList.toggle('aprovado');
+relatorios.forEach(relatorio => {
+    const botaoAprovar = relatorio.querySelector('.aprovar-button');
+
+    botaoAprovar.addEventListener('click', () => {
+        relatorio.classList.toggle('aprovado');
+        const relatorioId = relatorio.getAttribute('data-id');
+        const aprovado = relatorio.classList.contains('aprovado') ? 1 : 0;
+
+        // Enviar requisição para atualizar o status de aprovação no servidor
+        fetch(`atualizar_aprovacao.php?id_relatorio=${relatorioId}&aprovado=${aprovado}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao atualizar a aprovação do relatório.');
+                }
+                // Aprovação atualizada com sucesso
+            })
+            .catch(error => {
+                console.error(error);
+                // Lidar com o erro de atualização da aprovação do relatório
             });
-        });
+    });
+});
+
     </script>
 </center>
 <script src="./js/script.js"></script>
