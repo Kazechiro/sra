@@ -5,7 +5,6 @@ require('protect.php');
 
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,7 +13,7 @@ require('protect.php');
     <title>Entrar em um grupo</title>
 </head>
 <style>
-    .landbox{
+    .landbox {
         border: 1px solid #000;
         padding: 20px;
         width: 40%;
@@ -28,33 +27,32 @@ require('protect.php');
         bottom: -125px;
     }
 
-    button{
+    .ButtonEntrar {
         width: 30%;
-border: none;
-padding: 15px;
-color: black;
-font-size: 15px;
-cursor: pointer;
-border-radius: 10px;
-background-color: whitesmoke;
+        border: none;
+        padding: 15px;
+        color: black;
+        font-size: 15px;
+        cursor: pointer;
+        border-radius: 10px;
+        background-color: whitesmoke;
     }
-    button:hover{
-    background-color: #528B8B;
-}
 
-.success {
-    color: green;
-}
+    .ButtonEntrar:hover {
+        background-color: #528B8B;
+    }
 
-.error {
-    color: red;
-}
+    .success {
+        color: green;
+    }
 
-
-
+    .error {
+        color: red;
+    }
 </style>
+
 <body>
-<header>
+    <header>
         <nav class="nav-bar">
             <div class="logo">
                 <h1>
@@ -70,18 +68,27 @@ background-color: whitesmoke;
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="<?php echo isset($_SESSION['id_usuario']) ? 'principal.php' : 'cadastro.php'; ?>" 
-                            class="nav-link">
+                        <a href="<?php echo isset($_SESSION['id_usuario']) ? 'principal.php' : 'cadastro.php'; ?>" class="nav-link">
                             Menu
                         </a>
                     </li>
                     <li class="nav-item">
-                  <a href="<?php echo isset($_SESSION['id_usuario']) ? 'perfil.php' : 'cadastro.php'; ?>"
-                    class="nav-link">
-                    Perfil
-                  </a>
-                </li>
+                        <a href="<?php echo isset($_SESSION['id_usuario']) ? 'perfil.php' : 'cadastro.php'; ?>" class="nav-link">
+                            Perfil
+                        </a>
+                    </li>
                 </ul>
+            </div>
+            <div class="login-button">
+                <?php if (isset($_SESSION['id_usuario'])) : ?>
+                    <button onclick="window.location.href='logout.php';">
+                        Sair
+                    </button>
+                <?php else : ?>
+                    <button onclick="window.location.href='index.php';">
+                        Entrar
+                    </button>
+                <?php endif; ?>
             </div>
             <div class="mobile-menu-icon">
                 <button onclick="menuShow()">
@@ -92,45 +99,67 @@ background-color: whitesmoke;
         <div class="mobile-menu">
             <ul>
                 <li class="nav-item">
-                    <a href="menu.html" class="nav-link">Início</a>
+                    <a href="menu.php" class="nav-link">
+                        Início
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a href="principal.php" class="nav-link">Menu</a>
+                    <a href="<?php echo isset($_SESSION['id_usuario']) ? 'principal.php' : 'cadastro.php'; ?>" class="nav-link">
+                        Menu
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Sobre</a>
+                    <a href="<?php echo isset($_SESSION['id_usuario']) ? 'perfil.php' : 'cadastro.php'; ?>" class="nav-link">
+                        Perfil
+                    </a>
                 </li>
             </ul>
-            
+            <div class="login-button">
+                <?php if (isset($_SESSION['id_usuario'])) : ?>
+                    <button onclick="window.location.href='logout.php';">
+                        Sair
+                    </button>
+                <?php else : ?>
+                    <button onclick="window.location.href='index.php';">
+                        Entrar
+                    </button>
+                <?php endif; ?>
+            </div>
         </div>
     </header>
     <center>
         <br><br>
         <div class="landbox">
             <br>
-    <h1>Entrar em um Projeto</h1>
-    <br>
-    <form method="POST" action="novo_colaborador.php">
-    <?php
-       
-       
-        if (isset($_SESSION['msg_colaborador'])) {
-            echo $_SESSION['msg_colaborador'];
-            unset($_SESSION['msg_colaborador']); 
-        }
-        
-    ?>
-    <br>
-        <label for="codigo_entrada">Digite o ID do Projeto:</label>
-        <input type="number" name="codigo_entrada" id="codigo_entrada" required placeholder="digite o código" >
-        <br>
-       <div class="bts"><br> <br><button type="submit">Entrar</button> </div>
+            <h1>
+                Entrar em um Projeto
+            </h1>
+            <br>
+            <form method="POST" action="novo_colaborador.php">
+                <?php
 
+                if (isset($_SESSION['msg_colaborador'])) {
+                    echo $_SESSION['msg_colaborador'];
+                    unset($_SESSION['msg_colaborador']);
+                }
+
+                ?>
+                <br>
+                <label for="codigo_entrada">
+                    Digite o ID do Projeto:
+                </label>
+                <input type="number" name="codigo_entrada" id="codigo_entrada" required placeholder="digite o código">
+                <br>
+                <div>
+                    <br><br>
+                    <button class="ButtonEntrar" type="submit">
+                        Entrar
+                    </button>
+                </div>
+            </form>
         </div>
-    </form>
-
+        </form>
     </center>
-
     <script src="./js/script.js"></script>
 </body>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
