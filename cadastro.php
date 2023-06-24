@@ -12,12 +12,16 @@
     <link rel="stylesheet" href="./css/styles.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
-
+ 
         .success {
             color: green;
         }
         .error {
             color: red;
+        }
+
+        #cadastro #form_cadastro {
+            padding-bottom: 95px;
         }
     </style>
     <!-- <title> Cadastro </title> -->

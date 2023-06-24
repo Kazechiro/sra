@@ -42,50 +42,50 @@ if (!empty($id_grupo)) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./css/styles.css">
   <title>Painel</title>
+  <style>
+    .GrupoTela {
+      border: 1px solid #000;
+      padding: 20px;
+      width: 45%;
+      background: white;
+      box-shadow: 10px 20px grey;
+      border-radius: 10px 20px 30px;
+      margin: 35px auto;
+      text-align: center;
+    }
+
+    .ButtonVoltar button {
+      background: #c7c5c5;
+      border-radius: 20px;
+      width: 5%;
+      color: black;
+      font-weight: 500;
+      font-size: 1.1rem;
+    }
+
+    .ButtonVoltar button:hover {
+      width: 6%;
+      font-size: 1.5rem;
+    }
+
+    .ButtonTarefa button {
+      width: 50%;
+      padding: 15px;
+      color: black;
+      background-color: #c7c5c5;
+      cursor: pointer;
+      border-radius: 10px;
+      margin: 0 auto;
+      color: black;
+      font-weight: 500;
+      font-size: 1.1rem;
+    }
+
+    .ButtonTarefa button:hover {
+      font-size: 1.25rem;
+    }
+  </style>
 </head>
-<style>
-  .GrupoTela {
-    border: 1px solid #000;
-    padding: 20px;
-    width: 45%;
-    background: white;
-    box-shadow: 10px 20px grey;
-    border-radius: 10px 20px 30px;
-    margin: 35px auto;
-    text-align: center;
-  }
-
-  .ButtonVoltar button {
-    background: #c7c5c5;
-    border-radius: 20px;
-    width: 5%;
-    color: black;
-    font-weight: 500;
-    font-size: 1.1rem;
-  }
-
-  .ButtonVoltar button:hover {
-    width: 6%;
-    font-size: 1.5rem;
-  }
-
-  .ButtonTarefa button {
-    width: 50%;
-    padding: 15px;
-    color: black;
-    background-color: #c7c5c5;
-    cursor: pointer;
-    border-radius: 10px;
-    margin: 0 auto;
-    color: black;
-    font-weight: 500;
-    font-size: 1.1rem;
-  }
-
-  .ButtonTarefa button:hover {
-    font-size: 1.25rem;
-  }
-</style>
 
 <body>
   <header>
@@ -183,20 +183,25 @@ if (!empty($id_grupo)) {
 
       <?php if (!empty($result_colaboradores)) : ?>
         <ul style="list-style: none;">
-          <?php foreach ($result_colaboradores as $colaborador) : ?>
-            <?php
+          <?php
+          $criador_encontrado = false;
+          foreach ($result_colaboradores as $colaborador) :
             $nome_colaborador = $colaborador['nome'];
             $id_usuario_criador = $colaborador['id_usuario_criador'];
             $nome_criador = $colaborador['nome_criador'];
-            ?>
+
+            if ($id_usuario_criador == $row_grupo['id_usuario_criador']) :
+              $criador_encontrado = true;
+            endif;
+          ?>
             <li>
-              <?php echo $nome_colaborador . "<br>";
-              if ($id_usuario_criador == $row_grupo['id_usuario_criador']) : ?>
-                (Criador do grupo: <?php echo $nome_criador; ?>)
-              <?php endif; ?>
+              <?php echo $nome_colaborador; ?>
             </li>
           <?php endforeach; ?>
         </ul>
+        <?php if ($criador_encontrado) : ?>
+          <p>(Criador do grupo: <?php echo $nome_criador; ?>)</p>
+        <?php endif; ?>
       <?php else : ?>
         <p>
           Nenhum colaborador encontrado

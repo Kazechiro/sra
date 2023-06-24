@@ -188,7 +188,7 @@ $nome_grupo = $_GET['nome_grupo'];
             echo "<div class='$classeBotoes'>";
             echo "<a class='editar-button' href='editar_relatorio.php?id_relatorio=$relatorioId&id_grupo=$id_grupo&nome_grupo=$nome_grupo'><ion-icon name='create-outline'></ion-icon></a>";
             echo "<a class='excluir-button' href='apagar_relatorio.php?id_relatorio=$relatorioId&id_grupo=$id_grupo&nome_grupo=$nome_grupo' onclick='return confirm(\"Tem certeza que deseja excluir o relatório?\")'><ion-icon name='trash-outline'></ion-icon></a>";
-            echo "<button class='aprovar-button'><ion-icon name='checkmark-outline'></ion-icon></button>";
+            echo "<button class='aprovar-button'><ion-icon name='checkmark-outline'></ion-icon></button><br>";
             echo "</div>";
             echo "</div>";
         }

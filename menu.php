@@ -106,7 +106,7 @@ session_start();
         </div>
     </header>
     <center>
-        <br><br>
+        
         <div class="landbox">
             <h1>Sobre o Sistema de Recursos Administrativos</h1>
             <br>

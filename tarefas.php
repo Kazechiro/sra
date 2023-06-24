@@ -34,6 +34,18 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
   <link rel="stylesheet" href="css/styles.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
+
+    .bota{
+      border: none;
+    padding: 10px;
+    padding-bottom: 10px;
+    border-radius: 5px;
+    background-color: #957E6C;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    font-size: 1.1rem;
+    }
     * {
       padding: 0;
       margin: 0;
@@ -42,7 +54,7 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
     .lista_tarefa {
       margin-top: 10px;
       margin: auto;
-      width: 400px;
+      width: 900px;
       height: 400px;
       overflow-y: scroll;
       display: inline-block;
@@ -59,6 +71,11 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
       height: 30px;
       top: 10px;
       left: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+     
     }
 
     .ButtonTarefaEditar:hover {
@@ -71,6 +88,9 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
       height: 30px;
       bottom: 20px;
       left: 130px;
+      display: flex;
+      justify-content: center;
+     
     }
 
     .ButtonTarefaExcluir:hover {
@@ -105,6 +125,17 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
       border: 2px solid green;
       border-radius: 50px;
     }
+
+    .todo-container {
+    margin: auto;
+    width: 900px;
+    
+    background-color: #fff;
+    border-radius: 20px 100px;
+    padding: 30px 30px;
+    box-shadow: 10px 10px 21px -6 rgba(0,0,0,0.2);
+    display: inline-block;
+  }
   </style>
 </head>
 
@@ -136,17 +167,7 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
           </li>
         </ul>
       </div>
-      <div class="login-button">
-        <?php if (isset($_SESSION['id_usuario'])) : ?>
-          <button onclick="window.location.href='logout.php';">
-            Sair
-          </button>
-        <?php else : ?>
-          <button onclick="window.location.href='index.php';">
-            Entrar
-          </button>
-        <?php endif; ?>
-      </div>
+      
       <div class="mobile-menu-icon">
         <button onclick="menuShow()">
           <img class="icon" src="assets/img/menu_white_36dp.svg" alt="">
@@ -171,16 +192,6 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
           </a>
         </li>
       </ul>
-      <div class="login-button">
-        <?php if (isset($_SESSION['id_usuario'])) : ?>
-          <button onclick="window.location.href='logout.php';">
-            Sair
-          </button>
-        <?php else : ?>
-          <button onclick="window.location.href='index.php';">
-            Entrar
-          </button>
-        <?php endif; ?>
       </div>
     </div>
   </header>
@@ -198,7 +209,7 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
           <input name="nome_tarefa" type="text" id="todo-input" placeholder="O que você vai fazer?" required /><br>
           Descrição:
           <br>
-          <textarea id="todo-input" name="desc_tarefa" placeholder="Descreva brevemente seu Projeto" rows=10 cols=35 maxlength="250" required> </textarea>
+          <textarea id="todo-input" name="desc_tarefa" placeholder="Descreva brevemente seu Projeto" rows=10 cols=35 maxlength="250" required style="resize: none" > </textarea>
           <br>
           <br><br>
           <span>Status da Tarefa:</span>
@@ -226,9 +237,9 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
             <?php endforeach; ?>
           </select>
 
-          <button class="botao" id="close-button" type="button">Fechar</button>
+          <button class="bota" id="close-button" type="button">Fechar</button>
           <br>
-          <button type="submit">Adicionar Tarefa</button>
+          <button class="bota"type="submit">Adicionar Tarefa</button>
         </div>
 
         <div class="form-control">
@@ -256,14 +267,18 @@ $result_colaboradores = $stmt_colaboradores->fetchAll(PDO::FETCH_ASSOC);
         $stmt_tarefa->execute();
 
         while ($row_tarefa = $stmt_tarefa->fetch(PDO::FETCH_ASSOC)) {
+          echo "<div class='tarefas'>";
           echo "<li class='" . getStatusClass($row_tarefa['nome_status']) . "'>";
           echo "<span>Tarefa: " . $row_tarefa['nome_tarefa'] . "</span><br>";
           echo "<span>Descrição: " . $row_tarefa['desc_tarefa'] . "</span><br>";
           echo "<span>Status: " . $row_tarefa['nome_status'] . "</span><br>";
           echo "<span>Responsável: " . ($row_tarefa['nome_colaborador'] ?? "Sem responsável") . "</span>";
+          echo "<div style='text-align: center;'>"; // Estilos CSS inline para centralizar os botões
           echo "<button type='button' class='ButtonTarefaEditar'><a href='editar_tarefa.php?id_tarefa=" . $row_tarefa['id_tarefa'] . "&id_grupo=$id_grupo&nome_grupo=$nome_grupo'><ion-icon name='create-outline'></ion-icon></a></button>";
           echo "<button type='button' class='ButtonTarefaExcluir'><a href='apagar_tarefa.php?id_tarefa=" . $row_tarefa['id_tarefa'] . "&id_grupo=$id_grupo&nome_grupo=$nome_grupo'><ion-icon name='trash-outline'></ion-icon></a></button>";
+          echo "</div>";
           echo "</li><br><br>";
+          echo "</div>";
         }
         ?>
       </ul>
