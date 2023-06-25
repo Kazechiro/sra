@@ -39,9 +39,9 @@ if (isset($_POST['email']) && isset($_POST['senha'])) {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -53,14 +53,16 @@ if (isset($_POST['email']) && isset($_POST['senha'])) {
         .error {
             color: red;
         }
-        p{
-            position:absolute;
+
+        p {
+            position: absolute;
         }
     </style>
     <title>Login</title>
 </head>
+
 <body class="body-login">
-<header>
+    <header>
         <nav class="nav-bar">
             <div class="logo">
                 <h1>
@@ -76,22 +78,27 @@ if (isset($_POST['email']) && isset($_POST['senha'])) {
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="<?php echo isset($_SESSION['id_usuario']) ? 'principal.php' : 'cadastro.php'; ?>" 
-                            class="nav-link">
+                        <a href="<?php echo isset($_SESSION['id_usuario']) ? 'principal.php' : 'cadastro.php'; ?>" class="nav-link">
                             Menu
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            Sobre
+                        <a href="<?php echo isset($_SESSION['id_usuario']) ? 'perfil.php' : 'cadastro.php'; ?>" class="nav-link">
+                            Perfil
                         </a>
                     </li>
                 </ul>
             </div>
             <div class="login-button">
-                <button>
-                    <a href="index.php">Entrar</a>
-                </button>
+                <?php if (isset($_SESSION['id_usuario'])) : ?>
+                    <button onclick="window.location.href='logout.php';">
+                        Sair
+                    </button>
+                <?php else : ?>
+                    <button onclick="window.location.href='index.php';">
+                        Entrar
+                    </button>
+                <?php endif; ?>
             </div>
             <div class="mobile-menu-icon">
                 <button onclick="menuShow()">
@@ -102,60 +109,75 @@ if (isset($_POST['email']) && isset($_POST['senha'])) {
         <div class="mobile-menu">
             <ul>
                 <li class="nav-item">
-                    <a href="menu.html" class="nav-link">Início</a>
+                    <a href="menu.php" class="nav-link">
+                        Início
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a href="principal.php" class="nav-link">Menu</a>
+                    <a href="<?php echo isset($_SESSION['id_usuario']) ? 'principal.php' : 'cadastro.php'; ?>" class="nav-link">
+                        Menu
+                    </a>
                 </li>
                 <li class="nav-item">
-                  <a href="<?php echo isset($_SESSION['id_usuario']) ? 'perfil.php' : 'cadastro.php'; ?>"
-                    class="nav-link">
-                    Perfil
-                  </a>
+                    <a href="<?php echo isset($_SESSION['id_usuario']) ? 'perfil.php' : 'cadastro.php'; ?>" class="nav-link">
+                        Perfil
+                    </a>
                 </li>
             </ul>
             <div class="login-button">
-                <button>
-                    <a href="index.php">Entrar</a>
-                </button>
+                <?php if (isset($_SESSION['id_usuario'])) : ?>
+                    <button onclick="window.location.href='logout.php';">
+                        Sair
+                    </button>
+                <?php else : ?>
+                    <button onclick="window.location.href='index.php';">
+                        Entrar
+                    </button>
+                <?php endif; ?>
             </div>
         </div>
     </header>
+    <div id="login">
+        <form action="" method="POST" id="form_login">
+            <?php
+            if (isset($_SESSION['msg_login'])) {
+                echo $_SESSION['msg_login'];
+                unset($_SESSION['msg_login']);
+            }
+            ?>
 
-<div id="login">
-    <form action="" method="POST" id="form_login">
-        <?php
-        if (isset($_SESSION['msg_login'])) {
-            echo $_SESSION['msg_login'];
-            unset($_SESSION['msg_login']);
-        }
-        ?>
+            <h1>
+                Acesse sua conta
+            </h1>
+            <div class="input-container">
+                <input type="text" name="email" class="inputLogin" required>
+                <label class="labelLogin">
+                    E-mail
+                </label>
+            </div>
 
-        <h1>Acesse sua conta</h1>
-        <div class="input-container">
-            <input type="text" name="email" class="inputLogin" required>
-            <label class="labelLogin">E-mail</label>
-        </div>
+            <div class="input-container">
+                <input type="password" name="senha" class="inputLogin" required>
+                <label class="labelLogin">
+                    Senha
+                </label>
+            </div>
 
-        <div class="input-container">
-            <input type="password" name="senha" class="inputLogin" required>
-            <label class="labelLogin">Senha</label>
-        </div>
+            <div>
+                <button type="submit" class="submit-button">
+                    Entrar
+                </button>
+            </div>
 
-        <div>
-            <button type="submit" class="submit-button">Entrar</button>
-        </div>
+            <div class="cadastro">
+                Não possui uma conta? <a href="cadastro.php">Inscreva-se</a>
+            </div>
+        </form>
+    </div>
 
-        <div class="cadastro">
-            Não possui uma conta? <a href="cadastro.php">Inscreva-se</a>
-        </div>
-    </form>
-</div>
-
-<script src="js/script.js"></script>
-<script type="module"
-        src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule
-        src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="js/script.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
+
 </html>
