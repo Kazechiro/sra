@@ -8,7 +8,6 @@ include('conexao.php');
 
 $id_grupo = $_GET['id_grupo'];
 $nome_grupo = $_GET['nome_grupo'];
-$id_relatorio = $_GET['id_relatorio'];
 
 if (!empty($id_grupo)) {
   $query_grupo = "SELECT id_usuario_criador FROM grupo WHERE id_grupo = :grupo_id";
@@ -31,6 +30,7 @@ if (!empty($id_grupo)) {
 } else {
   $_SESSION['msg'] = "<p>Erro: grupo não encontrado</p>";
   header("Location: principal.php");
+  exit();
 }
 ?>
 <!DOCTYPE html>
@@ -88,7 +88,7 @@ if (!empty($id_grupo)) {
 </head>
 
 <body>
-  <header>
+<header>
     <nav class="nav-bar">
       <div class="logo">
         <h1>
@@ -172,9 +172,7 @@ if (!empty($id_grupo)) {
     </div>
     <h1>
       <p>
-        <?php
-        echo $nome_grupo;
-        ?>
+        <?php echo $nome_grupo; ?>
       </p>
       <br>
       <p>
@@ -185,19 +183,25 @@ if (!empty($id_grupo)) {
         <ul style="list-style: none;">
           <?php
           $criador_encontrado = false;
-          foreach ($result_colaboradores as $colaborador) :
+          foreach ($result_colaboradores as $colaborador) {
             $nome_colaborador = $colaborador['nome'];
+            $id_usuario_colaborador = $colaborador['id_usuario'];
             $id_usuario_criador = $colaborador['id_usuario_criador'];
             $nome_criador = $colaborador['nome_criador'];
 
-            if ($id_usuario_criador == $row_grupo['id_usuario_criador']) :
+            if ($id_usuario_criador == $row_grupo['id_usuario_criador']) {
               $criador_encontrado = true;
-            endif;
+            }
           ?>
             <li>
               <?php echo $nome_colaborador; ?>
+              <?php if ($_SESSION['adm'] == 1 || $id_usuario_criador == $id_usuario_colaborador) : ?>
+                <button onclick="confirmarExclusaoColaborador(<?php echo $id_usuario_colaborador; ?>, '<?php echo $nome_grupo; ?>', '<?php echo $id_grupo ?>')">
+                <ion-icon name="trash-outline"></ion-icon>
+                </button>
+              <?php endif; ?>
             </li>
-          <?php endforeach; ?>
+          <?php } ?>
         </ul>
         <?php if ($criador_encontrado) : ?>
           <p>(Criador do grupo: <?php echo $nome_criador; ?>)</p>
@@ -212,9 +216,7 @@ if (!empty($id_grupo)) {
     <p>
       Código do projeto:
       <span style="color:limegreen">
-        <?php
-        echo $id_grupo;
-        ?>
+        <?php echo $id_grupo; ?>
       </span>
       (use este codigo para convidar alguém para o seu projeto)
     </p>
@@ -252,6 +254,12 @@ if (!empty($id_grupo)) {
     function confirmarExclusao(idGrupo) {
       if (confirm("Tem certeza que deseja excluir o Projeto?")) {
         window.location.href = "apagar_grupo.php?id_grupo=" + idGrupo;
+      }
+    }
+
+    function confirmarExclusaoColaborador(idColaborador) {
+      if (confirm("Tem certeza que deseja excluir o colaborador?")) {
+        window.location.href = "apagar_colaborador.php?id_colaborador=" + idColaborador;
       }
     }
   </script>
