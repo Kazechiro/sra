@@ -31,6 +31,7 @@ if (!empty($id_grupo)) {
   $_SESSION['msg'] = "<p>Erro: grupo não encontrado</p>";
   header("Location: principal.php");
   exit();
+  exit();
 }
 ?>
 <!DOCTYPE html>
