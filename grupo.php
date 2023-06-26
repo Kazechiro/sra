@@ -225,7 +225,7 @@ if (!empty($id_grupo)) {
       Descrição:
       <?php 
       
-      $query_desc_grupo = "SELECT desc_grupo FROM grupo";
+      $query_desc_grupo = "SELECT desc_grupo FROM grupo WHERE id_grupo= $id_grupo ";
       $result_desc_grupo = mysqli_query($conexao, $query_desc_grupo);
       while ($row_desc_grupo = mysqli_fetch_assoc($result_desc_grupo)) {
         echo $row_desc_grupo['desc_grupo'];
