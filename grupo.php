@@ -220,6 +220,20 @@ if (!empty($id_grupo)) {
       </span>
       (use este codigo para convidar alguém para o seu projeto)
     </p>
+    <p>
+      Descrição:
+      <?php 
+      
+      $query_desc_grupo = "SELECT desc_grupo FROM grupo";
+      $result_desc_grupo = mysqli_query($conexao, $query_desc_grupo);
+      while ($row_desc_grupo = mysqli_fetch_assoc($result_desc_grupo)) {
+        echo $row_desc_grupo['desc_grupo'];
+      }
+      
+      
+      
+      ?>
+    </p>
     <br><br><br><br>
     <?php
     $TarefasHref = "tarefas.php?id_grupo=$id_grupo&nome_grupo=$nome_grupo";
